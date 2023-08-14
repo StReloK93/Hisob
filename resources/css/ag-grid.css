@@ -1,0 +1,8 @@
+.ag-theme-material {
+    /* disable all borders */
+    --ag-borders: 1px solid;
+    /* then add back a border between rows */
+    --ag-row-border-width: 1px;
+    --ag-row-border-color: rgb(238, 238, 238);
+    --ag-border-color: rgb(238, 238, 238);
+}
