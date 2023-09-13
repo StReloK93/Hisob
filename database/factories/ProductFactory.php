@@ -19,7 +19,6 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'nomenclature' => '1111111',
             'isActive' => true,
         ];
     }

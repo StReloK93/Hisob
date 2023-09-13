@@ -35,4 +35,8 @@ class Employe extends Model
     {
         return $this->belongsTo(position::class);
     }
+
+    protected $casts = [
+        'hiring_date' => 'date:Y-m-d',
+    ];
 }

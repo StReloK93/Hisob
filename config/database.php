@@ -98,7 +98,7 @@ return [
             'driver' => 'sqlsrv',
             // 'url' => env('DATABASE_URL'),
             'host' => '192.168.14.14',
-            'port' => env('DB_PORT', '1433'),
+            'port' => 1433,
             'database' => 'kadr',
             'username' => 'tatil',
             'password' => 'tatil123',
@@ -107,6 +107,20 @@ return [
             'prefix_indexes' => true,
             'trust_server_certificate' => true,
         ],
+
+        // 'oracle' => [
+        //     'driver' => 'oracle',
+        //     // 'url' => env('DATABASE_URL'),
+        //     'host' => '192.168.14.4',
+        //     'port' => 1521,
+        //     'database' => 'ORADB01.IVC.NMB.NGMK.UZ',
+        //     'username' => 'AM.SOLIEV',
+        //     'password' => 'aaaa1111',
+        //     'charset' => 'utf8',
+        //     'prefix' => '',
+        //     'prefix_indexes' => true,
+        //     'trust_server_certificate' => true,
+        // ],
     ],
 
     /*

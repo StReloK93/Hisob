@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="end" class="flex-0-0 ma-0 pb-4 px-4 overflow-y-auto">
+    <v-row justify="end" class="flex-0-0 ma-0 pb-2 px-4 overflow-y-auto">
         <v-dialog v-model="pageData.dialog" persistent width="512" location="right">
             <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-plus" color="teal" v-bind="props"></v-btn>

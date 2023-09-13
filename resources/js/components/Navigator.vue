@@ -10,15 +10,16 @@
           ></v-list-item>
         </template>
         <v-list color="transparent">
-            <v-list-item color="teal" prepend-icon="mdi-home" title="Bosh sahifa" to="/"></v-list-item>
-            <v-list-item color="teal" prepend-icon="mdi-account-hard-hat" title="Lavozimlar" to="/positions"></v-list-item>
-            <v-list-item color="teal" prepend-icon="mdi-texture-box" title="Bo'linmalar" to="/organizations"></v-list-item>
-            <v-list-item color="teal" prepend-icon="mdi-tshirt-crew" title="Mahsulotlar" to="/products"></v-list-item>
-            <v-list-item color="teal" prepend-icon="mdi-tshirt-crew" title="Y.M.M hisoboti" to="/fuel"></v-list-item>
+            <v-list-item color="teal" prepend-icon="mdi-home" title="Bosh sahifa" :to="{name: 'index'}"></v-list-item>
+            <v-list-item color="teal" prepend-icon="mdi-account-group" title="Hodimlar" :to="{name: 'employes'}"></v-list-item>
+            <v-list-item color="teal" prepend-icon="mdi-account-hard-hat" title="Lavozimlar" :to="{name: 'positions'}"></v-list-item>
+            <v-list-item color="teal" prepend-icon="mdi-texture-box" title="Bo'linmalar" :to="{name: 'organizations'}"></v-list-item>
+            <v-list-item color="teal" prepend-icon="mdi-tshirt-crew" title="Mahsulotlar" :to="{name: 'products'}"></v-list-item>
+            <!-- <v-list-item color="teal" prepend-icon="mdi-tshirt-crew" title="Y.M.M hisoboti" to="/fuel"></v-list-item> -->
         </v-list>
         <template v-slot:append>
             <div class="pa-2">
-                <v-btn color="red-accent-3" block append-icon="mdi-logout">
+                <v-btn @click="store.logout()" color="red-accent-3" block append-icon="mdi-logout">
                     Chiqish
                 </v-btn>
             </div>
@@ -28,10 +29,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useAuthStore } from '@/store/useAuthStore'
 const driwer = ref(true)
 
-function toggle(){
-    driwer.value = !driwer.value
-}
+const store = useAuthStore()
+
+function toggle(){ driwer.value = !driwer.value }
 defineExpose({toggle})
 </script>

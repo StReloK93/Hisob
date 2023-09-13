@@ -9,8 +9,6 @@ const { user } = defineProps(['user'])
 
 const route:any = useRoute()
 
-console.log(route.meta.breadcrumbs)
-
 const routes:any = reactive([...route.meta.breadcrumbs])
 
 if(user) routes.push({ title: user.name, disabled: true })

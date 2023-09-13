@@ -1,7 +1,23 @@
 import { createRouter, createWebHistory } from "vue-router"
 import routes from "./routes"
-export default createRouter({
-    // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+import { useAuthStore } from '@/store/useAuthStore'
+
+const router = createRouter({
     history: createWebHistory(),
-    routes, // short for `routes: routes`
+    routes,
 })
+
+
+router.beforeEach((to, from, next) => {
+	const store = useAuthStore()
+	if (store.user) {
+		if (to.meta.guard === 'guest') next({ name: 'main' })
+		else next()
+
+	} else {
+		if (to.meta.guard === 'auth') next({ name: 'login' })
+		else next()
+	}
+})
+
+export default router

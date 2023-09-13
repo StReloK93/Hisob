@@ -1,12 +1,18 @@
 <template>
     <section class="d-flex flex-column">
-        <Breadcrumbs></Breadcrumbs>
+        <div class="d-flex justify-space-between items-center">
+            <Breadcrumbs></Breadcrumbs>
+            <AddPosition @addPosition="addPosition"></AddPosition>
+            <EditPosition @editPosition="editPosition" ref="editComponent" :current="pageData"></EditPosition>
+        </div>
         <v-spacer class="px-4">
             <AgGridVue
                 class="ag-theme-material h-100"
-                :columnDefs="columnDefs" :rowData="position"
-                @rowClicked=""
-                animateRows="true"
+                :getRowId="({data}) => data.id"
+                :columnDefs="columnDefs"
+                :rowData="pageData.positions"
+                @grid-ready="(params) => pageData.gridApi = params.api"
+                :animateRows="true"
             />
         </v-spacer>
     </section>
@@ -14,17 +20,68 @@
 
 <script setup lang="ts">
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
+import AddPosition from '@/components/Position/AddPosition.vue'
+import EditPosition from '@/components/Position/EditPosition.vue'
+import PositionProducts from '@/components/AgGrid/PositionProducts.vue'
+import Button from '@/components/AgGrid/Button.vue'
+import IconEdit from '@/components/AgGrid/IconEdit.vue'
 import { reactive, ref } from "vue"
 import axios from '@/modules/axios'
 import { AgGridVue } from "ag-grid-vue3"
-const columnDefs = reactive([
-    { field: "id", headerName: 'Kod', width: 80},
-    { field: "name", headerName: 'Tabel raqami', flex: 1 },
-    { field: "isActive", headerName: 'Faolligi' },
 
+const editComponent = ref()
+
+const pageData = reactive({
+    gridApi: null,
+    selected: null,
+    positions: []
+})
+
+
+function addPosition(position){
+    pageData.gridApi.applyTransaction({add: [position],addIndex: 0})
+}
+
+function editPosition(position){
+    const rowNode = pageData.gridApi.getRowNode(position.id)
+    rowNode.setData(position)
+}
+
+const columnDefs = reactive([
+    { field: "id", headerName: '№', width: 65 },
+    { field: "name", headerName: 'Nomi' },
+    {
+        headerName: 'Biriktirilgan maxsulotlar',
+        flex: 1,
+        cellRenderer: PositionProducts,
+    },
+    {
+        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
+        field: "isActive",
+        headerName: 'Faolligi',
+        cellRenderer: Button,
+        width: 60,
+        headerClass: ['px-2'],
+        onCellClicked: (params) => {
+            const current = +!params.value
+            axios.post(`position/set_activate/${params.data.id}`, { active: current }).then(() => {
+                params.node.setDataValue('isActive', current)
+            })
+        }
+    },
+    {
+        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
+        headerName: '',
+        width: 60 ,
+        cellRenderer: IconEdit,
+        headerClass: ['px-2'],
+        onCellClicked: ({data}) => {
+            pageData.selected = data.id
+            editComponent.value.toggle()
+        }
+    },
 ]);
 
-const position = ref([])
-axios.get('position').then(({ data }) => position.value = data)
+axios.get('position').then(({ data }) => pageData.positions = data)
 </script>
 <style src="../../css/ag-grid.css"></style>
