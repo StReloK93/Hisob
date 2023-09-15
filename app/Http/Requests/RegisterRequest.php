@@ -24,6 +24,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
+            'login' => 'required|min:5|max:255|unique:users',
             'password' => 'required|min:6|max:255|confirmed',
         ];
     }
@@ -40,7 +41,8 @@ class RegisterRequest extends FormRequest
             'required' => ":attribute bo'sh bo'lmasligi kerak.",
             'min' => ":attribute :min simboldan kam bo'lmasligi kerak.",
             'max' => ":attribute :max simboldan ko'p bo'lmasligi kerak.",
-            'confirmed' => ":attributelar mos kelmayabdi"
+            'confirmed' => ":attributelar mos kelmayabdi",
+            'unique' => ":attribute band",
         ];
     }
 

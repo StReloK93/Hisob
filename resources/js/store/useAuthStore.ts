@@ -30,8 +30,13 @@ export const useAuthStore = defineStore('Auth', () => {
 
 
     async function register(props) {
-        const result = await axios.post('register', props)
-        if (result.status == 200) login(props)
+        try{
+            const result = await axios.post('register', props)
+            if (result.status == 200) login(props)
+            else return result.data
+        } catch (err){
+            return err.response.data
+        }
     }
 
     async function logout() {

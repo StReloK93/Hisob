@@ -8,6 +8,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,6 +26,7 @@ Route::apiResource('position', PositionController::class);
 Route::apiResource('organization', OrganizationController::class);
 Route::apiResource('product', ProductController::class);
 Route::apiResource('product_type', ProductTypeController::class);
+Route::apiResource('role', RoleController::class);
 
 Route::post('position/set_activate/{id}', [PositionController::class, 'setActivate']);
 Route::post('organization/set_activate/{id}', [OrganizationController::class, 'setActivate']);

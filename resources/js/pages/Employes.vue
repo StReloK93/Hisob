@@ -12,13 +12,13 @@
                 :columnDefs="columnDefs"
                 :rowData="employes"
                 @grid-ready="(params) => pageData.gridApi = params.api"
-                
+                @rowDoubleClicked="(selected) => router.push({ name: 'employe', params: { id: selected.data.id } })"
                 animateRows="true"
             />
         </v-spacer>
     </main>
 </template>
-<!-- @rowClicked="(selected) => router.push({ name: 'employe', params: { id: selected.data.id } })" -->
+
 <script setup lang="ts">
 import axios from '@/modules/axios'
 import IconEdit from '@/components/AgGrid/IconEdit.vue'
@@ -49,15 +49,18 @@ function editEmploye(employe){
 
 const router = useRouter()
 const columnDefs = reactive([
-    {
-        headerName: 'F.I.SH',
-        cellRenderer: ({ data: employe }) => {
-            return `${employe.last_name} ${employe.first_name.charAt(0)}.${employe.second_name.charAt(0)}`
+    { field: "table_number", headerName: 'Tabel raqami',  sortable: true},
+    { field: "name", headerName: 'F.I.SH', sortable: true ,flex: 1 },
+    { field: "organization.short_name", headerName: 'Ish joyi' , sortable: true },
+    { 
+        field: "employe_position",
+        headerName: 'Lavozimi',
+        sortable: true, 
+        valueFormatter: (data) => {
+            if(data.value.at(-1)) return data.value.at(-1).position.name
+            else return ""
         }
     },
-    { field: "table_number", headerName: 'Tabel raqami', flex: 1 , sortable: true},
-    { field: "organization.short_name", headerName: 'Ish joyi' , sortable: true },
-    { field: "position.name", headerName: 'Lavozimi' , sortable: true },
     { field: "hiring_date", headerName: 'Ishga qabul kuni' , sortable: true },
     { field: "gender", headerName: 'Jinsi', cellRenderer: (data) => gender(data.value) , sortable: true },
     {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employe;
+use App\Models\EmployePosition;
 class EmployeController extends Controller
 {
 
@@ -12,7 +13,15 @@ class EmployeController extends Controller
     }
 
     public function store(Request $request){
-        return Employe::create($request->all())->fresh();
+        $employe = Employe::create($request->all());
+
+        EmployePosition::create([
+            'employe_id' => $employe->id,
+            'position_id' => $request->position_id,
+        ]);
+
+        return $employe->fresh();
+
     }
 
     public function show($id){
@@ -21,11 +30,22 @@ class EmployeController extends Controller
 
 
     public function update($id, Request $request){
+
+        $employePosition = EmployePosition::where('employe_id' , $id)->latest('id')->first();
+
+        if($employePosition){
+            $employePosition->position_id = $request->position_id;
+            $employePosition->save();
+        }
+        else{
+            EmployePosition::create([
+                'employe_id' => $id,
+                'position_id' => $request->position_id,
+            ]);
+        }
+
         $employe = Employe::find($id);
-        $employe->table_number = $request->table_number;
-        $employe->first_name = $request->first_name;
-        $employe->last_name = $request->last_name;
-        $employe->position_id = $request->position_id;
+        $employe->name = $request->name;
         $employe->hiring_date = $request->hiring_date;
         $employe->gender = $request->gender;
         $employe->organization_id = $request->organization_id;

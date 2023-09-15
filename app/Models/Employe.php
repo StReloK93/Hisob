@@ -11,10 +11,7 @@ class Employe extends Model
 
     protected $fillable = [
         'table_number',
-        'first_name',
-        'last_name',
-        'second_name',
-        'position_id',
+        'name',
         'hiring_date',
         'gender',
         'organization_id',
@@ -23,7 +20,7 @@ class Employe extends Model
 
     protected $with = [
         'organization',
-        'position',
+        'employePosition',
     ];
 
     public function organization()
@@ -31,9 +28,9 @@ class Employe extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function Position()
+    public function employePosition()
     {
-        return $this->belongsTo(position::class);
+        return $this->hasMany(EmployePosition::class);
     }
 
     protected $casts = [

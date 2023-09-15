@@ -61,7 +61,7 @@ export default [
                 props: true,
                 meta: {
                     breadcrumbs: [
-                        { title: "Bosh sahifa", to: '/app/' , disabled: false }
+                        { title: "Hodimlar", to: '/app/employes' , disabled: false }
                     ]
                 }
             },
