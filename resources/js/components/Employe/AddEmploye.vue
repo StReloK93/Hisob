@@ -15,6 +15,9 @@
                             <v-row>
                                 <v-col cols="12" class="pt-0">
                                     <v-text-field
+                                        @input="inputTableNumber"
+                                        :loading="pageData.inputLoading"
+                                        color="teal"
                                         :rules="pageData.rules"
                                         label="Tabel raqam"
                                         variant="underlined"
@@ -25,6 +28,7 @@
                                 </v-col>
                                 <v-col cols="12" class="pt-0">
                                     <v-text-field
+                                        color="teal"
                                         :rules="pageData.rules"
                                         label="F.I.SH"
                                         variant="underlined"
@@ -34,6 +38,7 @@
                                 </v-col>
                                 <v-col cols="12" class="pt-0">
                                     <v-select
+                                        color="teal"
                                         :items="pageData.organizations"
                                         variant="underlined"
                                         hide-details="auto"
@@ -46,6 +51,7 @@
                                 </v-col>
                                 <v-col cols="12">
                                     <v-select 
+                                        color="teal"
                                         :items="pageData.positions" 
                                         variant="underlined"
                                         hide-details="auto"
@@ -58,6 +64,7 @@
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
+                                        color="teal"
                                         label="Ishga qabul qilingan sana"
                                         variant="underlined" hide-details="auto"
                                         v-model="formData.hiring_date"
@@ -66,7 +73,7 @@
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-radio-group class="" small v-model="formData.gender" hide-details="auto" :rules="pageData.rules">
+                                    <v-radio-group color="teal" class="" small v-model="formData.gender" hide-details="auto" :rules="pageData.rules">
                                         <v-radio label="Erkak" value="1"></v-radio>
                                         <v-radio label="Ayol" value="0"></v-radio>
                                     </v-radio-group>
@@ -79,7 +86,7 @@
                         <v-btn color="blue-gray-1" variant="text" type="button" @click="pageData.dialog = false">
                             Yopish
                         </v-btn>
-                        <v-btn color="blue-darken-1" variant="text" type="submit">
+                        <v-btn color="teal" variant="text" type="submit">
                             Saqlash
                         </v-btn>
                     </v-card-actions>
@@ -100,6 +107,7 @@ const pageData = reactive({
     dialog: false,
     organizations: null,
     positions: null,
+    inputLoading: false,
     rules: [(value) => value == null || value == "" ? 'toldiring' : true ]
 })
 
@@ -119,6 +127,25 @@ async function addEmploye() {
     axios.post('employe', formData).then(({ data }) => {
         pageData.dialog = false
         emit('addEmploye', data)
+    })
+}
+
+
+function inputTableNumber(){
+    if(formData.table_number.length == 5){
+        pageData.inputLoading = true
+        getEmployeData()
+    }
+}
+
+
+function getEmployeData(){
+    axios.get(`employe/getdata/${formData.table_number}`).then(({data})=> {
+        formData.name = data.name
+        formData.organization_id = data.organization_id
+        setTimeout(() => pageData.inputLoading = false, 1000)
+    }).catch(() => {
+        pageData.inputLoading = false
     })
 }
 

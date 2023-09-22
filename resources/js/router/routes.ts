@@ -25,6 +25,16 @@ export default [
                 }
             },
             {
+                path: 'users',
+                name: 'users',
+                component: () => import('@/pages/Users.vue'),
+                meta: {
+                    breadcrumbs: [
+                        { title: 'Hodimlar', to: '/app' , disabled: true },
+                    ]
+                }
+            },
+            {
                 path: 'employes',
                 name: 'employes',
                 component: () => import('@/pages/Employes.vue'),

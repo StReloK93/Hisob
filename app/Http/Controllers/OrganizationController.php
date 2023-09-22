@@ -24,6 +24,7 @@ class OrganizationController extends Controller
 
         return Organization::create([
             'name' => $request->name,
+            'code' => $request->code,
             'short_name' => $request->short_name,
             'isActive' => true,
         ]);
@@ -34,6 +35,7 @@ class OrganizationController extends Controller
     public function update($id, Request $request){
         $position = Organization::find($id);
         $position->name = $request->name;
+        $position->code = $request->code;
         $position->short_name = $request->short_name;
         $position->isActive = $request->isActive;
         $position->save();

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employe;
 use App\Models\EmployePosition;
+use App\Models\Organization;
+use DB;
 class EmployeController extends Controller
 {
 
@@ -25,7 +27,10 @@ class EmployeController extends Controller
     }
 
     public function show($id){
-        return Employe::find($id);
+
+        $employe = Employe::find($id);
+        $employe->cards = $this->getCardNumbers($employe->table_number);
+        return $employe;
     }
 
 
@@ -45,6 +50,8 @@ class EmployeController extends Controller
         }
 
         $employe = Employe::find($id);
+        
+        $employe->table_number = $request->table_number;
         $employe->name = $request->name;
         $employe->hiring_date = $request->hiring_date;
         $employe->gender = $request->gender;
@@ -54,9 +61,35 @@ class EmployeController extends Controller
         return $employe->fresh();
     }
 
+
+    public function getCardNumbers($table_number){
+        $cards = DB::connection('sqlsrv')->select("SELECT NomerKarti FROM [SCUD].[dbo].[KartiSotrudnikov] where TabelniyNomer=$table_number and DeletedTime is null");
+        $arr = [];
+
+        foreach ($cards as $key => $card) {
+            $arr[] = $card->NomerKarti;
+        }
+
+        return $arr;
+    }
+
+
+    public function getEmployeData($table_number){
+        // $string_version
+        // WHERE KodPodrazdelenii IN (".$string_version.")
+        $userData = DB::connection('sqlsrv')->select("SELECT TabelniyNomer , FIO , Doljnost , KodPodrazdelenii, Razryad  FROM [KADR].[dbo].[PoiskSotrudnikaTabelniyNomer] ($table_number) ");
+        if(empty($userData) == false){
+            $organization = Organization::where('code', $userData[0]->KodPodrazdelenii)->first();
+            return [
+                'name' => $userData[0]->FIO,
+                'organization_id' => $organization ? $organization->id : null ,
+            ];
+        }
+        else{
+            return null;
+        }
+    }
+
 }
 
 
-// public function getEmployeWithTable(){
-//     $user = DB::connection('1cbase')->select("SELECT TabelniyNomer , FIO , Doljnost , KodPodrazdelenii, Razryad  FROM dbo.PoiskSotrudnikaTabelniyNomer ('".$request->tableNumber."') WHERE KodPodrazdelenii IN (".$string_version.")");
-// }

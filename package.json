@@ -14,8 +14,11 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@sweetalert2/theme-material-ui": "^5.0.15",
         "ag-grid-community": "^30.0.6",
         "ag-grid-vue3": "^30.0.6",
+        "moment": "^2.29.4",
+        "onscan.js": "^1.5.2",
         "pinia": "^2.1.6",
         "sweetalert2": "^11.7.28",
         "vue": "^3.3.4",

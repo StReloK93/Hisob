@@ -9,15 +9,29 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12" class="pt-0">
-                                <v-text-field label="Tabel raqam" variant="underlined" hide-details="auto"
-                                    v-model="formData.table_number" type="number" :rules="pageData.rules"></v-text-field>
+                                <v-text-field
+                                    color="teal"
+                                    label="Tabel raqam"
+                                    variant="underlined"
+                                    hide-details="auto"
+                                    v-model="formData.table_number"
+                                    type="number"
+                                    :rules="pageData.rules"
+                                ></v-text-field>
                             </v-col>
                             <v-col cols="12" class="pt-0">
-                                <v-text-field label="F.I.SH" variant="underlined" hide-details="auto"
-                                    v-model="formData.name" :rules="pageData.rules"></v-text-field>
+                                <v-text-field
+                                    color="teal"
+                                    label="F.I.SH"
+                                    variant="underlined"
+                                    hide-details="auto"
+                                    v-model="formData.name"
+                                    :rules="pageData.rules"
+                                ></v-text-field>
                             </v-col>
                             <v-col cols="12" class="pt-0">
                                 <v-select
+                                    color="teal"
                                     :items="pageData.organizations"
                                     variant="underlined"
                                     hide-details="auto"
@@ -29,7 +43,8 @@
                                 ></v-select>
                             </v-col>
                             <v-col cols="12">
-                                <v-select 
+                                <v-select
+                                    color="teal"
                                     :items="pageData.positions" 
                                     variant="underlined"
                                     hide-details="auto"
@@ -41,11 +56,18 @@
                                 ></v-select>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field label="Ishga qabul qilingan sana" variant="underlined" hide-details="auto"
-                                    v-model="formData.hiring_date" type="date" :rules="pageData.rules"></v-text-field>
+                                <v-text-field
+                                    color="teal"
+                                    label="Ishga qabul qilingan sana"
+                                    variant="underlined"
+                                    hide-details="auto"
+                                    v-model="formData.hiring_date"
+                                    type="date"
+                                    :rules="pageData.rules"
+                                ></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-radio-group small v-model="formData.gender" hide-details="auto">
+                                <v-radio-group color="teal" small v-model="formData.gender" hide-details="auto">
                                     <v-radio label="Erkak" :value="1"></v-radio>
                                     <v-radio label="Ayol" :value="0"></v-radio>
                                 </v-radio-group>
@@ -95,7 +117,7 @@ const formData = reactive({
 
 function getSelectedEmploye(){
     axios.get(`employe/${current.selected}`).then(({data: employe}) => {
-        const latest = employe.employe_position.at(-1)
+        const latest = employe.position.at(-1)
         if(latest) formData.position_id = latest.position.id
 
 

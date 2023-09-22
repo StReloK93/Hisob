@@ -49,11 +49,11 @@ function editEmploye(employe){
 
 const router = useRouter()
 const columnDefs = reactive([
-    { field: "table_number", headerName: 'Tabel raqami',  sortable: true},
+    { field: "table_number", headerName: 'Tabel raqami',  sortable: true },
     { field: "name", headerName: 'F.I.SH', sortable: true ,flex: 1 },
     { field: "organization.short_name", headerName: 'Ish joyi' , sortable: true },
     { 
-        field: "employe_position",
+        field: "position",
         headerName: 'Lavozimi',
         sortable: true, 
         valueFormatter: (data) => {
@@ -61,8 +61,8 @@ const columnDefs = reactive([
             else return ""
         }
     },
-    { field: "hiring_date", headerName: 'Ishga qabul kuni' , sortable: true },
-    { field: "gender", headerName: 'Jinsi', cellRenderer: (data) => gender(data.value) , sortable: true },
+    { field: "hiring_date", headerName: 'Ishga qabul kuni' , sortable: true, width: 160 },
+    { field: "gender", headerName: 'Jinsi', cellRenderer: (data) => gender(data.value) , sortable: true, width: 100 },
     {
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',

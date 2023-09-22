@@ -1,6 +1,6 @@
 <template>
     <main class="relative">
-        <v-switch v-model="swith" hide-details="auto" color="teal"></v-switch>
+        <v-switch v-model="swith" hide-details="auto" :color="params.color ? params.color: 'teal'"></v-switch>
         <div class="absolute front-block"></div>
     </main>
 </template>
@@ -12,12 +12,6 @@ const swith = ref(false)
 swith.value = Boolean(params.value)
 </script>
 <style scoped>
-.relative{
-    position: relative;
-}
-.absolute{
-    position: absolute;
-}
 .front-block{
     top: 0;
     left: 0;

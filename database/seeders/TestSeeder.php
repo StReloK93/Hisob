@@ -4,13 +4,14 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Employe;
 use App\Models\Position;
+use App\Models\PositionProduct;
 use App\Models\EmployePosition;
-use App\Models\Organization;
 use App\Models\Product;
 Use Hash;
 class TestSeeder extends Seeder
@@ -22,9 +23,6 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-
-        Employe::factory(10)->create();
-
 
         Product::factory(4)->state(new Sequence(
             [
@@ -56,26 +54,6 @@ class TestSeeder extends Seeder
             'name' => 'Soliyev Aziz',
         ]);
 
-
-        Organization::factory(4)->state(new Sequence(
-            [
-                'name' => 'Axborot kommunikatsion texnologiyalar markazi',
-                'short_name' => 'AKTM',
-            ],
-            [
-                'name' => 'Shimoliy kon boshqarmasi',
-                'short_name' => 'SHKB',
-            ],
-            [
-                'name' => 'Gidro-metallurgiya zavodi 3',
-                'short_name' => 'GMZ-3',
-            ],
-            [
-                'name' => "Temir yo'l sexi",
-                'short_name' => 'TYS',
-            ],
-        ))->create();
-
         Position::factory(4)->state(new Sequence(
             [
                 'name' => 'Muhandis dasturchi',
@@ -91,9 +69,6 @@ class TestSeeder extends Seeder
             ],
         ))->create();
 
-
-
-
         EmployePosition::insert([
             ['employe_id' => 1,'position_id' => 2, 'created_at' => now()],
             ['employe_id' => 2,'position_id' => 1, 'created_at' => now()],
@@ -102,11 +77,27 @@ class TestSeeder extends Seeder
 
 
         Role::insert([
-            'name' => 'Admin',
-            'name' => 'Omborchi',
-            'name' => 'Buxgalter',
-            'name' => 'TB',
+            [ 'name' => 'Admin' ],
+            [ 'name' => 'Omborchi' ],
+            [ 'name' => 'Buxgalter' ],
+            [ 'name' => 'TB' ],
         ]);
 
+
+        Employe::factory(10)->create();
+
+
+
+        PositionProduct::insert([
+            [ 'position_id' => 1,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+            [ 'position_id' => 1,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+            [ 'position_id' => 1,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+            [ 'position_id' => 2,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+            [ 'position_id' => 2,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+            [ 'position_id' => 2,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+            [ 'position_id' => 3,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+            [ 'position_id' => 3,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+            [ 'position_id' => 3,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],
+        ]);
     }
 }

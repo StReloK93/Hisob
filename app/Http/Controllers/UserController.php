@@ -1,62 +1,84 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\PasswordResetRequest;
-use App\Services\UserService;
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class UserController extends Controller
 {
-    public function __construct (UserService $userService) {
-
-        $this->service = $userService;
-
-    }
-
-
-    public function Login(LoginRequest $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-
-        return $this->service->login($request);
-    
+        return User::all();
     }
 
-
-    public function register(RegisterRequest $request)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return $this->service->register($request);
+        //
     }
 
-
-    public function logout(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        
-        return $this->service->logout($request);
-
+        //
     }
 
-
-    public function getUser(Request $request){
- 
-        return $this->service->getUser($request);
-
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
-    public function setShop($shopid){
- 
-        return $this->service->setShop($shopid);
-
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
-    public function passwordReset(PasswordResetRequest $request){
-        return $this->service->passwordReset($request);
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
     }
 
-
-    public function logoutUser(Request $request){
-        return $request->user()->tokens()->where('id', $request->id)->delete();
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
-
 }

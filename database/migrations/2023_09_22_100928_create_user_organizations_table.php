@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('user_organizations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('short_name');
-            $table->integer('code')->nullable();
-            $table->boolean('isActive')->default(true);
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('user_organizations');
     }
 };

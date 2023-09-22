@@ -3,6 +3,26 @@ html {
 }
 
 
+.relative{
+    position: relative;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.swal2-container{
+    z-index: 1000000!important;
+}
+
+.grid-button{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    bottom: 5px;
+    right: 0px;
+}
+
 .bg-gray-100:hover{
     background: rgb(233, 233, 233);
 }

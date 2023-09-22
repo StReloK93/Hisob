@@ -20,7 +20,7 @@ class Employe extends Model
 
     protected $with = [
         'organization',
-        'employePosition',
+        'position',
     ];
 
     public function organization()
@@ -28,7 +28,7 @@ class Employe extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function employePosition()
+    public function position()
     {
         return $this->hasMany(EmployePosition::class);
     }
