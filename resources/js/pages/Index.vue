@@ -1,6 +1,6 @@
 <template>
     <main class="d-flex flex-column">
-        StReLoK
+        Bu sahifa hali tugallanmagan
     </main>
 </template>
 
