@@ -34,9 +34,15 @@ Route::apiResource('users', UserController::class);
 
 
 Route::get('employe_product/products/{employe_id}', [EmployeProductController::class, 'getEmployeProducts']);
+Route::get('employe_product/mainproducts/{employe_id}', [EmployeProductController::class, 'getMainEmployeProducts']);
 Route::get('employe_product/price/{nomenclature}', [EmployeProductController::class, 'getProductPrices']);
 Route::post('employe_product/confirm', [EmployeProductController::class, 'confirmProduct']);
 Route::get('employe/getdata/{tableNumber}', [EmployeController::class, 'getEmployeData']);
+
+Route::get('products/main', [ProductController::class, 'getMainProducts']);
+
+
+
 
 
 Route::post('product/set_activate/{id}', [ProductController::class, 'setActivate']);

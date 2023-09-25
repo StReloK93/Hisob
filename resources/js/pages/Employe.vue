@@ -24,7 +24,7 @@
                     <div v-else class="text-red">
                         Lavozim biriktirilmagan
                     </div>
-                    <v-tabs v-model="pageData.tab" class="mt-12" color="cyan">
+                    <v-tabs v-model="pageData.tab" @update:modelValue="changeTab" class="mt-12" color="cyan">
                         <v-tab value="one">Maxsus kiyimlar</v-tab>
                         <v-tab value="two">Asosiy buyumlar</v-tab>
                     </v-tabs>
@@ -41,25 +41,59 @@
                                     </v-chip>
                                 </aside>
                                 <v-spacer class="relative">
-                                    <AgGridVue :getRowId="({ data }) => data.id" :headerHeight="34"
-                                        class="ag-theme-material h-100" animateRows="true" :rowSelection="'multiple'"
-                                        :columnDefs="productsColumnDefs" :rowData="pageData.products"
+                                    <AgGridVue
+                                        :getRowId="({ data }) => data.id"
+                                        :headerHeight="34"
+                                        class="ag-theme-material h-100"
+                                        animateRows="true"
+                                        :rowSelection="'multiple'"
+                                        :columnDefs="ColumnDefs"
+                                        :rowData="pageData.products"
                                         @grid-ready="(params) => pageData.productGridApi = params.api"
-                                        @selection-changed="onSelectionChanged" />
+                                        @selection-changed="onSelectionChanged"
+                                    />
                                     <main class="absolute grid-button">
-                                        <Scud v-if="pageData.selectedRows.length" @confirm_products=confirm_products :employe="pageData.employe"
-                                            :selected="pageData" />
+                                        <Scud
+                                            v-if="pageData.selectedRows.length"
+                                            @confirm_products=confirm_products
+                                            :employe="pageData.employe"
+                                            :selected="pageData"
+                                        />
                                         <span v-else></span>
-                                        <AddProductEmploye @addProduct="addProduct" :employe="pageData.employe">
-                                        </AddProductEmploye>
+                                        <AddProduct
+                                            @addProduct="addProduct"
+                                            :employe="pageData.employe"
+                                        />
                                     </main>
                                 </v-spacer>
                             </main>
                         </v-window-item>
 
-                        <v-window-item value="two" class="flex-grow-1">
-                            <AgGridVue :headerHeight="34" class="ag-theme-material h-100" :columnDefs="columnDefs"
-                                :rowData="pageData.position?.products" />
+                        <v-window-item value="two" class="flex-grow-1 pt-5">
+                                <AgGridVue
+                                    :getRowId="({ data }) => data.id"
+                                    :headerHeight="34"
+                                    animateRows="true"
+                                    :rowSelection="'multiple'"
+                                    class="ag-theme-material h-100"
+                                    :columnDefs="ColumnDefs"
+                                    :rowData="pageData.mainProducts"
+                                    @selection-changed="onSelection"
+                                    @grid-ready="(params) => pageData.mainGridApi = params.api"
+                                />
+                                <main class="absolute grid-button">
+                                    <Scud
+                                        v-if="pageData.selectedRows.length"
+                                        @confirm_products=confirm_mainproducts
+                                        :employe="pageData.employe"
+                                        :selected="pageData"
+                                    />
+                                    <span v-else></span>
+                                    <AddMainProduct
+                                        @addProduct="addMainProduct"
+                                        :employe="pageData.employe"
+                                    />
+                                </main>
                         </v-window-item>
                     </v-window>
                 </main>
@@ -69,7 +103,8 @@
 </template>
 
 <script setup lang="ts">
-import AddProductEmploye from '@/components/Employe/AddProductEmploye.vue'
+import AddProduct from '@/components/Employe/AddProduct.vue'
+import AddMainProduct from '@/components/Employe/AddMainProduct.vue'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import Checkbox from '@/components/AgGrid/Checkbox.vue'
 import Scud from '@/components/Employe/Scud.vue'
@@ -80,14 +115,21 @@ const { id } = defineProps(['id'])
 
 const pageData = reactive({
     productGridApi: null,
+    mainGridApi: null,
     products: [],
     selectedRows: [],
     employe: null,
     tab: null,
-    position: null
+    position: null,
+    mainProducts: null,
 })
 
 
+
+function changeTab(){
+    pageData.productGridApi?.deselectAll()
+    pageData.mainGridApi?.deselectAll()
+}
 
 function confirm_products(arrayId) {
     const itemsToUpdate = []
@@ -99,7 +141,26 @@ function confirm_products(arrayId) {
         itemsToUpdate.push(data);
     })
 
-    setTimeout(() => pageData.productGridApi.applyTransaction({ update: itemsToUpdate }), 500)
+    setTimeout(() => {
+        pageData.productGridApi.applyTransaction({ update: itemsToUpdate })
+        changeTab()
+    }, 500)
+}
+
+function confirm_mainproducts(arrayId) {
+    const itemsToUpdate = []
+
+    arrayId.forEach(id => {
+        const rowNode = pageData.mainGridApi.getRowNode(id)
+        const data = rowNode.data
+        data.toggle_confirmation = true
+        itemsToUpdate.push(data);
+    })
+
+    setTimeout(() => {
+        pageData.mainGridApi.applyTransaction({ update: itemsToUpdate })
+        changeTab()
+    }, 500)
 }
 
 
@@ -109,23 +170,36 @@ axios.get(`employe/${id}`).then(({ data: employer }) => {
     pageData.employe = employer
     const lastPosition = employer.position.at(-1)
     if (lastPosition) pageData.position = lastPosition.position
-
 })
+
+
 
 
 function onSelectionChanged() {
     pageData.selectedRows = pageData.productGridApi.getSelectedRows()
 }
 
+function onSelection() {
+    pageData.selectedRows = pageData.mainGridApi.getSelectedRows()
+}
+
 axios.get(`employe_product/products/${id}`).then(({ data }) => {
     pageData.products = data
+})
+
+axios.get(`employe_product/mainproducts/${id}`).then(({ data }) => {
+    pageData.mainProducts = data
 })
 
 function addProduct(data) {
     pageData.productGridApi.applyTransaction({ add: data })
 }
 
-const productsColumnDefs = reactive([
+function addMainProduct(data) {
+    pageData.mainGridApi.applyTransaction({ add: data })
+}
+
+const ColumnDefs = reactive([
     {
         headerClass: ['px-3'],
         cellClass: ['px-3'],
@@ -158,15 +232,6 @@ const productsColumnDefs = reactive([
         cellRendererParams: { color: 'red' }
     },
 ])
-
-
-const columnDefs = reactive([
-    { field: "product.name", headerName: 'Nomi', flex: 1 },
-    { field: "product.expiration_date", headerName: 'Yaroqlilik muddati', flex: 1 },
-    { field: "count", headerName: 'soni' },
-]);
-
-
 
 </script>
 <style src="../../css/ag-grid.css"></style>

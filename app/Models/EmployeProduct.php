@@ -38,6 +38,12 @@ class EmployeProduct extends Model
         });
     }
 
+    public function scopeMainProducts($query)
+    {
+        return $query->whereHas('product', function($query) {
+            $query->where('product_type_id' , 2);
+        });
+    }
 
     protected $casts = [
         'date_of_receipt' => 'date:Y-m-d',

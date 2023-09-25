@@ -20,6 +20,10 @@ class EmployeProductController extends Controller
         return EmployeProduct::where('employe_id', $employe_id)->SpecialProducts()->get();
     }
 
+    public function getMainEmployeProducts($employe_id){
+        return EmployeProduct::where('employe_id', $employe_id)->MainProducts()->get();
+    }
+
     public function store(Request $request){
         $products = [];
         foreach ($request->products as $key => $product) {

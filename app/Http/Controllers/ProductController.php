@@ -12,6 +12,11 @@ class ProductController extends Controller
     }
 
 
+    public function getMainProducts(){
+        return Product::where('product_type_id', 2)->get();
+    }
+
+
     public function store(Request $request){
 
         $position = Product::create([
