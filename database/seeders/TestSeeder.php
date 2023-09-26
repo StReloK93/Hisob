@@ -6,14 +6,12 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
-use App\Models\User;
 use App\Models\Role;
 use App\Models\Employe;
 use App\Models\Position;
 use App\Models\PositionProduct;
 use App\Models\EmployePosition;
 use App\Models\Product;
-Use Hash;
 class TestSeeder extends Seeder
 {
     /**
@@ -47,12 +45,7 @@ class TestSeeder extends Seeder
             ],
         ))->create();
 
-        User::create([
-            'name' => 'Soliyev Aziz',
-            'login' => 'admin',
-            'password' => Hash::make('zzzz1111*'),
-            'name' => 'Soliyev Aziz',
-        ]);
+
 
         Position::factory(4)->state(new Sequence(
             [

@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use App\Models\ProductType;
 use App\Models\Organization;
 use App\Models\UserRole;
+use App\Models\User;
+Use Hash;
 
 
 class MainSeeder extends Seeder
@@ -18,6 +20,14 @@ class MainSeeder extends Seeder
      */
     public function run()
     {
+
+        User::create([
+            'name' => 'Soliyev Aziz',
+            'login' => 'admin',
+            'password' => Hash::make('zzzz1111*'),
+            'name' => 'Soliyev Aziz',
+        ]);
+
 
         ProductType::insert([
             ['name' => 'Ximoya vositalari'],
