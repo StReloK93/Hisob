@@ -65,3 +65,17 @@ init()
 
 
 // Buxgalterni roli Nazorat
+
+
+
+
+
+
+
+
+//Ish o'rni
+
+//buyi
+//kiyim o'lchami
+//bosh kiyimi o'lchami
+//oyoq kiyim o'lchami

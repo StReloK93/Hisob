@@ -18,7 +18,7 @@
                             </v-text-field>
                         </v-col>
                         <v-col cols="12" class="pt-0">
-                            <v-select
+                            <v-autocomplete
                                 color="teal"
                                 :items="pageData.products"
                                 variant="underlined"
@@ -28,8 +28,7 @@
                                 item-title="name"
                                 :item-value="(item) => item"
                                 multiple
-                                required
-                            ></v-select>
+                            ></v-autocomplete>
                         </v-col>
                         <v-col cols="12" class="py-4">
                                 <template v-for="product in formData.products">
