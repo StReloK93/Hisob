@@ -3,26 +3,26 @@
     "file": "assets/Button-c47f54aa.css",
     "src": "Button.css"
   },
-  "_Button-d84b848a.js": {
+  "_Button-a8bf368a.js": {
     "css": [
       "assets/Button-c47f54aa.css"
     ],
-    "file": "assets/Button-d84b848a.js",
+    "file": "assets/Button-a8bf368a.js",
     "imports": [
       "resources/js/app.ts"
     ]
   },
-  "_IconEdit-63a43e58.js": {
-    "file": "assets/IconEdit-63a43e58.js",
+  "_IconEdit-2ec7bd22.js": {
+    "file": "assets/IconEdit-2ec7bd22.js",
     "imports": [
       "resources/js/app.ts"
     ]
   },
-  "_ag-grid.css_vue_type_style_index_0_src_true_lang-0b580806.js": {
+  "_ag-grid.css_vue_type_style_index_0_src_true_lang-36b22160.js": {
     "css": [
       "assets/ag-grid-dfbea059.css"
     ],
-    "file": "assets/ag-grid.css_vue_type_style_index_0_src_true_lang-0b580806.js",
+    "file": "assets/ag-grid.css_vue_type_style_index_0_src_true_lang-36b22160.js",
     "imports": [
       "resources/js/app.ts"
     ]
@@ -75,7 +75,7 @@
       "resources/js/pages/Products.vue",
       "resources/js/pages/Login.vue"
     ],
-    "file": "assets/app-04b2ffd6.js",
+    "file": "assets/app-4ae07fea.js",
     "isEntry": true,
     "src": "resources/js/app.ts"
   },
@@ -87,27 +87,27 @@
     "css": [
       "assets/Employe-ed76da5f.css"
     ],
-    "file": "assets/Employe-7fda44e3.js",
+    "file": "assets/Employe-4362b875.js",
     "imports": [
       "resources/js/app.ts",
       "_helpers-2d02b701.js",
-      "_ag-grid.css_vue_type_style_index_0_src_true_lang-0b580806.js"
+      "_ag-grid.css_vue_type_style_index_0_src_true_lang-36b22160.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Employe.vue"
   },
   "resources/js/pages/Employes.vue": {
-    "file": "assets/Employes-3fb36677.js",
+    "file": "assets/Employes-fa9d0ee7.js",
     "imports": [
       "resources/js/app.ts",
-      "_IconEdit-63a43e58.js",
-      "_ag-grid.css_vue_type_style_index_0_src_true_lang-0b580806.js"
+      "_IconEdit-2ec7bd22.js",
+      "_ag-grid.css_vue_type_style_index_0_src_true_lang-36b22160.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Employes.vue"
   },
   "resources/js/pages/Home.vue": {
-    "file": "assets/Home-02341527.js",
+    "file": "assets/Home-833db5ab.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -115,7 +115,7 @@
     "src": "resources/js/pages/Home.vue"
   },
   "resources/js/pages/Index.vue": {
-    "file": "assets/Index-7b945552.js",
+    "file": "assets/Index-288d8688.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -123,7 +123,7 @@
     "src": "resources/js/pages/Index.vue"
   },
   "resources/js/pages/Login.vue": {
-    "file": "assets/Login-745a761a.js",
+    "file": "assets/Login-abb7382d.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -131,45 +131,45 @@
     "src": "resources/js/pages/Login.vue"
   },
   "resources/js/pages/Organizations.vue": {
-    "file": "assets/Organizations-0a6c5bc4.js",
+    "file": "assets/Organizations-019d4c93.js",
     "imports": [
-      "_IconEdit-63a43e58.js",
-      "_Button-d84b848a.js",
-      "_ag-grid.css_vue_type_style_index_0_src_true_lang-0b580806.js",
+      "_IconEdit-2ec7bd22.js",
+      "_Button-a8bf368a.js",
+      "_ag-grid.css_vue_type_style_index_0_src_true_lang-36b22160.js",
       "resources/js/app.ts"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Organizations.vue"
   },
   "resources/js/pages/Positions.vue": {
-    "file": "assets/Positions-50e834ec.js",
+    "file": "assets/Positions-2b56c45a.js",
     "imports": [
-      "_ag-grid.css_vue_type_style_index_0_src_true_lang-0b580806.js",
+      "_ag-grid.css_vue_type_style_index_0_src_true_lang-36b22160.js",
       "resources/js/app.ts",
       "_helpers-2d02b701.js",
-      "_Button-d84b848a.js",
-      "_IconEdit-63a43e58.js"
+      "_Button-a8bf368a.js",
+      "_IconEdit-2ec7bd22.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Positions.vue"
   },
   "resources/js/pages/Products.vue": {
-    "file": "assets/Products-ca4c0f2c.js",
+    "file": "assets/Products-cfb0ea00.js",
     "imports": [
       "resources/js/app.ts",
-      "_ag-grid.css_vue_type_style_index_0_src_true_lang-0b580806.js",
-      "_Button-d84b848a.js",
-      "_IconEdit-63a43e58.js"
+      "_ag-grid.css_vue_type_style_index_0_src_true_lang-36b22160.js",
+      "_Button-a8bf368a.js",
+      "_IconEdit-2ec7bd22.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Products.vue"
   },
   "resources/js/pages/Users.vue": {
-    "file": "assets/Users-3f5c3170.js",
+    "file": "assets/Users-cfb69de2.js",
     "imports": [
-      "_IconEdit-63a43e58.js",
-      "_Button-d84b848a.js",
-      "_ag-grid.css_vue_type_style_index_0_src_true_lang-0b580806.js",
+      "_IconEdit-2ec7bd22.js",
+      "_Button-a8bf368a.js",
+      "_ag-grid.css_vue_type_style_index_0_src_true_lang-36b22160.js",
       "resources/js/app.ts"
     ],
     "isDynamicEntry": true,

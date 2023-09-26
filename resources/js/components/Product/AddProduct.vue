@@ -30,7 +30,6 @@
                                     hide-details="auto"
                                     type="number"
                                     v-model="formData.expiration_date"
-                                    required
                                 />
                             </v-col>
                             <v-col cols="12" class="pt-0">
@@ -43,7 +42,7 @@
                                     label="Turi" 
                                     item-title="name"
                                     :item-value="(item) => item.id"
-                                    required
+                                    :rules="pageData.rules"
                                 ></v-select>
                             </v-col>
                             <v-col cols="12" class="pt-0">
@@ -74,7 +73,8 @@ const emit = defineEmits(['addProduct'])
 const pageData = reactive({
     dialog: false,
     products_types: null,
-    products: null
+    products: null,
+    rules: [(value) => value == null || value == "" ? 'toldiring' : true ],
 })
 
 const formData = reactive({

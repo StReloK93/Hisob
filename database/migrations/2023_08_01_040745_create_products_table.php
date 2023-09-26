@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('expiration_date');
+            $table->integer('expiration_date')->nullable();
             $table->integer('product_type_id');
             $table->boolean('isActive')->default(true);
             $table->timestamps();
