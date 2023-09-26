@@ -1,4 +1,4 @@
-import{d as zn,z as wu,j as Su,a as Eu,o as _u,c as Ru,b as Ou,A as Ls,B as Tu,C as Ti,D as Di,E as Du}from"./app-4ae07fea.js";const hw=zn({__name:"Breadcrumbs",props:["user"],setup(n){const{user:t}=n,e=wu(),r=Su([...e.meta.breadcrumbs]);return t&&r.push({title:t.name,disabled:!0}),(o,i)=>{const s=Eu("v-breadcrumbs");return _u(),Ru(s,{divider:"-",items:r,tag:"route-link"},null,8,["items"])}}});/**
+import{d as zn,z as wu,j as Su,a as Eu,o as _u,c as Ru,b as Ou,A as Ls,B as Tu,C as Ti,D as Di,E as Du}from"./app-70045dd6.js";const hw=zn({__name:"Breadcrumbs",props:["user"],setup(n){const{user:t}=n,e=wu(),r=Su([...e.meta.breadcrumbs]);return t&&r.push({title:t.name,disabled:!0}),(o,i)=>{const s=Eu("v-breadcrumbs");return _u(),Ru(s,{divider:"-",items:r,tag:"route-link"},null,8,["items"])}}});/**
           * @ag-grid-community/all-modules - Advanced Data Grid / Data Table supporting Javascript / Typescript / React / Angular / Vue * @version v30.0.6
           * @link https://www.ag-grid.com/
           * @license MIT

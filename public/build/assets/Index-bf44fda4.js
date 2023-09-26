@@ -1,0 +1,1 @@
+import{_ as e,o as a,h as n}from"./app-70045dd6.js";const c={},o={class:"d-flex flex-column"};function s(t,l){return a(),n("main",o," Bu sahifa hali tugallanmagan ")}const _=e(c,[["render",s]]);export{_ as default};

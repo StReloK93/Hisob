@@ -25,6 +25,9 @@ class Product extends Model
         return $this->belongsTo(ProductType::class);
     }
 
+    protected $casts = [
+        'product_type_id' => 'integer',
+    ];
 
     
     // protected $connection = 'oracle';

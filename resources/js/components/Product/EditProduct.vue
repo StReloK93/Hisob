@@ -25,8 +25,7 @@
                                     hide-details="auto"
                                     type="number"
                                     v-model="formData.expiration_date"
-                                    required>
-                                </v-text-field>
+                                />
                             </v-col>
                             <v-col cols="12" class="pt-0">
                                 <v-select
@@ -38,8 +37,7 @@
                                     label="Turi" 
                                     item-title="name"
                                     :item-value="(item) => item.id"
-                                    required
-                                ></v-select>
+                                />
                             </v-col>
                         <v-col cols="12" class="pt-0">
                             <v-switch label="Faolligi"  v-model="formData.isActive" hide-details="auto" color="teal"></v-switch>
