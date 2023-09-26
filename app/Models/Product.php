@@ -27,6 +27,7 @@ class Product extends Model
 
     protected $casts = [
         'product_type_id' => 'integer',
+        'isActive' => 'boolean',
     ];
 
     

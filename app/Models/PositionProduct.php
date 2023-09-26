@@ -23,4 +23,11 @@ class PositionProduct extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+
+    protected $casts = [
+        'count' => 'integer',
+        'position_id' => 'integer',
+        'product_id' => 'integer',
+    ];
 }

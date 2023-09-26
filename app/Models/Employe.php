@@ -35,5 +35,8 @@ class Employe extends Model
 
     protected $casts = [
         'hiring_date' => 'date:Y-m-d',
+        'gender' => 'boolean',
+        'organization_id' => 'boolean',
+        'division_id' => 'boolean',
     ];
 }

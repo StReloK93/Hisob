@@ -23,4 +23,10 @@ class EmployePosition extends Model
     {
         return $this->belongsTo(Position::class);
     }
+
+
+    protected $casts = [
+        'employe_id' => 'integer',
+        'position_id' => 'integer',
+    ];
 }

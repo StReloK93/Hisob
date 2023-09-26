@@ -47,5 +47,11 @@ class EmployeProduct extends Model
 
     protected $casts = [
         'date_of_receipt' => 'date:Y-m-d',
+        'employe_id' => 'integer',
+        'product_id' => 'integer',
+        'count' => 'integer',
+        'toggle_confirmation' => 'boolean',
+        'toggle_write_off' => 'boolean',
     ];
+    
 }

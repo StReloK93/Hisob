@@ -20,4 +20,10 @@ class Position extends Model
     {
         return $this->hasMany(PositionProduct::class);
     }
+
+
+    protected $casts = [
+        'isActive' => 'boolean',
+    ];
+
 }

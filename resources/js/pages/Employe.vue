@@ -36,7 +36,7 @@
                                     <p class="text-grey-lighten-1 text-caption pb-1">
                                         Biriktirilgan buyumlar
                                     </p>
-                                    <v-chip size="small" color="teal" class="mr-4 px-4 mb-2" v-for="item in pageData.position.products">
+                                    <v-chip size="small" color="teal" class="mr-2 px-4 mb-2" v-for="item in pageData.position.products">
                                         {{ item.product.name }} <span class="ml-2">x</span>{{ item.count }}
                                     </v-chip>
                                 </aside>

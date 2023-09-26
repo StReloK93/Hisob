@@ -14,4 +14,9 @@ class Organization extends Model
         'short_name',
         'isActive',
     ];
+
+
+    protected $casts = [
+        'isActive' => 'boolean',
+    ];
 }
