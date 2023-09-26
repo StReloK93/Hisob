@@ -12,14 +12,15 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12" class="pt-0">
-                                <v-text-field
+                                <v-combobox
                                     color="teal"
                                     label="Nomi"
                                     variant="underlined"
                                     hide-details="auto"
+                                    :items="pageData.products"
                                     v-model="formData.name"
-                                    required>
-                                </v-text-field>
+                                    required
+                                />
                             </v-col>
                             <v-col cols="12" class="pt-0">
                                 <v-text-field
@@ -29,8 +30,8 @@
                                     hide-details="auto"
                                     type="number"
                                     v-model="formData.expiration_date"
-                                    required>
-                                </v-text-field>
+                                    required
+                                />
                             </v-col>
                             <v-col cols="12" class="pt-0">
                                 <v-select
@@ -66,13 +67,14 @@
 </template>
 
 <script setup lang="ts">
-import { increment, decrement } from '@/modules/helpers'
 import { reactive, watch } from 'vue'
 import axios from '@/modules/axios'
 const emit = defineEmits(['addProduct'])
+
 const pageData = reactive({
     dialog: false,
     products_types: null,
+    products: null
 })
 
 const formData = reactive({
@@ -92,6 +94,10 @@ function addProduct() {
 
 axios.get('product_type').then(({data}) => {
     pageData.products_types = data.map((item) => { return {...item, count: 1} })
+})
+
+axios.get('product').then(({data}) => {
+    pageData.products = data.map((product) => product.name)
 })
 
 watch(() => pageData.dialog, (current) => {
