@@ -63,9 +63,8 @@ const columnDefs = reactive([
         width: 60,
         headerClass: ['px-2'],
         onCellClicked: (params) => {
-            const current = +!params.value
-            axios.post(`position/set_activate/${params.data.id}`, { active: current }).then(() => {
-                params.node.setDataValue('isActive', current)
+            axios.post(`position/set_activate/${params.data.id}`, { active: !params.value }).then(() => {
+                params.node.setDataValue('isActive', !params.value)
             })
         }
     },
