@@ -2,11 +2,12 @@
     <section class="d-flex flex-column">
         <div class="d-flex justify-space-between items-center">
             <Breadcrumbs></Breadcrumbs>
-            <!-- <AddOrganization @addOrganization="addOrganization" /> -->
-            <!-- <EditOrganization @editOrganization="editOrganization" ref="editComponent" :current="pageData" /> -->
+            <AddUser @addUser="addUser" />
+            <EditUser @editUser="editUser" ref="editUserComp" :current="pageData" />
         </div>
         <v-spacer class="px-4">
             <AgGridVue
+                :headerHeight="34"
                 class="ag-theme-material h-100"
                 :getRowId="({data}) => data.id"
                 :columnDefs="columnDefs"
@@ -22,14 +23,14 @@
 import IconEdit from '@/components/AgGrid/IconEdit.vue'
 import Button from '@/components/AgGrid/Button.vue'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
-import AddOrganization from '@/components/Organization/AddOrganization.vue'
-import EditOrganization from '@/components/Organization/EditOrganization.vue'
+import AddUser from '@/components/User/AddUser.vue'
+import EditUser from '@/components/User/EditUser.vue'
 
 import { reactive, ref } from "vue"
 import axios from '@/modules/axios'
 import { AgGridVue } from "ag-grid-vue3"
 
-const editComponent = ref()
+const editUserComp = ref()
 
 const pageData = reactive({
     gridApi: null,
@@ -37,13 +38,14 @@ const pageData = reactive({
     selected: null
 })
 
-function addOrganization(organization){
-    pageData.gridApi.applyTransaction({add: [organization]})
+
+function addUser(){
+    
 }
 
-function editOrganization(organization){
-    const rowNode = pageData.gridApi.getRowNode(organization.id)
-    rowNode.setData(organization)
+
+function editUser(){
+    
 }
 
 
@@ -72,7 +74,7 @@ const columnDefs = reactive([
         headerClass: ['px-2'],
         onCellClicked: ({ data }) => {
             pageData.selected = data.id
-            editComponent.value.toggle()
+            editUserComp.value.toggle()
         }
     },
 ]);

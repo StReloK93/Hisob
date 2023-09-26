@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('name');
             $table->datetime('hiring_date');
             $table->boolean('gender');
+            $table->string('heigth')->nullable();
+            $table->string('size_cloth')->nullable();
+            $table->string('size_head')->nullable();
+            $table->string('size_shoes')->nullable();
             $table->integer('organization_id');
             $table->integer('division_id')->nullable();
             $table->timestamps();

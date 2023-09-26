@@ -16,6 +16,10 @@ class Employe extends Model
         'gender',
         'organization_id',
         'division_id',
+        'heigth',
+        'size_cloth',
+        'size_head',
+        'size_shoes',
     ];
 
     protected $with = [

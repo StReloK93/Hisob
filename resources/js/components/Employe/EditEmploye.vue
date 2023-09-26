@@ -66,6 +66,40 @@
                                     :rules="pageData.rules"
                                 ></v-text-field>
                             </v-col>
+                             <!--  -->
+                             <v-col cols="6">
+                                <v-text-field
+                                    color="teal"
+                                    label="Bo'yi"
+                                    variant="underlined" hide-details="auto"
+                                    v-model="formData.heigth"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field
+                                    color="teal"
+                                    label="Bosh o'lchami"
+                                    variant="underlined" hide-details="auto"
+                                    v-model="formData.size_head"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field
+                                    color="teal"
+                                    label="Kiyim o'lchami"
+                                    variant="underlined" hide-details="auto"
+                                    v-model="formData.size_cloth"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field
+                                    color="teal"
+                                    label="Oyoq kiyim o'lchami"
+                                    variant="underlined" hide-details="auto"
+                                    v-model="formData.size_shoes"
+                                ></v-text-field>
+                            </v-col>
+
                             <v-col cols="12">
                                 <v-radio-group color="teal" small v-model="formData.gender" hide-details="auto">
                                     <v-radio label="Erkak" :value="1"></v-radio>
@@ -110,7 +144,13 @@ const formData = reactive({
     name: null,
     position_id: null,
     hiring_date: null,
+
     gender: null,
+    heigth: null,
+    size_cloth: null,
+    size_head: null,
+    size_shoes: null,
+
     organization_id: null,
 })
 
@@ -152,13 +192,16 @@ axios.all([
 }))
 
 
-
 function clear(){
     formData.table_number = null
     formData.name = null
     formData.position_id = null
     formData.hiring_date = null
     formData.gender = null
+    formData.heigth = null
+    formData.size_cloth = null
+    formData.size_head = null
+    formData.size_shoes = null
     formData.organization_id = null
 }
 

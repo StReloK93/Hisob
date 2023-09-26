@@ -8,6 +8,7 @@
         <v-spacer class="px-4">
             <AgGridVue
                 class="ag-theme-material h-100"
+                :headerHeight="34"
                 :getRowId="({data}) => data.id"
                 :columnDefs="columnDefs"
                 :rowData="employes"
@@ -49,8 +50,8 @@ function editEmploye(employe){
 
 const router = useRouter()
 const columnDefs = reactive([
-    { field: "table_number", headerName: 'Tabel raqami',  sortable: true },
-    { field: "name", headerName: 'F.I.SH', sortable: true ,flex: 1 },
+    { field: "table_number", headerName: 'Tabel raqami',  sortable: true, width: 100 , headerClass: ['px-2'], cellClass: ['px-2']},
+    { field: "name", headerName: 'F.I.SH', sortable: true ,flex: 1, minWidth: 275 },
     { field: "organization.short_name", headerName: 'Ish joyi' , sortable: true },
     { 
         field: "position",
@@ -62,7 +63,11 @@ const columnDefs = reactive([
         }
     },
     { field: "hiring_date", headerName: 'Ishga qabul kuni' , sortable: true, width: 160 },
-    { field: "gender", headerName: 'Jinsi', cellRenderer: (data) => gender(data.value) , sortable: true, width: 100 },
+    { field: "gender", headerName: 'Jinsi', cellRenderer: (data) => gender(data.value) , sortable: true, width: 60 , headerClass: ['px-2'], cellClass: ['px-2']},
+    { field: "heigth", headerName: "Bo'yi (sm)" , sortable: true, width: 85 , headerClass: ['px-2'], cellClass: ['px-2'] },
+    { field: "size_head", headerName: "Bosh o'lch.." , sortable: true ,  width: 105 , headerClass: ['px-2'], cellClass: ['px-2']},
+    { field: "size_cloth", headerName: "Kiyim o'lch.." , sortable: true ,  width: 105 , headerClass: ['px-2'], cellClass: ['px-2'] },
+    { field: "size_shoes", headerName: "Oyoq kiyim o'lch..", sortable: true ,  width: 125 , headerClass: ['px-2'], cellClass: ['px-2'] },
     {
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',

@@ -7,6 +7,7 @@
         </div>
         <v-spacer class="px-4">
             <AgGridVue
+                :headerHeight="34"
                 class="ag-theme-material h-100"
                 :getRowId="({data}) => data.id"
                 :columnDefs="columnDefs"
@@ -49,7 +50,7 @@ function editPosition(position){
 
 const columnDefs = reactive([
     { field: "id", headerName: '№', width: 65 },
-    { field: "name", headerName: 'Nomi' },
+    { field: "name", headerName: 'Nomi', width: 200 },
     {
         headerName: 'Biriktirilgan maxsulotlar',
         flex: 1,
