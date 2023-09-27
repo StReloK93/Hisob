@@ -23,14 +23,7 @@ use App\Http\Controllers\UserController;
 */
 
 
-Route::apiResource('employe', EmployeController::class);
-Route::apiResource('position', PositionController::class);
-Route::apiResource('organization', OrganizationController::class);
-Route::apiResource('product', ProductController::class);
-Route::apiResource('product_type', ProductTypeController::class);
-Route::apiResource('role', RoleController::class);
-Route::apiResource('employe_product', EmployeProductController::class);
-Route::apiResource('users', UserController::class);
+
 
 
 Route::get('employe_product/products/{employe_id}', [EmployeProductController::class, 'getEmployeProducts']);
@@ -56,7 +49,17 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    
+    Route::apiResource('employe', EmployeController::class);
+    Route::apiResource('position', PositionController::class);
+    Route::apiResource('organization', OrganizationController::class);
+    Route::apiResource('product', ProductController::class);
+    Route::apiResource('product_type', ProductTypeController::class);
+    Route::apiResource('role', RoleController::class);
+    Route::apiResource('employe_product', EmployeProductController::class);
+    Route::apiResource('users', UserController::class);
+
+    Route::get('accessOrganizations', [OrganizationController::class, 'accessOrganizations']);
+
     Route::get('/user', [AuthController::class, 'getUser']);
 
 });

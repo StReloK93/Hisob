@@ -6,7 +6,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
-use App\Models\Role;
 use App\Models\Employe;
 use App\Models\Position;
 use App\Models\PositionProduct;
@@ -68,18 +67,7 @@ class TestSeeder extends Seeder
             ['employe_id' => 3,'position_id' => 3, 'created_at' => now()],
         ]);
 
-
-        Role::insert([
-            [ 'name' => 'Admin' ],
-            [ 'name' => 'Omborchi' ],
-            [ 'name' => 'Buxgalter' ],
-            [ 'name' => 'TB' ],
-        ]);
-
-
         Employe::factory(10)->create();
-
-
 
         PositionProduct::insert([
             [ 'position_id' => 1,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],

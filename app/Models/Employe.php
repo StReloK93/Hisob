@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Auth;
+
 
 class Employe extends Model
 {
@@ -37,10 +39,22 @@ class Employe extends Model
         return $this->hasMany(EmployePosition::class);
     }
 
+    public function scopeAccessOrganizations($query)
+    {
+        
+        $organizations = [];
+        foreach (Auth::user()->organizations as $key => $item) {
+            $organizations[] = $item->organizations_id;
+        }
+
+        return $query->whereIn('organization_id', $organizations);
+    }
+
+
     protected $casts = [
         'hiring_date' => 'date:Y-m-d',
         'gender' => 'boolean',
-        'organization_id' => 'boolean',
-        'division_id' => 'boolean',
+        'organization_id' => 'integer',
+        'division_id' => 'integer',
     ];
 }

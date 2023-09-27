@@ -50,13 +50,13 @@ function editEmploye(employe){
 
 const router = useRouter()
 const columnDefs = reactive([
-    { field: "table_number", headerName: 'Tabel raqami',  sortable: true, width: 100 , headerClass: ['px-2'], cellClass: ['px-2']},
+    { field: "table_number", headerName: 'Tabel №',  sortable: true, width: 65 , headerClass: ['px-2'], cellClass: ['px-2']},
     { field: "name", headerName: 'F.I.SH', sortable: true ,flex: 1, minWidth: 275 },
     { field: "organization.short_name", headerName: 'Ish joyi' , sortable: true },
     { 
         field: "position",
         headerName: 'Lavozimi',
-        sortable: true, 
+        sortable: true,
         valueFormatter: (data) => {
             if(data.value.at(-1)) return data.value.at(-1).position.name
             else return ""

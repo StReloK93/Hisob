@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class UserOrganization extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'user_id' => 'integer',
+        'organizations_id' => 'integer',
+    ];
 }

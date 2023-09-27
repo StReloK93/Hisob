@@ -30,7 +30,7 @@
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12" class="pt-0">
-                                <v-select
+                                <v-autocomplete
                                     color="teal"
                                     :items="pageData.organizations"
                                     variant="underlined"
@@ -40,10 +40,10 @@
                                     item-title="short_name"
                                     item-value="id"
                                     :rules="pageData.rules"
-                                ></v-select>
+                                ></v-autocomplete>
                             </v-col>
                             <v-col cols="12">
-                                <v-select
+                                <v-autocomplete
                                     color="teal"
                                     :items="pageData.positions" 
                                     variant="underlined"
@@ -53,7 +53,7 @@
                                     item-title="name"
                                     item-value="id"
                                     :rules="pageData.rules"
-                                ></v-select>
+                                ></v-autocomplete>
                             </v-col>
                             <v-col cols="12">
                                 <v-text-field
@@ -102,8 +102,8 @@
 
                             <v-col cols="12">
                                 <v-radio-group color="teal" small v-model="formData.gender" hide-details="auto">
-                                    <v-radio label="Erkak" :value="1"></v-radio>
-                                    <v-radio label="Ayol" :value="0"></v-radio>
+                                    <v-radio label="Erkak" :value="true"></v-radio>
+                                    <v-radio label="Ayol" :value="false"></v-radio>
                                 </v-radio-group>
                             </v-col>
                         </v-row>
@@ -165,6 +165,10 @@ function getSelectedEmploye(){
         formData.name = employe.name
         formData.hiring_date = employe.hiring_date
         formData.gender = employe.gender
+        formData.heigth = employe.heigth
+        formData.size_cloth = employe.size_cloth
+        formData.size_head = employe.size_head
+        formData.size_shoes = employe.size_shoes
         formData.organization_id = employe.organization_id
     })
 }
@@ -183,7 +187,7 @@ async function editEmploye() {
 }
 
 axios.all([
-    axios.get('organization'), 
+    axios.get('accessOrganizations'),
     axios.get('position')
 ])
 .then(axios.spread(({data:organizations}, {data:positions}) => {

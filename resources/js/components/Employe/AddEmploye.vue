@@ -37,7 +37,7 @@
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" class="pt-0">
-                                    <v-select
+                                    <v-autocomplete
                                         color="teal"
                                         :items="pageData.organizations"
                                         variant="underlined"
@@ -47,10 +47,10 @@
                                         item-title="short_name"
                                         item-value="id"
                                         :rules="pageData.rules"
-                                    ></v-select>
+                                    />
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-select 
+                                    <v-autocomplete 
                                         color="teal"
                                         :items="pageData.positions" 
                                         variant="underlined"
@@ -60,7 +60,7 @@
                                         item-title="name"
                                         :rules="pageData.rules"
                                         item-value="id"
-                                    ></v-select>
+                                    />
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
@@ -109,8 +109,8 @@
 
                                 <v-col cols="12">
                                     <v-radio-group color="teal" class="" small v-model="formData.gender" hide-details="auto" :rules="pageData.rules">
-                                        <v-radio label="Erkak" value="1"></v-radio>
-                                        <v-radio label="Ayol" value="0"></v-radio>
+                                        <v-radio label="Erkak" :value="true"></v-radio>
+                                        <v-radio label="Ayol" :value="false"></v-radio>
                                     </v-radio-group>
                                 </v-col>
                             </v-row>
@@ -191,7 +191,7 @@ function getEmployeData(){
 }
 
 axios.all([
-    axios.get('organization'), 
+    axios.get('accessOrganizations'), 
     axios.get('position')
 ])
 .then(axios.spread(({data:organizations}, {data:positions}) => {

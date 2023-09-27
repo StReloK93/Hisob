@@ -3,7 +3,7 @@
         <div class="d-flex justify-space-between items-center">
             <Breadcrumbs></Breadcrumbs>
             <AddUser @addUser="addUser" />
-            <EditUser @editUser="editUser" ref="editUserComp" :current="pageData" />
+            <EditUser @editUser="editUser" ref="editUserComp" :selected="pageData" />
         </div>
         <v-spacer class="px-4">
             <AgGridVue
@@ -20,8 +20,9 @@
 </template>
 
 <script setup lang="ts">
+
 import IconEdit from '@/components/AgGrid/IconEdit.vue'
-import Button from '@/components/AgGrid/Button.vue'
+import UserRoles from '@/components/AgGrid/UserRoles.vue'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import AddUser from '@/components/User/AddUser.vue'
 import EditUser from '@/components/User/EditUser.vue'
@@ -35,37 +36,24 @@ const editUserComp = ref()
 const pageData = reactive({
     gridApi: null,
     users: [],
-    selected: null
+    user: null
 })
 
 
 function addUser(){
-    
+
 }
 
-
-function editUser(){
-    
+function editUser(user){
+    const rowNode = pageData.gridApi.getRowNode(user.id)
+    rowNode.setData(user)
 }
-
 
 const columnDefs = reactive([
     { field: "id", headerName: '№', width: 65 },
-    { field: "name", headerName: 'Nomi', flex: 1 },
     { field: "login", headerName: 'Login' },
-    {
-        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
-        field: "isActive",
-        headerName: 'Faolligi',
-        cellRenderer: Button,
-        width: 60,
-        headerClass: ['px-2'],
-        onCellClicked: (params) => {
-            axios.post(`organization/set_activate/${params.data.id}`, { active: !params.value }).then(() => {
-                params.node.setDataValue('isActive', !params.value)
-            })
-        }
-    },
+    { field: "name", headerName: 'Nomi', flex: 1 },
+    { field: "roles", headerName: 'Rollari', flex: 1, cellRenderer: UserRoles, valueFormatter: null },
     {
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',
@@ -73,7 +61,7 @@ const columnDefs = reactive([
         cellRenderer: IconEdit,
         headerClass: ['px-2'],
         onCellClicked: ({ data }) => {
-            pageData.selected = data.id
+            pageData.user = data
             editUserComp.value.toggle()
         }
     },

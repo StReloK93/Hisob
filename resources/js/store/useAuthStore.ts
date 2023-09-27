@@ -1,12 +1,11 @@
 
 import { defineStore } from "pinia"
-import { ref } from "vue"
+import { ref , computed } from "vue"
 import router from "@/router"
 import axios from '@/modules/axios'
 
 export const useAuthStore = defineStore('Auth', () => {
     const user = ref(null)
-    const shop = ref(null)
 
     async function login(data) {
         const result = await axios.post('login', data)
@@ -18,6 +17,10 @@ export const useAuthStore = defineStore('Auth', () => {
         }
     }
 
+    const userRoles = computed(() => {
+        return user.value?.roles?.map((role) => role.role_id)
+    })
+    
 
     async function getUser() {
 
@@ -50,5 +53,5 @@ export const useAuthStore = defineStore('Auth', () => {
         }
     }
 
-    return { user, shop, getUser, login, register, logout }
+    return { user, userRoles,  getUser, login, register, logout }
 })

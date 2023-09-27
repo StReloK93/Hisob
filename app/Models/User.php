@@ -12,11 +12,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+
+    protected $with = [
+        'organizations',
+        'roles'
+    ];
+
     protected $fillable = [
         'name',
         'login',
@@ -33,9 +34,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+
+
+    public function organizations()
+    {
+        return $this->hasMany(UserOrganization::class);
+    }
+
+    public function roles()
+    {
+        return $this->hasMany(UserRole::class);
+    }
 }

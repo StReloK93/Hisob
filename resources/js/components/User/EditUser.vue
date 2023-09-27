@@ -15,8 +15,7 @@
                                     variant="underlined"
                                     disabled
                                     hide-details="auto"
-                                    v-model="formData.name"
-                                    type="number"
+                                    v-model="formData.login"
                                 />
                             </v-col>
                             <v-col cols="12" class="pt-0">
@@ -26,7 +25,6 @@
                                     variant="underlined"
                                     hide-details="auto"
                                     v-model="formData.name"
-                                    type="number"
                                     :rules="pageData.rules"
                                 />
                             </v-col>
@@ -35,9 +33,23 @@
                                     color="teal"
                                     variant="underlined"
                                     label="Bo'linmalar"
+                                    v-model="formData.organizations"
                                     :items="pageData.organizations"
                                     item-title="short_name"
-                                    :item-value="(item) => item"
+                                    :item-value="(item) => item.id"
+                                    multiple
+                                    chips
+                                />
+                            </v-col>
+                            <v-col cols="12" class="pt-0">
+                                <v-autocomplete
+                                    color="teal"
+                                    variant="underlined"
+                                    label="Bo'linmalar"
+                                    v-model="formData.roles"
+                                    :items="pageData.roles"
+                                    item-title="name"
+                                    :item-value="(item) => item.id"
                                     multiple
                                     chips
                                 />
@@ -59,38 +71,61 @@
     </v-dialog>
 </template>
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive , watch } from 'vue'
 import axios from '@/modules/axios'
+const { selected } = defineProps(['selected'])
 
 const emit = defineEmits(['editUser'])
 const formData = reactive({
     name: null,
     login: null,
     organizations: [],
+    roles: [],
 })
 
+function getUser(){
+    const user = selected.user
+    
+    formData.login = user.login
+    formData.name = user.name
+    formData.organizations = user.organizations.map((item) => item.organizations_id)
+    formData.roles = user.roles.map((item) => item.role_id)
+}
 
 function editUser(){
-
+    axios.put(`users/${selected.user.id}`, formData).then(({data}) => {
+        pageData.dialog = false
+        emit('editUser', data)
+    })
 }
 
 const pageData = reactive({
     rules: [(value) => value == null || value == "" ? 'toldiring' : true ],
     dialog: false,
-    organizations: []
+    organizations: [],
+    roles: []
 })
-
 
 axios.all([
     axios.get('organization'), 
-    axios.get('position')
+    axios.get('role'), 
 ])
-.then(axios.spread(({data:organizations}, {data:positions}) => {
+.then(axios.spread(({data:organizations}, {data:roles}) => {
     pageData.organizations = organizations
+    pageData.roles = roles
 }))
 
-
+function clear(){
+    formData.name = null
+    formData.login = null
+    formData.organizations = []
+}
 
 const toggle = () => pageData.dialog = true
 defineExpose({ toggle })
+
+watch(() => pageData.dialog, (current) => {
+    if (current) getUser()
+    else  clear()
+})
 </script>

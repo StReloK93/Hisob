@@ -16,9 +16,11 @@
             <v-list-item color="teal" prepend-icon="mdi-tshirt-crew" title="Mahsulotlar" :to="{name: 'products'}"></v-list-item>
             <!-- <v-list-item color="teal" prepend-icon="mdi-tshirt-crew" title="Y.M.M hisoboti" to="/fuel"></v-list-item> -->
             <v-divider></v-divider>
-            <p class="px-4 mt-3 text-caption text-blue-grey-lighten-3">Admin</p>
-            <v-list-item color="teal" prepend-icon="mdi-account-network" title="Foydalanuvchilar" :to="{name: 'users'}"></v-list-item>
-            <v-list-item color="teal" prepend-icon="mdi-texture-box" title="Bo'linmalar" :to="{name: 'organizations'}"></v-list-item>
+            <div v-if="store.userRoles.includes(1)">
+                <p class="px-4 mt-3 text-caption text-blue-grey-lighten-3">Admin</p>
+                <v-list-item color="teal" prepend-icon="mdi-account-network" title="Foydalanuvchilar" :to="{name: 'users'}"></v-list-item>
+                <v-list-item color="teal" prepend-icon="mdi-texture-box" title="Bo'linmalar" :to="{name: 'organizations'}"></v-list-item>
+            </div>
 
         </v-list>
         <template v-slot:append>
@@ -37,6 +39,8 @@ import { useAuthStore } from '@/store/useAuthStore'
 const driwer = ref(true)
 
 const store = useAuthStore()
+
+
 
 function toggle(){ driwer.value = !driwer.value }
 defineExpose({toggle})

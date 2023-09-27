@@ -7,11 +7,12 @@ use App\Models\Employe;
 use App\Models\EmployePosition;
 use App\Models\Organization;
 use DB;
+
 class EmployeController extends Controller
 {
 
-    public function index(){
-        return Employe::orderBy('id', 'desc')->get();
+    public function index(Request $request){
+        return Employe::orderBy('id', 'desc')->accessOrganizations()->get();
     }
 
     public function store(Request $request){

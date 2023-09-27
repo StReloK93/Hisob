@@ -13,6 +13,9 @@ class OrganizationController extends Controller
 
     }
 
+    public function accessOrganizations(){
+        return Organization::accessOrganizations()->get();
+    }
 
     public function show($id){
 
