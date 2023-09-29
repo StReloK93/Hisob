@@ -12,7 +12,7 @@ class UserService {
         if (Auth::attempt($request->only('login', 'password'))) {
 
             $user = Auth::user();
-            $token = $this->createToken($user, $request);
+            $token = $this->createToken($user);
             return response()->json(['token' => $token,'type' => 'Bearer'], 200);
 
         }
@@ -20,8 +20,8 @@ class UserService {
         return response()->json(['message' => 'Parol yoki login xato!'], 299);
     }
 
-    private function createToken($user,$request) {
-        return $user->createToken( 'userToken', [$user->isActive])->plainTextToken;
+    private function createToken($user) {
+        return $user->createToken( 'userToken', $user->rolenames)->plainTextToken;
     }
 
 

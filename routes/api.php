@@ -26,29 +26,19 @@ use App\Http\Controllers\UserController;
 
 
 
-Route::get('employe_product/products/{employe_id}', [EmployeProductController::class, 'getEmployeProducts']);
-Route::get('employe_product/mainproducts/{employe_id}', [EmployeProductController::class, 'getMainEmployeProducts']);
-Route::get('employe_product/price/{nomenclature}', [EmployeProductController::class, 'getProductPrices']);
-Route::post('employe_product/confirm', [EmployeProductController::class, 'confirmProduct']);
-Route::get('employe/getdata/{tableNumber}', [EmployeController::class, 'getEmployeData']);
 
-Route::get('products/main', [ProductController::class, 'getMainProducts']);
-
-
-
-
-
-Route::post('product/set_activate/{id}', [ProductController::class, 'setActivate']);
-
-Route::post('position/set_activate/{id}', [PositionController::class, 'setActivate']);
-Route::post('organization/set_activate/{id}', [OrganizationController::class, 'setActivate']);
-Route::post('product/set_activate/{id}', [ProductController::class, 'setActivate']);
 
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [AuthController::class, 'getUser']);
+    Route::get('/logout', [AuthController::class, 'logoutUser']);
+
+
+
+
     Route::apiResource('employe', EmployeController::class);
     Route::apiResource('position', PositionController::class);
     Route::apiResource('organization', OrganizationController::class);
@@ -60,7 +50,36 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('accessOrganizations', [OrganizationController::class, 'accessOrganizations']);
 
-    Route::get('/user', [AuthController::class, 'getUser']);
+
+
+    Route::get('employe_product/products/{employe_id}', [EmployeProductController::class, 'getEmployeProducts']);
+    Route::get('employe_product/mainproducts/{employe_id}', [EmployeProductController::class, 'getMainEmployeProducts']);
+    Route::get('employe_product/price/{nomenclature}', [EmployeProductController::class, 'getProductPrices']);
+    Route::post('employe_product/confirm', [EmployeProductController::class, 'confirmProduct']);
+    Route::get('employe/getdata/{tableNumber}', [EmployeController::class, 'getEmployeData']);
+
+    Route::get('products/main', [ProductController::class, 'getMainProducts']);
+
+    Route::post('product/set_activate/{id}', [ProductController::class, 'setActivate']);
+
+    Route::post('position/set_activate/{id}', [PositionController::class, 'setActivate']);
+    Route::post('organization/set_activate/{id}', [OrganizationController::class, 'setActivate']);
+    Route::post('product/set_activate/{id}', [ProductController::class, 'setActivate']);
+
+
+
+
 
 });
 
+
+Route::middleware(['auth:sanctum', 'ability:admin,omborchi'])->group(function () {
+
+
+});
+
+
+Route::middleware(['auth:sanctum', 'ability:admin'])->group(function () {
+
+
+});

@@ -23,10 +23,10 @@ class MainSeeder extends Seeder
     {
 
         Role::insert([
-            [ 'name' => 'Admin' ],
-            [ 'name' => 'Omborchi' ],
-            [ 'name' => 'Buxgalter' ],
-            [ 'name' => 'TB' ],
+            [ 'name' => 'admin' ],
+            [ 'name' => 'omborchi' ],
+            [ 'name' => 'buxgalter' ],
+            [ 'name' => 'tb' ],
         ]);
 
 

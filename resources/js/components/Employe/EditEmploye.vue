@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="pageData.dialog" persistent width="512" location="right">
+    <v-dialog v-model="pageData.dialog" persistent width="768" location="right">
         <v-card>
             <v-form ref="form" class="bg-white" @submit.prevent="editEmploye">
                 <v-card-title class="bg-blue-grey-lighten-5">

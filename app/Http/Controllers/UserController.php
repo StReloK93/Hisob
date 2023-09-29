@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserRole;
 use App\Models\UserOrganization;
-
+use Hash;
 
 class UserController extends Controller
 {
@@ -19,9 +19,19 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        //
-    }
 
+        $user = User::create([
+            'name' => $request->name,
+            'login' => $request->login,
+            'password' => Hash::make('zzzz1111*'),
+        ]);
+
+
+        $this->insertOrganization($request->organizations, $user->id);
+        $this->insertRole($request->roles, $user->id);
+
+        return $user;
+    }
 
     public function show($id)
     {
@@ -35,8 +45,11 @@ class UserController extends Controller
         $this->insertRole($request->roles, $id);
 
         $user = User::find($id);
+
         $user->name = $request->name;
         $user->save();
+
+        $this->updateToken($user);
 
         return $user->fresh();
     }
@@ -45,6 +58,14 @@ class UserController extends Controller
     {
         //
     }
+
+
+
+
+
+
+
+
 
 
     private function insertOrganization($organizations, $id){
@@ -69,5 +90,13 @@ class UserController extends Controller
             ];
         }
         UserRole::insert($array);
+    }
+
+
+    private function updateToken($user){
+        foreach ($user->tokens as $token) {
+            $token->abilities = $user->rolenames;
+            $token->save();
+        }
     }
 }

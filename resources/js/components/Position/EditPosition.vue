@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="pageData.dialog" persistent width="512" location="right">
+    <v-dialog v-model="pageData.dialog" persistent width="768" location="right">
         <v-card tag="form" class="bg-white" @submit.prevent="editPosition">
             <v-card-title class="bg-blue-grey-lighten-5">
                 <span>Lavozim kiritish formasi</span>
@@ -19,6 +19,7 @@
                         </v-col>
                         <v-col cols="12" class="pt-0">
                             <v-autocomplete
+                                chips
                                 color="teal"
                                 :items="pageData.products"
                                 variant="underlined"

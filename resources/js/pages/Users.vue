@@ -40,8 +40,8 @@ const pageData = reactive({
 })
 
 
-function addUser(){
-
+function addUser(user){
+    pageData.gridApi.applyTransaction({add: [user]})
 }
 
 function editUser(user){

@@ -45,7 +45,7 @@
                                 <v-autocomplete
                                     color="teal"
                                     variant="underlined"
-                                    label="Bo'linmalar"
+                                    label="Rollar"
                                     v-model="formData.roles"
                                     :items="pageData.roles"
                                     item-title="name"
@@ -71,11 +71,14 @@
     </v-dialog>
 </template>
 <script setup lang="ts">
-import { reactive , watch } from 'vue'
+import { reactive , watch, ref } from 'vue'
 import axios from '@/modules/axios'
 const { selected } = defineProps(['selected'])
+const form = ref()
 
 const emit = defineEmits(['editUser'])
+
+
 const formData = reactive({
     name: null,
     login: null,
@@ -92,7 +95,10 @@ function getUser(){
     formData.roles = user.roles.map((item) => item.role_id)
 }
 
-function editUser(){
+async function editUser(){
+    const { valid } = await form.value.validate()
+    if(valid == false) return
+
     axios.put(`users/${selected.user.id}`, formData).then(({data}) => {
         pageData.dialog = false
         emit('editUser', data)
