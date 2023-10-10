@@ -2,7 +2,7 @@
     <section class="d-flex flex-column">
         <div class="d-flex justify-space-between items-center">
             <Breadcrumbs></Breadcrumbs>
-            <AddPosition @addPosition="addPosition"></AddPosition>
+            <AddPosition v-if="(store.userRoles.includes(4) || store.userRoles.includes(1))" @addPosition="addPosition"></AddPosition>
             <EditPosition @editPosition="editPosition" ref="editComponent" :current="pageData"></EditPosition>
         </div>
         <v-spacer class="px-4">
@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import AddPosition from '@/components/Position/AddPosition.vue'
 import EditPosition from '@/components/Position/EditPosition.vue'
 import PositionProducts from '@/components/AgGrid/PositionProducts.vue'
@@ -29,6 +28,9 @@ import IconEdit from '@/components/AgGrid/IconEdit.vue'
 import { reactive, ref } from "vue"
 import axios from '@/modules/axios'
 import { AgGridVue } from "ag-grid-vue3"
+import { useAuthStore } from '@/store/useAuthStore'
+const store = useAuthStore()
+
 
 const editComponent = ref()
 
@@ -57,6 +59,7 @@ const columnDefs = reactive([
         cellRenderer: PositionProducts,
     },
     {
+        hide: (store.userRoles.includes(4) || store.userRoles.includes(1)) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         field: "isActive",
         headerName: 'Faolligi',
@@ -70,6 +73,7 @@ const columnDefs = reactive([
         }
     },
     {
+        hide: (store.userRoles.includes(4) || store.userRoles.includes(1)) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',
         width: 60 ,

@@ -19,7 +19,7 @@
                                     <td>Nomi</td>
                                     <td>Nomenklatura</td>
                                     <td>Soni</td>
-                                    <td>Narxi</td>
+                                    <!-- <td>Narxi</td> -->
                                 </tr>
                             </thead>
                             <tbody>                                
@@ -27,7 +27,7 @@
                                     <td>{{item.product.name}}</td>
                                     <td>{{item.nomenclature}}</td>
                                     <td>{{item.count}}</td>
-                                    <td>{{item.price}}</td>
+                                    <!-- <td>{{item.price}}</td> -->
                                 </tr>
                             </tbody>
                         </v-table>

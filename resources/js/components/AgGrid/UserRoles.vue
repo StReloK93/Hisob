@@ -1,6 +1,6 @@
 <template>
     <main>
-        <v-chip v-for="item in params.value" size="small" label :key="item" class="mx-1">
+        <v-chip v-for="item in params.value" size="small" label :key="item" class="mr-1">
             {{ item.role.name }}
         </v-chip>
     </main>

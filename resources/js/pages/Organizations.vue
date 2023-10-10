@@ -22,7 +22,6 @@
 <script setup lang="ts">
 import IconEdit from '@/components/AgGrid/IconEdit.vue'
 import Button from '@/components/AgGrid/Button.vue'
-import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import AddOrganization from '@/components/Organization/AddOrganization.vue'
 import EditOrganization from '@/components/Organization/EditOrganization.vue'
 

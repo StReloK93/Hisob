@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Position;
 use App\Models\PositionProduct;
+use DB;
 class PositionController extends Controller
 {
     public function index(){
@@ -17,10 +18,16 @@ class PositionController extends Controller
     }
 
 
+
+
+
     public function store(Request $request){
 
         $position = Position::create([
             'name' => $request->name,
+            'main_document_id' => $request->main_document_id,
+            'number_in_document' => $request->number_in_document,
+            'position_type_id' => $request->position_type_id,
             'isActive' => $request->isActive,
         ]);
 
@@ -29,6 +36,8 @@ class PositionController extends Controller
                 'position_id' => $position->id,
                 'product_id' => $product['id'],
                 'count' => $product['count'],
+                'expiration_date' => $product['expiration_date'],
+                'working_condition_id' => $product['working_condition_id'],
             ]);
         }
 
@@ -40,6 +49,9 @@ class PositionController extends Controller
     public function update($id, Request $request){
         $position = Position::find($id);
         $position->name = $request->name;
+        $position->main_document_id = $request->main_document_id;
+        $position->number_in_document = $request->number_in_document;
+        $position->position_type_id = $request->position_type_id;
         $position->isActive = $request->isActive;
         $position->save();
 
@@ -50,6 +62,8 @@ class PositionController extends Controller
                 'position_id' => $position->id,
                 'product_id' => $product['id'],
                 'count' => $product['count'],
+                'expiration_date' => $product['expiration_date'],
+                'working_condition_id' => $product['working_condition_id'],
             ]);
         }
 
@@ -63,3 +77,8 @@ class PositionController extends Controller
         return $position->save();
     }
 }
+
+
+// public function allPositions(){
+//     return DB::connection('sqlsrv')->select("SELECT distinct doljnost FROM [KADR].[dbo].[sprSotrudniki]");
+// }

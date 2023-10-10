@@ -17,6 +17,8 @@ class PositionProduct extends Model
         'position_id',
         'product_id',
         'count',
+        'expiration_date',
+        'working_condition_id'
     ];
 
     public function product()

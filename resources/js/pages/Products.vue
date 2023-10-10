@@ -21,7 +21,6 @@
 <script setup lang="ts">
 import AddProduct from '@/components/Product/AddProduct.vue'
 import EditProduct from '@/components/Product/EditProduct.vue'
-import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import Button from '@/components/AgGrid/Button.vue'
 import IconEdit from '@/components/AgGrid/IconEdit.vue'
 import { reactive, ref } from "vue"
@@ -48,7 +47,6 @@ function editProduct(Product){
 const columnDefs = reactive([
     { field: "id", headerName: 'Kod', width: 80 },
     { field: "name", headerName: 'Nomi', flex: 1 },
-    { field: "expiration_date", headerName: 'Muddati (Oy)' },
     { field: "product_type.name", headerName: 'Turi' },
     {
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],

@@ -2,7 +2,7 @@
     <main class="d-flex flex-column">
         <div class="d-flex justify-space-between items-center">
             <Breadcrumbs></Breadcrumbs>
-            <AddEmploye @addEmploye="addEmploye"></AddEmploye>
+            <AddEmploye v-if="(store.userRoles.includes(4) || store.userRoles.includes(1))" @addEmploye="addEmploye"></AddEmploye>
             <EditEmploye @editEmploye="editEmploye" ref="editComponent" :current="pageData"></EditEmploye>
         </div>
         <v-spacer class="px-4">
@@ -23,14 +23,14 @@
 <script setup lang="ts">
 import axios from '@/modules/axios'
 import IconEdit from '@/components/AgGrid/IconEdit.vue'
-import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import AddEmploye from '@/components/Employe/AddEmploye.vue'
 import EditEmploye from '@/components/Employe/EditEmploye.vue'
 import { reactive, ref } from "vue"
 import { AgGridVue } from "ag-grid-vue3"
 import { gender } from '@/modules/gender'
 import { useRouter } from 'vue-router'
-
+import { useAuthStore } from '@/store/useAuthStore'
+const store = useAuthStore()
 
 const editComponent = ref()
 
@@ -69,6 +69,7 @@ const columnDefs = reactive([
     { field: "size_cloth", headerName: "Kiyim o'lch.." , sortable: true ,  width: 105 , headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "size_shoes", headerName: "Oyoq kiyim o'lch..", sortable: true ,  width: 125 , headerClass: ['px-2'], cellClass: ['px-2'] },
     {
+        hide: (store.userRoles.includes(4) || store.userRoles.includes(1)) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',
         width: 60,

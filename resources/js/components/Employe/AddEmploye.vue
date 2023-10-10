@@ -6,7 +6,7 @@
             </template>
             <v-card>
 
-                <v-form ref="form" fast-fail class="bg-white" @submit.prevent="addEmploye">
+                <v-form ref="form" fast-fail class="bg-white" @submit.prevent="addEmploye" @vnode-mounted="form.reset()">
                     <v-card-title class="bg-blue-grey-lighten-5">
                         <span>Xodim kiritish</span>
                     </v-card-title>
@@ -143,7 +143,7 @@ const pageData = reactive({
     organizations: null,
     positions: null,
     inputLoading: false,
-    rules: [(value) => value == null || value == "" ? 'toldiring' : true ]
+    rules: [(value) => [null, ""].includes(value) ? 'toldiring' : true ]
 })
 
 const formData = reactive({
@@ -152,7 +152,7 @@ const formData = reactive({
     position_id: null,
     hiring_date: null,
 
-    gender: null,
+    gender: false,
     heigth: null,
     size_cloth: null,
     size_head: null,
@@ -198,21 +198,4 @@ axios.all([
     pageData.organizations = organizations
     pageData.positions = positions
 }))
-
-function clear(){
-    formData.table_number = null
-    formData.name = null
-    formData.position_id = null
-    formData.hiring_date = null
-    formData.gender = null
-    formData.heigth = null
-    formData.size_cloth = null
-    formData.size_head = null
-    formData.size_shoes = null
-    formData.organization_id = null
-}
-
-watch(() => pageData.dialog, (current) => {
-    if (current) clear()
-})
 </script>

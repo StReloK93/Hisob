@@ -16,6 +16,7 @@ import { createPinia } from 'pinia'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import onScan from 'onscan.js'
 onScan.attachTo(document)
 
@@ -26,6 +27,7 @@ const vuetify = createVuetify({
 
 const pinia = createPinia()
 const app = createApp(App)
+app.component('Breadcrumbs', Breadcrumbs)
 app.use(vuetify)
 app.use(pinia)
 

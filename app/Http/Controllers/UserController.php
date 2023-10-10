@@ -7,13 +7,14 @@ use App\Models\User;
 use App\Models\UserRole;
 use App\Models\UserOrganization;
 use Hash;
-
+use Auth;
 class UserController extends Controller
 {
 
     public function index()
     {
         return User::all();
+        return User::whereNot('id',Auth::user()->id)->get();
     }
 
 

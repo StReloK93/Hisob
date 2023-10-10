@@ -126,12 +126,11 @@
 <script setup lang="ts">
 import { reactive, watch, ref } from 'vue'
 import axios from '@/modules/axios'
+const emit = defineEmits(['editEmploye'])
 const { current } = defineProps(['current'])
 
 const form = ref()
 
-
-const emit = defineEmits(['editEmploye'])
 const pageData = reactive({
     dialog: false,
     organizations: null,
@@ -173,9 +172,6 @@ function getSelectedEmploye(){
     })
 }
 
-
-
-
 async function editEmploye() {
     const { valid } = await form.value.validate()
     if(valid == false) return
@@ -195,23 +191,9 @@ axios.all([
     pageData.positions = positions
 }))
 
-
-function clear(){
-    formData.table_number = null
-    formData.name = null
-    formData.position_id = null
-    formData.hiring_date = null
-    formData.gender = null
-    formData.heigth = null
-    formData.size_cloth = null
-    formData.size_head = null
-    formData.size_shoes = null
-    formData.organization_id = null
-}
-
 watch(() => pageData.dialog, (dialog) => {
     if (dialog) getSelectedEmploye()
-    else clear()
+    else form.value.reset()
 })
 
 const toggle = () => pageData.dialog = true

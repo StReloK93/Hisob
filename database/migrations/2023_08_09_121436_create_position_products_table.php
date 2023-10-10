@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->integer('position_id');
             $table->integer('product_id');
+            $table->integer('working_condition_id');
             $table->integer('count')->default(1);
+            $table->string('expiration_date')->nullable();
             $table->timestamps();
         });
     }

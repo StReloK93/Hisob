@@ -8,39 +8,18 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12" class="pt-0">
-                            <v-text-field
-                                color="teal"
-                                label="Nomi"
-                                variant="underlined"
-                                hide-details="auto"
-                                v-model="formData.name"
-                                required>
+                            <v-text-field color="teal" label="Nomi" variant="underlined" hide-details="auto"
+                                v-model="formData.name" required>
                             </v-text-field>
                         </v-col>
                         <v-col cols="12" class="pt-0">
-                                <v-text-field
-                                    color="teal"
-                                    label="Muddati (Oy)"
-                                    variant="underlined"
-                                    hide-details="auto"
-                                    type="number"
-                                    v-model="formData.expiration_date"
-                                />
-                            </v-col>
-                            <v-col cols="12" class="pt-0">
-                                <v-select
-                                    color="teal"
-                                    :items="pageData.products_types"
-                                    variant="underlined"
-                                    hide-details="auto"
-                                    v-model="formData.product_type"
-                                    label="Turi" 
-                                    item-title="name"
-                                    :item-value="(item) => item.id"
-                                />
-                            </v-col>
+                            <v-select color="teal" :items="pageData.products_types" variant="underlined" hide-details="auto"
+                                v-model="formData.product_type" label="Turi" item-title="name"
+                                :item-value="(item) => item.id" />
+                        </v-col>
                         <v-col cols="12" class="pt-0">
-                            <v-switch label="Faolligi"  v-model="formData.isActive" hide-details="auto" color="teal"></v-switch>
+                            <v-switch label="Faolligi" v-model="formData.isActive" hide-details="auto"
+                                color="teal"></v-switch>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -70,14 +49,13 @@ const pageData = reactive({
 
 const formData = reactive({
     name: null,
-    expiration_date: null,
     product_type: null,
     isActive: true,
 })
 
 
-axios.get('product_type').then(({data}) => {
-    pageData.products_types = data.map((item) => { return {...item, count: 1} })
+axios.get('product_type').then(({ data }) => {
+    pageData.products_types = data.map((item) => { return { ...item, count: 1 } })
 })
 
 
@@ -89,25 +67,23 @@ function editProduct() {
 }
 
 
-function getSelectedProduct(id){
-    axios.get(`product/${id}`).then(({data}) =>{
+function getSelectedProduct(id) {
+    axios.get(`product/${id}`).then(({ data }) => {
         formData.name = data.name
         formData.product_type = data.product_type_id
-        formData.expiration_date = data.expiration_date,
         formData.isActive = Boolean(data.isActive)
     })
 }
 
-function clear(){
+function clear() {
     formData.name = null
     formData.product_type = null
-    formData.expiration_date = null,
     formData.isActive = true
 }
 
 watch(() => pageData.dialog, (dialog) => {
     if (dialog) getSelectedProduct(current.selected)
-    
+
     else clear()
 })
 

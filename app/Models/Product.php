@@ -15,7 +15,6 @@ class Product extends Model
     protected $fillable = [
         'name',
         'isActive',
-        'expiration_date',
         'product_type_id',
     ];
 

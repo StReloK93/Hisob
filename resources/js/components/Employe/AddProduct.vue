@@ -13,7 +13,8 @@
                         <v-container>
                             <v-row>
                                 <v-col cols="12" class="pt-3">
-                                    <v-select
+                                    <v-autocomplete
+                                        chips
                                         :rules="pageData.rules"
                                         color="teal"
                                         :items="pageData.products"

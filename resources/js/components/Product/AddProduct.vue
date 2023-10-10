@@ -23,16 +23,6 @@
                                 />
                             </v-col>
                             <v-col cols="12" class="pt-0">
-                                <v-text-field
-                                    color="teal"
-                                    label="Muddati (Oy)"
-                                    variant="underlined"
-                                    hide-details="auto"
-                                    type="number"
-                                    v-model="formData.expiration_date"
-                                />
-                            </v-col>
-                            <v-col cols="12" class="pt-0">
                                 <v-select
                                     color="teal"
                                     :items="pageData.products_types"
@@ -79,7 +69,6 @@ const pageData = reactive({
 
 const formData = reactive({
     name: null,
-    expiration_date: null,
     product_type: null,
     isActive: true,
 })
@@ -104,7 +93,6 @@ watch(() => pageData.dialog, (current) => {
     if (current) {
         formData.name = null
         formData.product_type = null
-        formData.expiration_date = null,
         formData.isActive = true
     }
 })

@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
+            $table->integer('main_document_id');
+            $table->integer('number_in_document');
+            $table->integer('position_type_id');
             $table->string('name');
             $table->boolean('isActive')->default(true);
             $table->timestamps();

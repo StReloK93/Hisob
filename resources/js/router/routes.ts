@@ -86,7 +86,50 @@ export default [
                     ]
                 }
             },
+            {
+                path: 'maindocuments',
+                name: 'maindocuments',
+                component: () => import('@/pages/MainDocuments.vue'),
+                meta: {
+                    breadcrumbs: [
+                        { title: 'Normaviy hujjatlar', to: '/app' , disabled: true },
+                    ]
+                }
+            },
+            {
+                path: 'positiontype',
+                name: 'positiontype',
+                component: () => import('@/pages/PositionType.vue'),
+                meta: {
+                    breadcrumbs: [
+                        { title: 'Kasb turlari', to: '/app' , disabled: true },
+                    ]
+                }
+            },
+            {
+                path: 'mainprofessions',
+                name: 'mainprofessions',
+                component: () => import('@/pages/MainProfessions.vue'),
+                meta: {
+                    breadcrumbs: [
+                        { title: 'Kasb turlari', to: '/app' , disabled: true },
+                    ]
+                }
+            },
+            {
+                path: 'working_conditions',
+                name: 'workingconditions',
+                component: () => import('@/pages/WorkingConditions.vue'),
+                meta: {
+                    breadcrumbs: [
+                        { title: 'Kasb turlari', to: '/app' , disabled: true },
+                    ]
+                }
+            },
+            
         ]
+
+        
     },
 
 

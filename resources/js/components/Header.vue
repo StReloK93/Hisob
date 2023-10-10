@@ -1,7 +1,23 @@
 <template>
     <Navigator ref="nav"></Navigator>
     <v-app-bar color="teal-darken-1" prominent>
-        <v-app-bar-nav-icon variant="text" @click.stop="toggleNavigator"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon variant="text" class="mr-8" @click.stop="toggleNavigator"></v-app-bar-nav-icon>
+        <v-btn size="small" class="mr-2" icon="" v-if="store.userRoles.includes(1)">
+            <v-icon>mdi-shield-crown</v-icon>
+            <v-tooltip activator="parent" location="bottom">Admin</v-tooltip>
+        </v-btn>
+        <v-btn size="small" class="mr-2" icon="" v-if="store.userRoles.includes(2)">
+            <v-icon>mdi-clipboard-list</v-icon>
+            <v-tooltip activator="parent" location="bottom">Omborchi</v-tooltip>
+        </v-btn>
+        <v-btn size="small" class="mr-2" icon="" v-if="store.userRoles.includes(3)">
+            <v-icon>mdi-point-of-sale</v-icon>
+            <v-tooltip activator="parent" location="bottom">Buxgalter</v-tooltip>
+        </v-btn>
+        <v-btn size="small" class="mr-2" icon="" v-if="store.userRoles.includes(4)">
+            <v-icon>mdi-security</v-icon>
+            <v-tooltip activator="parent" location="bottom">ММваХТ мухандиси</v-tooltip>
+        </v-btn>
         <v-spacer></v-spacer>
         <v-btn class="text-none" stacked>
             <v-badge :content="10" color="error">
@@ -14,10 +30,15 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import Navigator from "./Navigator.vue"
+import { useAuthStore } from "@/store/useAuthStore"
 const nav = ref(null)
+const store = useAuthStore()
 
 function toggleNavigator() {
     nav.value.toggle()
 }
+// 2089
 
+// 943780031
 </script>
+

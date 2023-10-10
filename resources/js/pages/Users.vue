@@ -20,10 +20,8 @@
 </template>
 
 <script setup lang="ts">
-
 import IconEdit from '@/components/AgGrid/IconEdit.vue'
 import UserRoles from '@/components/AgGrid/UserRoles.vue'
-import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import AddUser from '@/components/User/AddUser.vue'
 import EditUser from '@/components/User/EditUser.vue'
 

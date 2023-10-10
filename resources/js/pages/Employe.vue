@@ -1,6 +1,5 @@
 <template>
     <section v-if="pageData.employe" class="d-flex flex-column">
-
         <Breadcrumbs :user="{ name: pageData.employe.name }"></Breadcrumbs>
         <v-spacer class="px-4">
             <section class="bg-white pa-6 h-100 d-flex">
@@ -54,13 +53,14 @@
                                     />
                                     <main class="absolute grid-button">
                                         <Scud
-                                            v-if="pageData.selectedRows.length"
+                                            v-if="pageData.selectedRows.length && store.userRoles.includes(2)"
                                             @confirm_products=confirm_products
                                             :employe="pageData.employe"
                                             :selected="pageData"
                                         />
                                         <span v-else></span>
                                         <AddProduct
+                                            v-if="store.userRoles.includes(2)"
                                             @addProduct="addProduct"
                                             :employe="pageData.employe"
                                         />
@@ -83,13 +83,14 @@
                                 />
                                 <main class="absolute grid-button">
                                     <Scud
-                                        v-if="pageData.selectedRows.length"
+                                        v-if="pageData.selectedRows.length && store.userRoles.includes(2)"
                                         @confirm_products=confirm_mainproducts
                                         :employe="pageData.employe"
                                         :selected="pageData"
                                     />
                                     <span v-else></span>
                                     <AddMainProduct
+                                        v-if="store.userRoles.includes(2)"
                                         @addProduct="addMainProduct"
                                         :employe="pageData.employe"
                                     />
@@ -105,13 +106,15 @@
 <script setup lang="ts">
 import AddProduct from '@/components/Employe/AddProduct.vue'
 import AddMainProduct from '@/components/Employe/AddMainProduct.vue'
-import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import Checkbox from '@/components/AgGrid/Checkbox.vue'
 import Scud from '@/components/Employe/Scud.vue'
 import axios from '@/modules/axios'
 import { AgGridVue } from 'ag-grid-vue3'
 import { reactive } from 'vue'
+import { useAuthStore } from '@/store/useAuthStore'
 const { id } = defineProps(['id'])
+
+const store = useAuthStore()
 
 const pageData = reactive({
     productGridApi: null,
@@ -206,9 +209,9 @@ const ColumnDefs = reactive([
         field: "product.name",
         headerName: 'Nomi',
         flex: 1,
-        headerCheckboxSelection: true,
-        checkboxSelection: true,
-        showDisabledCheckboxes: true,
+        headerCheckboxSelection: store.userRoles.includes(2),
+        checkboxSelection: store.userRoles.includes(2),
+        showDisabledCheckboxes: store.userRoles.includes(2),
     },
     { field: "count", headerName: 'soni', width: 85 },
     { field: "product.expiration_date", headerName: 'Muddati (oy)', width: 120 },
