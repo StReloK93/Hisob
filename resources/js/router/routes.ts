@@ -102,7 +102,7 @@ export default [
                 component: () => import('@/pages/PositionType.vue'),
                 meta: {
                     breadcrumbs: [
-                        { title: 'Kasb turlari', to: '/app' , disabled: true },
+                        { title: 'Lavozim turlari', to: '/app' , disabled: true },
                     ]
                 }
             },
@@ -112,7 +112,7 @@ export default [
                 component: () => import('@/pages/WorkingConditions.vue'),
                 meta: {
                     breadcrumbs: [
-                        { title: 'Kasb turlari', to: '/app' , disabled: true },
+                        { title: 'Mehnat sharoitlari', to: '/app' , disabled: true },
                     ]
                 }
             },

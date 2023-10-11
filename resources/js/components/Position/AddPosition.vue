@@ -168,7 +168,16 @@ async function addPostion() {
     })
 }
 
-axios.get('product').then(({data}) => pageData.products = data)
+axios.get('product').then(({data}) => {
+    pageData.products = data.map((item) => { 
+        return {
+            ...item,
+            count: 1 ,
+            expiration_date: null,
+            working_condition_id: null,
+        }
+    })
+})
 axios.get('position_type').then(({data}) => pageData.position_types = data)
 axios.get('document').then(({data}) => pageData.main_documents = data)
 axios.get('working_condition').then(({data}) => pageData.working_conditions = data)

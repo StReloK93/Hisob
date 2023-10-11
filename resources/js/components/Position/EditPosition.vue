@@ -195,8 +195,6 @@ function getSelectedEmploye(id){
 }
 
 axios.get('product').then(({data}) => {
-    pageData.products = data
-
     pageData.products = data.map((item) => { 
         return {
             ...item,
