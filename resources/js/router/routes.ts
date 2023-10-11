@@ -107,16 +107,6 @@ export default [
                 }
             },
             {
-                path: 'mainprofessions',
-                name: 'mainprofessions',
-                component: () => import('@/pages/MainProfessions.vue'),
-                meta: {
-                    breadcrumbs: [
-                        { title: 'Kasb turlari', to: '/app' , disabled: true },
-                    ]
-                }
-            },
-            {
                 path: 'working_conditions',
                 name: 'workingconditions',
                 component: () => import('@/pages/WorkingConditions.vue'),

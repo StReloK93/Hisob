@@ -5,7 +5,7 @@
                 <v-btn icon="mdi-plus" color="teal" v-bind="props"></v-btn>
             </template>
             <v-card class="bg-white">
-            <v-form ref="formTag" @submit.prevent="addPostion">
+                <v-form ref="formTag" @submit.prevent="addPostion">
                     <v-card-title class="bg-blue-grey-lighten-5">
                         <span>Lavozim kiritish formasi</span>
                     </v-card-title>
