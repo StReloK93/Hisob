@@ -16,6 +16,7 @@ class Employe extends Model
         'name',
         'hiring_date',
         'gender',
+        'profession',
         'organization_id',
         'division_id',
         'heigth',

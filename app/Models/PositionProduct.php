@@ -10,7 +10,8 @@ class PositionProduct extends Model
     use HasFactory;
 
     protected $with = [
-        'product'
+        'product',
+        'workingCondition'
     ];
 
     protected $fillable = [
@@ -26,6 +27,11 @@ class PositionProduct extends Model
         return $this->belongsTo(Product::class);
     }
 
+
+    public function workingCondition()
+    {
+        return $this->belongsTo(WorkingCondition::class);
+    }
 
     protected $casts = [
         'count' => 'integer',

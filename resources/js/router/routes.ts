@@ -17,7 +17,7 @@ export default [
             {
                 path: 'index',
                 name: 'index',
-                component: () => import('@/pages/Index.vue'),
+                component: () => import('@/pages/Main/Index.vue'),
                 meta: {
                     breadcrumbs: [
                         { title: 'Hodimlar', to: '/app' , disabled: true },
@@ -27,7 +27,7 @@ export default [
             {
                 path: 'users',
                 name: 'users',
-                component: () => import('@/pages/Users.vue'),
+                component: () => import('@/pages/User/Users.vue'),
                 meta: {
                     breadcrumbs: [
                         { title: 'Hodimlar', to: '/app' , disabled: true },
@@ -37,7 +37,7 @@ export default [
             {
                 path: 'employes',
                 name: 'employes',
-                component: () => import('@/pages/Employes.vue'),
+                component: () => import('@/pages/Employes/Employes.vue'),
                 meta: {
                     breadcrumbs: [
                         { title: 'Hodimlar', to: '/app/employes' , disabled: true },
@@ -47,7 +47,7 @@ export default [
             {
                 path: 'positions',
                 name: 'positions',
-                component: () => import('@/pages/Positions.vue'),
+                component: () => import('@/pages/Position/Positions.vue'),
                 meta: {
                     breadcrumbs: [
                         { title: 'Lavozimlar', to: '/app/positions' , disabled: true }
@@ -57,7 +57,7 @@ export default [
             {
                 path: 'organizations',
                 name: 'organizations',
-                component: () => import('@/pages/Organizations.vue'),
+                component: () => import('@/pages/Organization/Organizations.vue'),
                 meta: {
                     breadcrumbs: [
                         { title: "Bo'linmalar", to: '/app/organizations' , disabled: true }
@@ -67,18 +67,18 @@ export default [
             {
                 path: 'employe/:id',
                 name: 'employe',
-                component: () => import('@/pages/Employe.vue'),
+                component: () => import('@/pages/Employe/Employe.vue'),
                 props: true,
                 meta: {
                     breadcrumbs: [
-                        { title: "Hodimlar", to: '/app/employes' , disabled: false }
+                        { title: "Xodimlar", to: '/app/employes' , disabled: false }
                     ]
                 }
             },
             {
                 path: 'products',
                 name: 'products',
-                component: () => import('@/pages/Products.vue'),
+                component: () => import('@/pages/Product/Products.vue'),
                 props: true,
                 meta: {
                     breadcrumbs: [
@@ -89,7 +89,7 @@ export default [
             {
                 path: 'maindocuments',
                 name: 'maindocuments',
-                component: () => import('@/pages/MainDocuments.vue'),
+                component: () => import('@/pages/MainDocument/MainDocuments.vue'),
                 meta: {
                     breadcrumbs: [
                         { title: 'Normaviy hujjatlar', to: '/app' , disabled: true },
@@ -99,7 +99,7 @@ export default [
             {
                 path: 'positiontype',
                 name: 'positiontype',
-                component: () => import('@/pages/PositionType.vue'),
+                component: () => import('@/pages/PositionType/PositionTypes.vue'),
                 meta: {
                     breadcrumbs: [
                         { title: 'Lavozim turlari', to: '/app' , disabled: true },
@@ -109,7 +109,7 @@ export default [
             {
                 path: 'working_conditions',
                 name: 'workingconditions',
-                component: () => import('@/pages/WorkingConditions.vue'),
+                component: () => import('@/pages/WorkingCondition/WorkingConditions.vue'),
                 meta: {
                     breadcrumbs: [
                         { title: 'Mehnat sharoitlari', to: '/app' , disabled: true },
@@ -118,11 +118,7 @@ export default [
             },
             
         ]
-
-        
     },
-
-
     {
         path: '/login',
         name: 'login',

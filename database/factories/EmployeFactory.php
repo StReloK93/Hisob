@@ -24,6 +24,7 @@ class EmployeFactory extends Factory
         return [
             'table_number' => rand(10000,99999),
             'name' => fake()->name(),
+            'profession' => fake()->name(),
             'hiring_date' => fake()->dateTimeThisYear(),
             'gender' => (bool)rand(0,1),
             'organization_id' => Organization::inRandomOrder()->first(),

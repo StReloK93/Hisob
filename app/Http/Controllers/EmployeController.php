@@ -54,6 +54,7 @@ class EmployeController extends Controller
         
         $employe->table_number = $request->table_number;
         $employe->name = $request->name;
+        $employe->profession = $request->profession;
         $employe->hiring_date = $request->hiring_date;
         $employe->gender = $request->gender;
         $employe->organization_id = $request->organization_id;

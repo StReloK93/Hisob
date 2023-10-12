@@ -1,25 +1,25 @@
 <template>
     <Navigator ref="nav"></Navigator>
     <v-app-bar color="teal-darken-1" prominent>
-        <v-app-bar-nav-icon variant="text" class="mr-8" @click.stop="toggleNavigator"></v-app-bar-nav-icon>
-        <v-btn size="small" class="mr-2" icon="" v-if="store.userRoles.includes(1)">
+        <v-app-bar-nav-icon variant="text" class="mr-8" color="white"  @click.stop="toggleNavigator"></v-app-bar-nav-icon>
+        <v-btn size="small" class="mr-2" color="white" icon="" v-if="store.userRoles.includes(1)">
             <v-icon>mdi-shield-crown</v-icon>
             <v-tooltip activator="parent" location="bottom">Admin</v-tooltip>
         </v-btn>
-        <v-btn size="small" class="mr-2" icon="" v-if="store.userRoles.includes(2)">
-            <v-icon>mdi-clipboard-list</v-icon>
+        <v-btn size="small" class="mr-2" color="white" icon="" v-if="store.userRoles.includes(2)">
+            <v-icon text="white">mdi-clipboard-list</v-icon>
             <v-tooltip activator="parent" location="bottom">Omborchi</v-tooltip>
         </v-btn>
-        <v-btn size="small" class="mr-2" icon="" v-if="store.userRoles.includes(3)">
+        <v-btn size="small" class="mr-2" color="white" icon="" v-if="store.userRoles.includes(3)">
             <v-icon>mdi-point-of-sale</v-icon>
             <v-tooltip activator="parent" location="bottom">Buxgalter</v-tooltip>
         </v-btn>
-        <v-btn size="small" class="mr-2" icon="" v-if="store.userRoles.includes(4)">
+        <v-btn size="small" class="mr-2" color="white" icon="" v-if="store.userRoles.includes(4)">
             <v-icon>mdi-security</v-icon>
             <v-tooltip activator="parent" location="bottom">ММваХТ мухандиси</v-tooltip>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn class="text-none" stacked>
+        <v-btn color="white" class="text-none" stacked>
             <v-badge :content="10" color="error">
                 <v-icon>mdi-bell</v-icon>
             </v-badge>

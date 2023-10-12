@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('table_number');
             $table->string('name');
+            $table->string('profession');
             $table->datetime('hiring_date');
             $table->boolean('gender');
             $table->string('heigth')->nullable();

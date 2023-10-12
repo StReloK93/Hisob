@@ -7,10 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
 use App\Models\Employe;
-use App\Models\Position;
+
 use App\Models\PositionProduct;
 use App\Models\EmployePosition;
-use App\Models\Product;
 class TestSeeder extends Seeder
 {
     /**
@@ -20,46 +19,7 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-
-        Product::factory(4)->state(new Sequence(
-            [
-                'name' => 'Kurtka',
-                'product_type_id' => 1,
-                'expiration_date' => 12,
-            ],
-            [
-                'name' => 'Shim',
-                'product_type_id' => 1,
-                'expiration_date' => 6,
-            ],
-            [
-                'name' => "Qo'lqop",
-                'product_type_id' => 1,
-                'expiration_date' => 18,
-            ],
-            [
-                'name' => 'Oyoq Kiyim',
-                'product_type_id' => 1,
-                'expiration_date' => 24,
-            ],
-        ))->create();
-
-
-
-        Position::factory(4)->state(new Sequence(
-            [
-                'name' => 'Muhandis dasturchi',
-            ],
-            [
-                'name' => 'Nonvoy',
-            ],
-            [
-                'name' => 'Duradgor',
-            ],
-            [
-                'name' => 'Mexanik',
-            ],
-        ))->create();
+        Employe::factory(10)->create();
 
         EmployePosition::insert([
             ['employe_id' => 1,'position_id' => 2, 'created_at' => now()],
@@ -67,7 +27,6 @@ class TestSeeder extends Seeder
             ['employe_id' => 3,'position_id' => 3, 'created_at' => now()],
         ]);
 
-        Employe::factory(10)->create();
 
         PositionProduct::insert([
             [ 'position_id' => 1,'product_id' => Product::inRandomOrder()->first()->id, 'count' => 1, 'created_at' => now() ],

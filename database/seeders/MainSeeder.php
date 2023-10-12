@@ -3,14 +3,21 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use App\Models\ProductType;
 use App\Models\Organization;
+use App\Models\UserOrganization;
 use App\Models\UserRole;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Position;
+use App\Models\Product;
+use App\Models\Document;
+use App\Models\MainDocument;
+use App\Models\MainDocumentFiles;
+use App\Models\WorkingCondition;
 Use Hash;
-
 
 class MainSeeder extends Seeder
 {
@@ -22,6 +29,18 @@ class MainSeeder extends Seeder
     public function run()
     {
 
+        $document = MainDocument::create([
+            'name' => 'Нормы бесплатной выдачи спецодежды, спецобуви и других средств индивидуальной защиты работникам',
+            'confirm_date' => '2014-01-11',
+            'description' => '',
+        ]);
+
+        MainDocumentFiles::create([
+            'main_document_id' => $document->id,
+            'src' => '116970243050.pdf',
+        ]);
+
+
         Role::insert([
             [ 'name' => 'admin' ],
             [ 'name' => 'omborchi' ],
@@ -29,18 +48,25 @@ class MainSeeder extends Seeder
             [ 'name' => 'tb' ],
         ]);
 
-
-        User::create([
+        $user = User::create([
             'name' => 'Soliyev Aziz',
             'login' => 'admin',
             'password' => Hash::make('zzzz1111*'),
             'name' => 'Soliyev Aziz',
         ]);
 
+        UserRole::insert([
+            [ 'user_id' => $user->id, 'role_id' => 1 ],
+            [ 'user_id' => $user->id, 'role_id' => 2 ],
+            [ 'user_id' => $user->id, 'role_id' => 3 ],
+            [ 'user_id' => $user->id, 'role_id' => 4 ],
+        ]);
 
-        UserRole::create([
-            'user_id' => 1,
-            'role_id' => 1,
+        UserOrganization::insert([
+            [ 'user_id' => $user->id, 'organizations_id' => 1],
+            [ 'user_id' => $user->id, 'organizations_id' => 2],
+            [ 'user_id' => $user->id, 'organizations_id' => 3],
+            [ 'user_id' => $user->id, 'organizations_id' => 4],
         ]);
 
         ProductType::insert([
@@ -75,6 +101,63 @@ class MainSeeder extends Seeder
             ['name' => 'Issiqlik suv gaz taminoti va kanalizatsiyalar sexi' ,'short_name' => 'ISGTVAKS' ,                'code' =>'31' ], //ЦТВГСиК
             ['name' => 'Markaziy fizika kimyoviy labaratoriyasi' ,'short_name' => 'MFKL' ,                               'code' =>'43' ], //ЦФХЛ
         ]);
-        
+
+        Product::factory(17)->state(new Sequence(
+            [ 'name' => 'Костюм кислотостойкий','product_type_id' => 1 ],
+            [ 'name' => 'Ботинки кожаные с металлическим подноском', 'product_type_id' => 1],
+            [ 'name' => "Сапоги резиновые с металлическим подноском", 'product_type_id' => 1 ],
+            [ 'name' => 'Фартук из полимерных материалов', 'product_type_id' => 1 ],
+            [ 'name' => 'Перчатки кислото-щелочностойкие', 'product_type_id' => 1 ],
+            [ 'name' => 'Перчатки диэлектрические', 'product_type_id' => 1 ],
+            [ 'name' => 'Галоши диэлектрические', 'product_type_id' => 1 ],
+            [ 'name' => 'Очки защитные', 'product_type_id' => 1 ],
+            [ 'name' => 'Респиратор (противогазоаэрозольный)', 'product_type_id' => 1 ],
+            [ 'name' => 'Нарукавники кислотостойкие', 'product_type_id' => 1 ],
+            [ 'name' => 'Портянки или носки хлопчатобумажные', 'product_type_id' => 1 ],
+            [ 'name' => 'Бельё нательное', 'product_type_id' => 1 ],
+            [ 'name' => 'Куртка на утепляющей прокладке', 'product_type_id' => 1 ],
+            [ 'name' => 'Каска защитная с подшлемником', 'product_type_id' => 1 ],
+            [ 'name' => 'Самоспасатель', 'product_type_id' => 1 ],
+            [ 'name' => 'Лампа шахтёрская', 'product_type_id' => 1 ],
+            [ 'name' => 'Портянки суконные', 'product_type_id' => 1 ],
+        ))->create();
+
+
+        Position::factory(5)->state(new Sequence(
+            [ 'name' => 'Аккумуляторщик','main_document_id' => 1, 'number_in_document' => 1, 'position_type_id' => 1],
+            [ 
+                'name' => 'Аппаратчик станции приготовления питьевой воды на опреснительных установках; Аппаратчик химводоочистки; Аппаратчик очистки сточных вод; Аппаратчик гидрохлорирования',
+                'main_document_id' => 1, 'number_in_document' => 2, 'position_type_id' => 1
+            ],
+            [ 'name' => 'Архивариус','main_document_id' => 1, 'number_in_document' => 3, 'position_type_id' => 1],
+            [ 'name' => 'Аэродромный рабочий ','main_document_id' => 1, 'number_in_document' => 4, 'position_type_id' => 1],
+            [ 'name' => 'Библиотекарь','main_document_id' => 1, 'number_in_document' => 5, 'position_type_id' => 1],
+        ))->create();
+
+
+        WorkingCondition::insert([
+            [
+                'name' => 'При работе на производственных рабочих местах',
+            ],
+            [
+                'name' => 'При наружных работах зимой или в не отапливаемых помещениях',
+            ],
+            [
+                'name' => 'При работе во влажных условиях',
+            ],
+            [
+                'name' => 'При работе с вибратором',
+            ],
+            [
+                'name' => 'При работе по зачистке снега и канавы',
+            ],
+            [
+                'name' => 'При работах в подземных условиях',
+            ]
+        ]);
+
+
+
+
     }
 }

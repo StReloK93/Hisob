@@ -18,6 +18,7 @@ class PositionTypeController extends Controller
     {
         return PositionType::create([
             'name' => $request->name,
+            'code' => $request->code,
         ]);
     }
 
@@ -32,6 +33,7 @@ class PositionTypeController extends Controller
     {
         $PositionType =  PositionType::find($id);
         $PositionType->name = $request->name;
+        $PositionType->code = $request->code;
         $PositionType->save();
 
         return $PositionType;
