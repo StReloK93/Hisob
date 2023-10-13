@@ -11,7 +11,7 @@ export default [
             ]
         },
         redirect: {
-            name: 'index'
+            name: 'employes'
         },
         children: [
             {
@@ -93,16 +93,6 @@ export default [
                 meta: {
                     breadcrumbs: [
                         { title: 'Normaviy hujjatlar', to: '/app' , disabled: true },
-                    ]
-                }
-            },
-            {
-                path: 'positiontype',
-                name: 'positiontype',
-                component: () => import('@/pages/PositionType/PositionTypes.vue'),
-                meta: {
-                    breadcrumbs: [
-                        { title: 'Lavozim turlari', to: '/app' , disabled: true },
                     ]
                 }
             },

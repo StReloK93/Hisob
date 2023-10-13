@@ -17,9 +17,9 @@
                             <p class="text-center text-caption text-red-darken-1" v-if="pageData.errorLogin">
                                 {{ pageData.errorLogin.message }}
                             </p>
-                            <v-text-field label="Login" variant="underlined" color="teal" v-model="LoginData.login" required></v-text-field>
-                            <v-text-field label="Parol" variant="underlined" color="teal" type="password" v-model="LoginData.password" required></v-text-field>
-                            <v-btn type="submit" color="teal" class="w-100">
+                            <v-text-field class="mb-4" label="Login" v-model="LoginData.login" required></v-text-field>
+                            <v-text-field class="mb-4" label="Parol" type="password" v-model="LoginData.password" required></v-text-field>
+                            <v-btn type="submit" class="w-100">
                                 Kirish
                             </v-btn>
                         </v-container>
@@ -30,18 +30,16 @@
                             <p class="text-center text-caption text-red-darken-1" v-if="pageData.errorRegister">
                                 {{ pageData.errorRegister.message }}
                             </p>
-                            <v-text-field label="F.I.SH" variant="underlined" color="teal" v-model="RegisterData.name" required></v-text-field>
-                            <v-text-field label="Login" variant="underlined" color="teal" v-model="RegisterData.login" required></v-text-field>
-                            <v-text-field label="Parol" variant="underlined" color="teal" type="password" v-model="RegisterData.password" required></v-text-field>
-                            <v-text-field label="Parolni takrorlang" variant="underlined" color="teal" type="password" v-model="RegisterData.password_confirmation" required></v-text-field>
-                            <v-btn type="submit" color="teal" class="w-100">
+                            <v-text-field class="mb-4" label="F.I.SH" v-model="RegisterData.name" required></v-text-field>
+                            <v-text-field class="mb-4" label="Login" v-model="RegisterData.login" required></v-text-field>
+                            <v-text-field class="mb-4" label="Parol" type="password" v-model="RegisterData.password" required></v-text-field>
+                            <v-text-field class="mb-4" label="Parolni takrorlang" type="password" v-model="RegisterData.password_confirmation" required></v-text-field>
+                            <v-btn type="submit" class="w-100">
                                 Ro'yhatdan o'tish
                             </v-btn>
                         </v-container>
                     </v-window-item>
-
                 </v-window>
-
             </v-sheet>
         </v-main>
     </v-app>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MainDocument extends Model
 {
-    protected $with = ['files'];
+    protected $with = ['files', 'positionTypes'];
 
     protected $fillable = [
         'name',
@@ -21,6 +21,10 @@ class MainDocument extends Model
         return $this->hasMany(MainDocumentFiles::class);
     }
 
+    public function positionTypes()
+    {
+        return $this->hasMany(PositionType::class);
+    }
 
     protected $casts = [
         'confirm_date' => 'date:Y-m-d',

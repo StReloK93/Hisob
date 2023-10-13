@@ -1,16 +1,15 @@
 <template>
 <v-navigation-drawer v-model="driwer" location="left">
 	<template v-slot:prepend>
-		<v-list-item class="bg-teal-lighten-5" lines="two" prepend-avatar="/images/profile.png" :title="store.user.name" :subtitle="store.user.login" />
+		<v-list-item class="bg-teal-lighten-5" lines="two" prepend-avatar="/images/profile.png" :title="store.user?.name" :subtitle="store.user?.login" />
 	</template>
 	<v-list density="comfortable" >
-		<v-list-item  prepend-icon="mdi-home" title="Bosh sahifa" :to="{ name: 'index' }" />
+		<!-- <v-list-item  prepend-icon="mdi-home" title="Bosh sahifa" :to="{ name: 'index' }" /> -->
 		<v-list-item prepend-icon="mdi-account-group" title="Xodimlar" :to="{ name: 'employes' }" />
 
 		<v-divider></v-divider>
 		<v-list-subheader title="Umumiy" />
 		<v-list-item prepend-icon="mdi-texture-box" title="Normaviy hujjatlar" :to="{ name: 'maindocuments' }" />
-		<v-list-item prepend-icon="mdi-format-list-bulleted-type" title="Lavozim turlari" :to="{ name: 'positiontype' }" />
 
 		<v-list-item prepend-icon="mdi-tshirt-crew" title="Shaxsiy himoya vositalari" :to="{ name: 'products' }">
 			<v-tooltip activator="parent" location="bottom">Shaxsiy himoya vositalari</v-tooltip>
@@ -21,7 +20,7 @@
 
 
 		<v-divider></v-divider>
-		<div v-if="store.userRoles.includes(1)">
+		<div v-if="store.userRoles?.includes(1)">
 			<v-list-subheader title="Admin" />
 			<v-list-item prepend-icon="mdi-account-network" title="Foydalanuvchilar" :to="{ name: 'users' }" />
 			<v-list-item prepend-icon="mdi-texture-box" title="Bo'linmalar" :to="{ name: 'organizations' }" />
@@ -30,7 +29,7 @@
 	</v-list>
 	<template v-slot:append>
 		<div class="pa-2">
-			<v-btn @click="store.logout()" color="red-accent-3" block append-icon="mdi-logout">
+			<v-btn @click="logout" color="red-accent-3" block append-icon="mdi-logout">
 				Chiqish
 			</v-btn>
 		</div>
@@ -40,11 +39,24 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/useAuthStore'
+import swal from '@/modules/swal'
 const driwer = ref(true)
 
 const store = useAuthStore()
 
 function toggle() { driwer.value = !driwer.value }
 defineExpose({ toggle })
+
+
+function logout(){
+	swal.fire({
+        title: "Tizimdan chiqmoqchimisiz?",
+        icon: 'warning',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            store.logout()
+        }
+    })
+}
 </script>
 

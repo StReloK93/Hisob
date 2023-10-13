@@ -18,7 +18,8 @@ export const useAuthStore = defineStore('Auth', () => {
     }
 
     const userRoles = computed(() => {
-        return user.value?.roles?.map((role) => role.role_id)
+        if(user.value) return user.value?.roles?.map((role) => role.role_id)
+        else return []
     })
     
 

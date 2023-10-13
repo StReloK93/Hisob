@@ -10,5 +10,5 @@ class PositionType extends Model
     use HasFactory;
 
 
-    protected $fillable = ['name', 'code'];
+    protected $fillable = ['name', 'code', 'main_document_id'];
 }

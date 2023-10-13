@@ -10,4 +10,6 @@
 </template>
 <script setup lang="ts">
 import Header from '@/components/Header.vue'
+import { useAuthStore } from '@/store/useAuthStore'
+const store = useAuthStore()
 </script>

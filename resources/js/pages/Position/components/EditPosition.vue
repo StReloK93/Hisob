@@ -1,9 +1,10 @@
 <template>
-    <v-dialog v-model="pageData.dialog" persistent width="992" location="right">
-        <v-card class="bg-white">
-            <v-form @submit.prevent="editPosition" ref="formTag">
+    <v-dialog v-model="pageData.dialog" scrollable width="992" location="right">
+        <v-form @submit.prevent="editPosition" ref="formTag">
+            <v-card class="bg-white">
                 <v-card-title> Lavozim tahrirlash </v-card-title>
-                <v-card-text class="pa-0">
+                <v-divider></v-divider>
+                <v-card-text class="pa-0" style="height: 700px;">
                     <v-container>
                         <v-row>
                             <v-col cols="5" class="pt-0">
@@ -20,8 +21,8 @@
                                     class="my-2"
                                     :items="pageData.position_types"
                                     v-model="formData.position_type_id"
-                                    label="Lavozim turi" 
-                                    item-title="name"
+                                    label="Ish turi" 
+                                    :item-title="(item) => `${item.code} - ${item.name}`"
                                     :item-value="(item) => item.id"
                                     :rules="pageData.rules"
                                 />
@@ -48,7 +49,7 @@
                                     :rules="pageData.rules"
                                 />
                             </v-col>
-                            <v-col cols="7" class="pt-0">
+                            <v-col cols="7">
                                 <section v-for="product in formData.products" class="bg-blue-grey-lighten-5 mb-1">
                                     <div class="w-100 d-flex justify-space-between align-center pt-1 px-2">
                                         <span class="text-grey-darken-1 w-75 pb-1">{{ product.name }}</span>
@@ -90,9 +91,10 @@
                         </v-row>
                     </v-container>
                 </v-card-text>
+                <v-divider></v-divider>
                 <FormFooter @close="pageData.dialog = false"/>
-            </v-form>
-        </v-card>
+            </v-card>
+        </v-form>
     </v-dialog>
 </template>
 
