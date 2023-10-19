@@ -60,3 +60,22 @@ input::-webkit-inner-spin-button {
 ::-webkit-scrollbar-thumb {
     background-color: #ccc;
 }
+
+
+.ag-theme-material {
+    /* disable all borders */
+    --ag-borders: 1px solid;
+    /* then add back a border between rows */
+    --ag-row-border-width: 1px;
+    --ag-row-border-color: #eee;
+    --ag-border-color: #e9e9e9;
+    --ag-cell-horizontal-padding: 8px!important;
+    /* --ag-background-color: transparent; */
+}
+
+.custom-row{
+    background: rgb(255, 255, 255)!important;
+    max-height: 50px;
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 3px #eeeeee;
+}

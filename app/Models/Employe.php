@@ -25,10 +25,10 @@ class Employe extends Model
         'size_shoes',
     ];
 
-    protected $with = [
-        'organization',
-        'position',
-    ];
+
+    protected $appends = ['end_timer'];
+
+    protected $with = ['organization','position'];
 
     public function organization()
     {
@@ -38,6 +38,11 @@ class Employe extends Model
     public function position()
     {
         return $this->hasMany(EmployePosition::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(EmployeProduct::class);
     }
 
     public function scopeAccessOrganizations($query)
@@ -51,6 +56,13 @@ class Employe extends Model
         return $query->whereIn('organization_id', $organizations);
     }
 
+
+
+    public function getEndTimerAttribute() {
+        return $this->products->filter(function ($product, $key) {
+            return $product->timer < 300;
+        });
+    }
 
     protected $casts = [
         'hiring_date' => 'date:Y-m-d',

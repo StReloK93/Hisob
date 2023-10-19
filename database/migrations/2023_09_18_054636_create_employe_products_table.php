@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('employe_products', function (Blueprint $table) {
             $table->id();
             $table->integer('employe_id');
-            $table->integer('product_id');
+            $table->integer('position_product_id');
             $table->integer('count');
             $table->bigInteger('nomenclature');
             $table->double('price', 15,2);

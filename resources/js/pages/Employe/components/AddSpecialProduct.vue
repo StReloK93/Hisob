@@ -1,13 +1,14 @@
 <template>
     <v-row justify="end" class="flex-0-0 ma-0 pb-2 px-4 overflow-y-auto">
-        <v-dialog v-model="pageData.dialog" persistent width="600" location="right">
+        <v-dialog v-model="pageData.dialog" scrollable width="600" location="right">
             <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-plus" color="teal" v-bind="props"></v-btn>
             </template>
+            <v-form ref="form" @submit.prevent="addProductEmploye">
             <v-card class="bg-white">
-                <v-form ref="form" @submit.prevent="addProductEmploye">
                     <v-card-title> Xodimga maxsus kiyim topshirish </v-card-title>
-                    <v-card-text class="pa-0">
+                    <v-divider></v-divider>
+                    <v-card-text class="pa-0" style="height: 700px;">
                         <v-container>
                             <v-row>
                                 <v-col cols="12" class="pt-3">
@@ -69,9 +70,10 @@
                             </v-row>
                         </v-container>
                     </v-card-text>
+                    <v-divider></v-divider>
                     <FormFooter @close="pageData.dialog = false"/>
-                </v-form>
-            </v-card>
+                </v-card>
+            </v-form>
         </v-dialog>
     </v-row>
 </template>
@@ -97,7 +99,7 @@ async function getProductPrices(product){
 
 const pageData = reactive({
     dialog: false,
-    products: position.products.map((item) => { return {...item.product, count: 1, nomenclature: null, price: null , productPrices: []} }),
+    products: position.products.map((item) => { return {...item, name: item.product.name, count: 1, nomenclature: null, price: null , productPrices: []} }),
     rules: [(value) => value == null || value == "" ? 'toldiring' : true ],
 })
 

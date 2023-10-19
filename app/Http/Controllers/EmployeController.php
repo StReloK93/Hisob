@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employe;
 use App\Models\EmployePosition;
+use App\Models\EmployeProduct;
 use App\Models\Organization;
 use DB;
 
 class EmployeController extends Controller
 {
 
-    public function index(Request $request){
+    public function index(){
         return Employe::orderBy('id', 'desc')->accessOrganizations()->get();
     }
+
+
 
     public function store(Request $request){
         $employe = Employe::create($request->all());
@@ -24,8 +27,11 @@ class EmployeController extends Controller
         ]);
 
         return $employe->fresh();
-
     }
+
+
+
+
 
     public function show($id){
 

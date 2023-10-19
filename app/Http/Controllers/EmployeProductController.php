@@ -12,6 +12,12 @@ class EmployeProductController extends Controller
     }
 
 
+    public function inTimer(){
+        return EmployeProduct::all()->filter(function ($product, $key) {
+            return $product->timer < 300;
+        });
+    }
+
     public function show($id){
         return EmployeProduct::find($id);
     }
@@ -29,7 +35,7 @@ class EmployeProductController extends Controller
         foreach ($request->products as $key => $product) {
             $product = EmployeProduct::create([
                 'employe_id' => $request->employe_id,
-                'product_id' => $product['id'],
+                'position_product_id' => $product['id'],
                 'count' => $product['count'],
                 'nomenclature' => $product['nomenclature'],
                 'price' => $product['price'],

@@ -9,6 +9,7 @@ import onScan from 'onscan.js'
 import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-material.css"
 import '@sweetalert2/theme-material-ui/material-ui.css'
+import '../css/app.css'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import FormFooter from '@/components/FormFooter.vue'
 import { AgGridVue } from 'ag-grid-vue3'

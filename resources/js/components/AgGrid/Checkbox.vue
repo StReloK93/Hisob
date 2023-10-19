@@ -1,16 +1,12 @@
 <template>
     <main class="relative d-flex align-center">
         <span v-if="params.color">
-            {{ params.data.date_write_off }}
+            {{ params.data.expiration_date }}
         </span>
         <span v-else>
             {{ params.data.date_of_receipt }}
         </span>
-        <v-checkbox
-            v-model="swith"
-            :color="params.color ? params.color: 'teal'"
-            hide-details
-        />
+        <v-checkbox v-model="swith" :color="params.color ? params.color: 'teal'" hide-details />
         <div class="absolute front-block"></div>
     </main>
 </template>

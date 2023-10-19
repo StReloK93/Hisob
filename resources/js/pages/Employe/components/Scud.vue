@@ -22,7 +22,7 @@
                             </thead>
                             <tbody>                                
                                 <tr v-for="item in selected.selectedRows">
-                                    <td>{{item.product.name}}</td>
+                                    <td>{{item.postion_product.product.name}}</td>
                                     <td>{{item.nomenclature}}</td>
                                     <td>{{item.count}}</td>
                                     <!-- <td>{{item.price}}</td> -->

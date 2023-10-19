@@ -195,6 +195,14 @@ axios.get(`employe_product/mainproducts/${id}`).then(({ data }) => {
     pageData.mainProducts = data
 })
 
+axios.get(`employe_product/custom/in_timer`).then(({ data }) => {
+    pageData.mainProducts = data
+})
+
+
+
+
+
 function addProduct(data) {
     pageData.productGridApi.applyTransaction({ add: data })
 }
@@ -207,33 +215,44 @@ const ColumnDefs = reactive([
     {
         headerClass: ['px-3'],
         cellClass: ['px-3'],
-        field: "product.name",
+        field: "postion_product.product.name",
         headerName: 'Nomi',
         flex: 1,
+        minWidth: 300,
         headerCheckboxSelection: store.userRoles.includes(2),
         checkboxSelection: store.userRoles.includes(2),
         showDisabledCheckboxes: store.userRoles.includes(2),
     },
-    { field: "count", headerName: 'soni', width: 85 },
-    { field: "product.expiration_date", headerName: 'Muddati (oy)', width: 120 },
-    { field: "price", headerName: 'Narxi', width: 120 },
-    { field: "nomenclature", headerName: 'Nomenklatura', width: 120 },
+    { field: "count", headerName: 'soni', width: 50, headerClass: ['px-2'], cellClass: ['px-2']},
+    { field: "postion_product.expiration_date", headerName: 'Muddati (oy)', width: 90, headerClass: ['px-2'], cellClass: ['px-2'] },
+    { field: "price", headerName: 'Narxi', width: 120, headerClass: ['px-2'], cellClass: ['px-2'] },
+    { field: "nomenclature", headerName: 'Nomenklatura', width: 120, headerClass: ['px-2'], cellClass: ['px-2'] },
     {
         headerClass: ['px-2'],
         cellClass: ['d-flex', 'align-center', 'px-2', 'bg-gray-100'],
         field: "toggle_confirmation",
         headerName: 'Topshirildi',
-        width: 145,
+        width: 130,
         cellRenderer: Checkbox
     },
     {
         headerClass: ['px-2'],
         cellClass: ['d-flex', 'align-center', 'px-2', 'bg-gray-100'],
         field: "toggle_write_off",
-        headerName: 'Xisobdan chiqarildi',
+        headerName: 'Xisobdan chiqariladi',
         cellRenderer: Checkbox,
         width: 145,
         cellRendererParams: { color: 'red' }
+    },
+    {
+        headerClass: ['px-2'],
+        cellClass: ['d-flex', 'align-center', 'px-2', 'bg-gray-100', 'justify-center'],
+        field: "timer",
+        cellRenderer: ({value}) => {
+            return  `${value} Kun` 
+        },
+        headerName: 'Q.Muddati',
+        width: 75,
     },
 ])
 
