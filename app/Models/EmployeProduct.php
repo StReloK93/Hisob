@@ -10,7 +10,8 @@ class EmployeProduct extends Model
     use HasFactory;
 
     protected $with = [
-        'postionProduct'
+        'positionProduct',
+        // 'employe'
     ];
 
     protected $appends = ['expiration_date','timer'];
@@ -27,11 +28,15 @@ class EmployeProduct extends Model
         'toggle_write_off',
     ];
 
-    public function postionProduct()
+    public function positionProduct()
     {
         return $this->hasOne(PositionProduct::class, 'id', 'position_product_id');
     }
 
+    public function employe()
+    {
+        return $this->belongsTo(Employe::class);
+    }
 
     public function scopeSpecialProducts($query)
     {
@@ -41,6 +46,16 @@ class EmployeProduct extends Model
             });
         });
     }
+
+    public function scopeAccessOrganizations($query)
+    {
+        return $query->whereHas('employe', function ($query) {
+            $query->accessOrganizations();
+        });
+    }
+
+
+
 
     public function scopeMainProducts($query)
     {
@@ -62,7 +77,7 @@ class EmployeProduct extends Model
     
 
     public function getExpirationDateAttribute() {
-        $date = Carbon::parse($this->date_of_receipt)->addMonth($this->postionProduct->expiration_date)->format('Y-m-d');
+        $date = Carbon::parse($this->date_of_receipt)->addMonth($this->positionProduct->expiration_date)->format('Y-m-d');
         return $date;
     }
 

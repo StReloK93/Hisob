@@ -40,11 +40,6 @@ class Employe extends Model
         return $this->hasMany(EmployePosition::class);
     }
 
-    public function products()
-    {
-        return $this->hasMany(EmployeProduct::class);
-    }
-
     public function scopeAccessOrganizations($query)
     {
         
@@ -59,7 +54,9 @@ class Employe extends Model
 
 
     public function getEndTimerAttribute() {
-        return $this->products->filter(function ($product, $key) {
+        return EmployeProduct::where('employe_id', $this->id)
+        ->get()
+        ->filter(function ($product, $key) {
             return $product->timer < 300;
         });
     }

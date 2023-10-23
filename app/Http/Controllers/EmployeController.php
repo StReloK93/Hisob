@@ -8,6 +8,7 @@ use App\Models\EmployePosition;
 use App\Models\EmployeProduct;
 use App\Models\Organization;
 use DB;
+use Carbon\Carbon;
 
 class EmployeController extends Controller
 {
@@ -85,13 +86,17 @@ class EmployeController extends Controller
     public function getEmployeData($table_number){
         // $string_version
         // WHERE KodPodrazdelenii IN (".$string_version.")
-        $userData = DB::connection('sqlsrv')->select("SELECT TabelniyNomer , FIO , Doljnost , KodPodrazdelenii, Razryad  FROM [KADR].[dbo].[PoiskSotrudnikaTabelniyNomer] ($table_number) ");
+        $userData = DB::connection('sqlsrv')->select("SELECT TabelniyNomer , FIO , doljnost , KodPodrazdelenii, Razryad, DataNachaloRaboti  FROM [KADR].[dbo].[PoiskSotrudnikaTabelniyNomer] ($table_number) ");
         if(empty($userData) == false){
             $organization = Organization::where('code', $userData[0]->KodPodrazdelenii)->first();
             return [
                 'name' => $userData[0]->FIO,
                 'organization_id' => $organization ? $organization->id : null ,
+                'profession' => $userData[0]->doljnost ,
+                'hiring_date' => Carbon::parse($userData[0]->DataNachaloRaboti)->format('Y-m-d'),
             ];
+
+            
         }
         else{
             return null;

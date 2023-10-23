@@ -195,9 +195,6 @@ axios.get(`employe_product/mainproducts/${id}`).then(({ data }) => {
     pageData.mainProducts = data
 })
 
-axios.get(`employe_product/custom/in_timer`).then(({ data }) => {
-    pageData.mainProducts = data
-})
 
 
 

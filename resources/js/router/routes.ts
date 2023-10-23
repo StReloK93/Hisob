@@ -106,6 +106,17 @@ export default [
                     ]
                 }
             },
+            {
+                path: 'specialproduct',
+                name: 'specialproduct',
+                component: () => import('@/pages/SpecialProduct/SpecialProducts.vue'),
+                meta: {
+                    breadcrumbs: [
+                        { title: 'Mehnat sharoitlari', to: '/app' , disabled: true },
+                    ]
+                }
+            },
+
             
         ]
     },

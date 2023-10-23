@@ -7,7 +7,7 @@ import '@mdi/font/css/materialdesignicons.css'
 const color = 'teal'
 const variant = 'underlined'
 
-const defaultInputParams = { color: color, variant: variant, hideDetails: "auto" }
+const defaultInputParams = { color: color, variant: variant, hideDetails: "auto", noDataText: "Qo'llanma to'ldirilmagan"  }
 
 export default createVuetify({
 	components,

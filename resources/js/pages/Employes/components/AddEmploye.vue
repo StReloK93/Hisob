@@ -118,6 +118,8 @@ function getEmployeData(){
     axios.get(`employe/getdata/${formData.table_number}`).then(({data})=> {
         formData.name = data.name
         formData.organization_id = data.organization_id
+        formData.profession = data.profession
+        formData.hiring_date = data.hiring_date
         setTimeout(() => pageData.inputLoading = false, 1000)
     }).catch(() => {
         pageData.inputLoading = false

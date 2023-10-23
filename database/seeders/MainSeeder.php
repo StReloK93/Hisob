@@ -89,7 +89,7 @@ class MainSeeder extends Seeder
             ['name' => 'Shimoliy kon boshqarmasi' ,'short_name' => 'SHKB' ,                                              'code' =>'07'],  //СевРу
             ['name' => 'Avtomobil transport boshqarmasi' ,                    'short_name' => 'ATB' ,                    'code' =>'25' ], //УАТ
             ['name' => 'Elektr jihozlarini tamirlash uchastkasi' ,'short_name' => 'EJTU' ,                               'code' =>'08'],  //УРЕО
-            ['name' => 'Axborot kommunikatsiya texnologiyalar markazi' , 'short_name' => 'AKTM' ,                        'code' =>'35' ], //ЦИКТ
+            ['name' => 'Uchquduq Axborot kommunikatsiya texnologiyalar markazi' , 'short_name' => 'UAKTM' ,                        'code' =>'16' ], //ЦИКТ
             ['name' => "Nazorat o'lchov asboblari va avtomatika markazi labaratoriyasi" ,'short_name' => "NO'A va AML" , 'code' =>'33' ], //ЦЛКИПИА
             [
                 'name' => "Mehnat sharoitlari nazorati , atrof muhit muhofazasi va tabiy resurslardan oqilona foydalanish markaziy labaratoriyasi" , //ЦЛКУТ
@@ -101,7 +101,7 @@ class MainSeeder extends Seeder
             ['name' => 'Issiqlik suv gaz taminoti va kanalizatsiyalar sexi' ,'short_name' => 'ISGTVAKS' ,                'code' =>'31' ], //ЦТВГСиК
             ['name' => 'Markaziy fizika kimyoviy labaratoriyasi' ,'short_name' => 'MFKL' ,                               'code' =>'43' ], //ЦФХЛ
         ]);
-
+        
         Product::factory(17)->state(new Sequence(
             [ 'name' => 'Костюм кислотостойкий','product_type_id' => 1 ],
             [ 'name' => 'Ботинки кожаные с металлическим подноском', 'product_type_id' => 1],

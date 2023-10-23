@@ -8,14 +8,10 @@ use DB;
 class EmployeProductController extends Controller
 {
     public function index(){
-        return EmployeProduct::all();
-    }
-
-
-    public function inTimer(){
-        return EmployeProduct::all()->filter(function ($product, $key) {
-            return $product->timer < 300;
-        });
+        $employeProduct = EmployeProduct::with('employe')->accessOrganizations()->get();
+        return $employeProduct->filter(function ($product, $key) {
+            return $product->timer < 400;
+        })->values();
     }
 
     public function show($id){

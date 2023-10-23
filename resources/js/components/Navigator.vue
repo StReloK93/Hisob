@@ -6,6 +6,7 @@
 	<v-list density="comfortable" >
 		<!-- <v-list-item  prepend-icon="mdi-home" title="Bosh sahifa" :to="{ name: 'index' }" /> -->
 		<v-list-item prepend-icon="mdi-account-group" title="Xodimlar" :to="{ name: 'employes' }" />
+		<v-list-item prepend-icon="mdi-hard-hat" title="Himoya vositalar muddatlari" :to="{ name: 'specialproduct' }" />
 
 		<v-divider></v-divider>
 		<v-list-subheader title="Umumiy" />
