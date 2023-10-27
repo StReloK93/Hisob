@@ -5,16 +5,21 @@
             <section class="bg-white pa-6 h-100 d-flex">
                 <main class="flex-fill d-flex flex-column">
                     <div class="d-flex align-center justify-space-between">
-                        <span class="text-blue-grey-darken-3 text-h5">
-                            {{ pageData.employe.name }} <span class="ml-4 text-body-1">№ {{ pageData.employe.table_number
-                            }}</span>
-                        </span>
-                        <span class="text-grey d-inline-flex align-center">
-                            <v-icon class="mr-2">mdi-texture-box</v-icon> {{ pageData.employe.organization.short_name }}
-                        </span>
+                        <main class="text-blue-grey-darken-3 text-h5 d-flex align-center">
+                            {{ pageData.employe.name }} 
+                            <span class="ml-4 text-body-1">№ {{ pageData.employe.table_number }}</span>
+                        </main>
+                        <main>
+                            <ImageUpload :employe="pageData.employe"/>
+                            <v-btn icon="mdi-printer" class="ml-4"/>
+                        </main>
+                    </div>
+                    <div class="text-grey my-2 d-inline-flex align-center">
+                        <v-icon class="mr-2">mdi-texture-box</v-icon> {{ pageData.employe.organization.short_name }}
                     </div>
                     <p class="text-grey-lighten-1 text-caption">
                         Lavozim
+
                     </p>
 
                     <div v-if="pageData.position" class="text-teal">
@@ -113,11 +118,13 @@ import Checkbox from '@/components/AgGrid/Checkbox.vue'
 import axios from '@/modules/axios'
 import { reactive } from 'vue'
 import { useAuthStore } from '@/store/useAuthStore'
+import ImageUpload from './components/ImageUpload.vue'
 const { id } = defineProps(['id'])
 
 const store = useAuthStore()
 
 const pageData = reactive({
+    image: "",
     productGridApi: null,
     mainGridApi: null,
     products: [],
@@ -126,9 +133,14 @@ const pageData = reactive({
     tab: null,
     position: null,
     mainProducts: null,
+    inputImage: null
 })
 
 
+
+function changeImage(){
+    pageData.image = URL.createObjectURL(pageData.inputImage[0])
+}
 
 function changeTab(){
     pageData.productGridApi?.deselectAll()
@@ -197,9 +209,6 @@ axios.get(`employe_product/mainproducts/${id}`).then(({ data }) => {
 
 
 
-
-
-
 function addProduct(data) {
     pageData.productGridApi.applyTransaction({ add: data })
 }
@@ -212,7 +221,7 @@ const ColumnDefs = reactive([
     {
         headerClass: ['px-3'],
         cellClass: ['px-3'],
-        field: "postion_product.product.name",
+        field: "position_product.product.name",
         headerName: 'Nomi',
         flex: 1,
         minWidth: 300,

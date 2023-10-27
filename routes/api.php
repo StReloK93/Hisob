@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeProductController;
+use App\Http\Controllers\EmployeImagesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainDocumentController;
 use App\Http\Controllers\PositionTypeController;
@@ -33,7 +34,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('employe_product/products/{employe_id}', [EmployeProductController::class, 'getEmployeProducts']);
     Route::get('employe_product/mainproducts/{employe_id}', [EmployeProductController::class, 'getMainEmployeProducts']);
     Route::get('employe_product/custom/in_timer', [EmployeProductController::class, 'inTimer']);
-    
+
+    Route::apiResource('employe_images', EmployeImagesController::class)->except(['store']);
+    Route::post('/employe_images/{id}', [EmployeImagesController::class, 'store']);
+
 
 
     Route::apiResource('product', ProductController::class);

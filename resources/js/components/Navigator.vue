@@ -1,9 +1,7 @@
 <template>
 <v-navigation-drawer v-model="driwer" location="left">
-	<template v-slot:prepend>
-		<v-list-item class="bg-teal-lighten-5" lines="two" prepend-avatar="/images/profile.png" :title="store.user?.name" :subtitle="store.user?.login" />
-	</template>
-	<v-list density="comfortable" >
+	<v-list-item class="bg-teal-lighten-5" lines="two" prepend-avatar="/images/profile.png" :title="store.user?.name" :subtitle="store.user?.login" />
+	<v-list density="comfortable">
 		<!-- <v-list-item  prepend-icon="mdi-home" title="Bosh sahifa" :to="{ name: 'index' }" /> -->
 		<v-list-item prepend-icon="mdi-account-group" title="Xodimlar" :to="{ name: 'employes' }" />
 		<v-list-item prepend-icon="mdi-hard-hat" title="Himoya vositalar muddatlari" :to="{ name: 'specialproduct' }" />

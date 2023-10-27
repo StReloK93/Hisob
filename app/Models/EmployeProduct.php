@@ -40,7 +40,7 @@ class EmployeProduct extends Model
 
     public function scopeSpecialProducts($query)
     {
-        return $query->whereHas('postionProduct', function($query) {
+        return $query->whereHas('positionProduct', function($query) {
             $query->whereHas('product', function($query) {
                 $query->where('product_type_id' , 1);
             });
@@ -59,7 +59,7 @@ class EmployeProduct extends Model
 
     public function scopeMainProducts($query)
     {
-        return $query->whereHas('postionProduct', function($query) {
+        return $query->whereHas('positionProduct', function($query) {
             $query->whereHas('product', function($query) {
                 $query->where('product_type_id' , 2);
             });
