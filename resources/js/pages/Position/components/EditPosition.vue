@@ -45,6 +45,7 @@
                                     label="Biriktirilgan buyumlar" 
                                     item-title="name"
                                     :item-value="(item) => item"
+                                    :value-comparator="(current, item) => current.id == item.id"
                                     multiple
                                     :rules="pageData.rules"
                                 />
@@ -147,7 +148,7 @@ function getSelectedEmploye(id){
         formData.products = data.products.map((item) => { 
             return {
                 ...item.product,
-                count: item.count ,
+                count: item.count,
                 expiration_date: item.expiration_date,
                 working_condition_id: item.working_condition_id,
             }
