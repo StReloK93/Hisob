@@ -29,11 +29,7 @@ const pageData:any = reactive({
 })
 
 function getRowClass(params){
-    console.log(params.data.timer)
-    if (params.data.timer < 30) {
-        return 'bg-red-lighten-4';
-    }
-    
+    if (params.data.timer < 30) return 'bg-red-lighten-4';
 }
 
 axios.get(`employe_product`).then(({ data }) => {

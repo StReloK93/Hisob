@@ -50,7 +50,7 @@ function editPosition(position){
 }
 
 const columnDefs = reactive([
-    { field: "id", headerName: '№', width: 65 },
+    { field: "number_in_document", headerName: '№', width: 65 },
     { field: "name", headerName: 'Nomi', width: 200 },
     {
         headerName: 'Biriktirilgan maxsulotlar',

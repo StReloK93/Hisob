@@ -144,7 +144,7 @@ axios.get('product').then(({data}) => {
             ...item,
             count: 1 ,
             expiration_date: null,
-            working_condition_id: null,
+            working_condition_id: 1,
         }
     })
 })
