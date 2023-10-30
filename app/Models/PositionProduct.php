@@ -37,5 +37,6 @@ class PositionProduct extends Model
         'count' => 'integer',
         'position_id' => 'integer',
         'product_id' => 'integer',
+        'working_condition_id' => 'integer',
     ];
 }
