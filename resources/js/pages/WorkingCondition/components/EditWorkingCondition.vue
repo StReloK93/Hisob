@@ -1,50 +1,37 @@
 <template>
     <v-dialog v-model="pageData.dialog" persistent width="512" location="right">
-        <v-form @submit.prevent="editWorkingCondition" ref="formTag" @vue:mounted="onMountedForm">
-            <v-card class="bg-white">
-                <v-card-title> Mehnat sharoitini tahrirlash </v-card-title>
-                <v-card-text class="pa-0">
-                    <v-container>
-                        <v-row>
-                            <v-col cols="12" class="pt-0">
-                                <v-text-field color="teal" label="Nomi" v-model="formData.name" variant="underlined"
-                                    hide-details="auto" :rules="pageData.rules" />
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-card-text>
-                <FormFooter @close="pageData.dialog = false"/>
-            </v-card>
-        </v-form>
+        <CustomForm :submitMethod="editWorkingCondition" @close="pageData.dialog = false" @vue:mounted="onMountedForm"
+            title="Mehnat sharoitini tahrirlash">
+            <v-row>
+                <v-col cols="12" class="pt-0">
+                    <v-text-field label="Nomi" v-model="formData.name" :rules="rules" />
+                </v-col>
+            </v-row>
+        </CustomForm>
     </v-dialog>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 import axios from '@/modules/axios'
+import { rules } from '@/modules/helpers'
 const emit = defineEmits(['editWorkingCondition'])
 const { current } = defineProps(['current'])
-const formTag = ref()
 
 const pageData = reactive({
     dialog: false,
-    rules: [(value) => value == null || value == "" ? 'toldiring' : true],
 })
 
 const formData = reactive({ name: null })
 
 async function editWorkingCondition() {
-    const { valid } = await formTag.value.validate()
-    if (valid == false) return
-
-    axios.patch(`working_condition/${current.selected}`, formData).then(({ data }) => {
+    await axios.patch(`working_condition/${current.selected}`, formData).then(({ data }) => {
         pageData.dialog = false
         emit('editWorkingCondition', data)
     })
 }
 
 async function onMountedForm() {
-    formTag.value.reset()
     axios.get(`working_condition/${current.selected}`).then(({ data }) => {
         formData.name = data.name
     })

@@ -97,6 +97,7 @@ const pageData = reactive({
     dialog: false,
     products: null,
     rules: [(value) => value == null || value == "" ? 'toldiring' : true ],
+    formLoading: false,
 })
 
 
@@ -121,10 +122,11 @@ const formData = reactive({
 
 async function addProductEmploye() {
     const { valid } = await form.value.validate()
-    if(valid == false) return
-    
+    if(valid == false || pageData.formLoading) return
+    pageData.formLoading = false
     axios.post('employe_product', formData).then(({ data }) => {
         pageData.dialog = false
+        pageData.formLoading = false
         emit('addProduct', data)
     })
 }
@@ -134,6 +136,7 @@ watch(() => pageData.dialog, (current) => {
         formData.employe_id = null
         formData.products = []
         formData.date_of_receipt = null
+        pageData.formLoading = false
     }
     else formData.date_of_receipt = moment().format('YYYY-MM-DD')
 })

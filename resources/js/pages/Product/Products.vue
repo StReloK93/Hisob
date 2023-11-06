@@ -49,19 +49,6 @@ const columnDefs = reactive([
     { field: "product_type.name", headerName: 'Turi' },
     {
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
-        field: "isActive",
-        headerName: 'Faolligi',
-        cellRenderer: Button,
-        width: 60,
-        headerClass: ['px-2'],
-        onCellClicked: (params) => {
-            axios.post(`product/set_activate/${params.data.id}`, { active: !params.value }).then(() => {
-                params.node.setDataValue('isActive', !params.value)
-            })
-        }
-    },
-    {
-        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',
         width: 60 ,
         cellRenderer: IconEdit,

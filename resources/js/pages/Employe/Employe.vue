@@ -230,7 +230,7 @@ const ColumnDefs = reactive([
         showDisabledCheckboxes: store.userRoles.includes(2),
     },
     { field: "count", headerName: 'soni', width: 50, headerClass: ['px-2'], cellClass: ['px-2']},
-    { field: "postion_product.expiration_date", headerName: 'Muddati (oy)', width: 90, headerClass: ['px-2'], cellClass: ['px-2'] },
+    { field: "position_product.expiration_date", headerName: 'Muddati (oy)', width: 90, headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "price", headerName: 'Narxi', width: 120, headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "nomenclature", headerName: 'Nomenklatura', width: 120, headerClass: ['px-2'], cellClass: ['px-2'] },
     {

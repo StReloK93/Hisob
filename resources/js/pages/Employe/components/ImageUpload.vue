@@ -11,7 +11,7 @@
                     <UploadImage :formData="pageData" @onload="onload"/>
                 </v-card-text>
                 <v-divider></v-divider>
-                <FormFooter @close="pageData.dialog = false"/>
+                <FormFooter :pageData="pageData" @close="pageData.dialog = false"/>
             </v-card>
         </form>
     </v-dialog>
@@ -27,7 +27,8 @@ const emit = defineEmits(['saved'])
 
 const pageData = reactive({
     dialog: false,
-    images: []
+    images: [],
+    formLoading: false,
 })
 
 const images = ref([])
@@ -41,6 +42,8 @@ function onload(imagelist){
 }
 
 function saveImages(){
+    if(pageData.formLoading) return
+    pageData.formLoading = true
     const formData = new FormData()
     
     images.value.forEach(item => {
@@ -51,7 +54,8 @@ function saveImages(){
     axios.post(`employe_images/${employe.id}`, formData).then(({data}) => {
         emit('saved', data)
         pageData.dialog = false
-    })
+        pageData.formLoading = false
+    }).catch(() => pageData.formLoading = false)
 }
 
 

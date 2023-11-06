@@ -7,3 +7,5 @@ export function decrement(object){
         object.count--
     }
 }
+
+export const rules = [(value) => [null, ""].includes(value) ? "To'ldiring" : true]

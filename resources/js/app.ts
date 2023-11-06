@@ -12,6 +12,7 @@ import '@sweetalert2/theme-material-ui/material-ui.css'
 import '../css/app.css'
 import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import FormFooter from '@/components/FormFooter.vue'
+import CustomForm from '@/components/CustomForm.vue'
 import { AgGridVue } from 'ag-grid-vue3'
 onScan.attachTo(document)
 
@@ -20,6 +21,7 @@ const pinia = createPinia()
 const app = createApp(App)
 app.component('Breadcrumbs', Breadcrumbs)
 app.component('FormFooter', FormFooter)
+app.component('CustomForm', CustomForm)
 app.component('AgGridVue', AgGridVue)
 app.use(vuetify)
 app.use(pinia)

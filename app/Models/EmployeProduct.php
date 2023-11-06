@@ -77,8 +77,13 @@ class EmployeProduct extends Model
     
 
     public function getExpirationDateAttribute() {
-        $date = Carbon::parse($this->date_of_receipt)->addMonth($this->positionProduct->expiration_date)->format('Y-m-d');
-        return $date;
+        if($this->positionProduct){
+            $date = Carbon::parse($this->date_of_receipt)->addMonth($this->positionProduct->expiration_date)->format('Y-m-d');
+            return $date;
+        }
+        else{
+            return null;
+        }
     }
 
 

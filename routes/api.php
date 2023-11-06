@@ -65,10 +65,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('allpositions', [PositionController::class, 'allPositions']);
 
-    
-    Route::post('product/set_activate/{id}', [ProductController::class, 'setActivate']);
-
-
 
 });
 

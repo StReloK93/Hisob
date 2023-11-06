@@ -45,15 +45,4 @@ class ProductController extends Controller
         return Product::find($id);
     }
 
-    public function setActivate($id, Request $request){
-        $position = Product::find($id);
-        $position->isActive = $request->active;
-        return $position->save();
-    }
 }
-
-
-        // return Product::where([
-        //     ['n_gr', 25],
-        //     ['complete', 'Y']
-        // ])->get();

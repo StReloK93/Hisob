@@ -65,6 +65,11 @@ class EmployeController extends Controller
         $employe->hiring_date = $request->hiring_date;
         $employe->gender = $request->gender;
         $employe->organization_id = $request->organization_id;
+
+        $employe->heigth = $request->heigth;
+        $employe->size_cloth = $request->size_cloth;
+        $employe->size_head = $request->size_head;
+        $employe->size_shoes = $request->size_shoes;
         $employe->save();
 
         return $employe->fresh();
