@@ -1,1 +1,0 @@
-import{_ as n,a as c,o as e,c as t}from"./app-0ff9e463.js";const s={};function r(_,a){const o=c("v-btn");return e(),t(o,{color:"teal",icon:"mdi-pencil-outline",size:"x-small"})}const l=n(s,[["render",r]]);export{l as I};

@@ -5,6 +5,13 @@
             <AddEmploye v-if="(store.userRoles.includes(4) || store.userRoles.includes(1))" @addEmploye="addEmploye"></AddEmploye>
             <EditEmploye @editEmploye="editEmploye" ref="editComponent" :current="pageData"></EditEmploye>
         </div>
+        <div class="px-4 mb-2 ">
+            <v-row class="d-flex justify-end">
+                <v-col cols="3">
+                    <v-text-field prepend-inner-icon="mdi-magnify" @input="(event) => pageData.gridApi.setQuickFilter(event.target.value)" label="Qidiruv"></v-text-field>
+                </v-col>
+            </v-row>
+        </div>
         <v-spacer class="px-4">
             <AgGridVue
                 class="ag-theme-material h-100"
