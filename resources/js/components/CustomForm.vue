@@ -3,7 +3,7 @@
         <v-card class="bg-white">
             <v-card-title> {{ title }} </v-card-title>
             <v-divider></v-divider>
-            <v-card-text class="pa-0" :style="[height ? `min-height: ${height}` : '']">
+            <v-card-text class="pa-0" :style="[height ? `height: ${height}` : '']">
                 <v-container>
                     <slot></slot>
                 </v-container>

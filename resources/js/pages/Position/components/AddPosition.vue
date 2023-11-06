@@ -4,7 +4,7 @@
             <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-plus" color="teal" v-bind="props"></v-btn>
             </template>
-            <CustomForm :submitMethod="addPostion" @close="pageData.dialog = false" title="Lavozim kiritish" height="700px">
+            <CustomForm :submitMethod="addPostion" @close="pageData.dialog = false" title="Lavozim kiritish" height="600px">
                 <FormInputs :formData="formData" :pageData="pageData"/>
             </CustomForm>
         </v-dialog>

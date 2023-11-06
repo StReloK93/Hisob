@@ -9,8 +9,16 @@
             <v-text-field class="my-2" label="Nomi" v-model="formData.name" :rules="rules" />
             <v-text-field class="my-2" label="Meyordagi tartib raqami" v-model="formData.number_in_document"
                 :rules="rules" />
-            <v-autocomplete class="my-2" :items="pageData.products" v-model="formData.products"
-                label="Biriktirilgan buyumlar" item-title="name" :item-value="(item) => item" multiple :rules="rules" />
+            <v-autocomplete class="my-2"
+                :items="pageData.products"
+                v-model="formData.products"
+                label="Biriktirilgan buyumlar"
+                item-title="name"
+                :item-value="(item) => item"
+                multiple
+                :rules="rules"
+                :value-comparator="(item , value) => item.id == value.id"
+            />
         </v-col>
         <v-col cols="7">
             <section v-for="product in formData.products" class="bg-blue-grey-lighten-5 mb-1">

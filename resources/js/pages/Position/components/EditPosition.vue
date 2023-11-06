@@ -1,6 +1,6 @@
 <template>
     <v-dialog v-model="pageData.dialog" scrollable width="992" location="right">
-        <CustomForm :submitMethod="editPosition" @close="pageData.dialog = false" title="Lavozim kiritish" height="700px">
+        <CustomForm :submitMethod="editPosition" @close="pageData.dialog = false" title="Lavozim kiritish" height="600px">
             <FormInputs :formData="formData" :pageData="pageData" />
         </CustomForm>
     </v-dialog>
