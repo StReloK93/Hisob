@@ -8,6 +8,7 @@
         <v-spacer class="px-4">
             <AgGridVue
                 :headerHeight="34"
+                :defaultColDef="{sortable: true}"
                 class="ag-theme-material h-100"
                 :getRowId="({data}) => data.id"
                 :columnDefs="columnDefs"

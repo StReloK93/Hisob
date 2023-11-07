@@ -7,6 +7,7 @@
             <AgGridVue
                 :getRowClass="getRowClass"
                 :headerHeight="34"
+                :defaultColDef="{sortable: true}"
                 class="ag-theme-material h-100"
                 :getRowId="({data}) => data.id"
                 :columnDefs="columnDefs"

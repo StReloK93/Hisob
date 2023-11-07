@@ -48,6 +48,7 @@
                                 </aside>
                                 <v-spacer class="relative">
                                     <AgGridVue
+                                        :defaultColDef="{sortable: true}"
                                         :getRowId="({ data }) => data.id"
                                         :headerHeight="34"
                                         class="ag-theme-material h-100"
@@ -78,6 +79,7 @@
 
                         <v-window-item value="two" class="flex-grow-1 pt-5">
                                 <AgGridVue
+                                    :defaultColDef="{sortable: true}"
                                     :getRowId="({ data }) => data.id"
                                     :headerHeight="34"
                                     animateRows="true"
