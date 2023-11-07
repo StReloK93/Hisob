@@ -32,23 +32,23 @@
                                                 </main>
                                             </div>
                                             <v-row>
-                                                <v-col cols="6">
+                                                <v-col cols="4">
                                                     <v-text-field :rules="pageData.rules" label="Nomenklatura raqami"
                                                         @input="getProductPrices(product)" v-model="product.nomenclature"
                                                         type="number" />
                                                 </v-col>
-                                                <v-col cols="6">
+                                                <v-col cols="4">
                                                     <v-combobox :rules="pageData.rules" :items="product.productPrices"
                                                         v-model="product.price" type="number" label="Mahsulot narxlari"
                                                         item-title="price1" />
                                                 </v-col>
+                                                <v-col cols="4">
+                                                    <v-text-field :rules="pageData.rules" label="Topshirilgan sana"
+                                                        type="date" v-model="product.date_of_receipt" />
+                                                </v-col>
                                             </v-row>
                                         </main>
                                     </template>
-                                </v-col>
-                                <v-col cols="12" class="pt-0">
-                                    <v-text-field :rules="pageData.rules" label="Topshirilgan sana" type="date"
-                                        v-model="formData.date_of_receipt" />
                                 </v-col>
                             </v-row>
                         </v-container>
@@ -106,7 +106,6 @@ async function addProductEmploye() {
 
 watch(() => pageData.dialog, (current) => {
     if (current == false) {
-        formData.employe_id = null
         formData.products = []
         formData.date_of_receipt = null
         pageData.formLoading = false

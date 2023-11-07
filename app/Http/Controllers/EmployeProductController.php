@@ -35,7 +35,7 @@ class EmployeProductController extends Controller
                 'count' => $product['count'],
                 'nomenclature' => $product['nomenclature'],
                 'price' => $product['price'],
-                'date_of_receipt' => $request->date_of_receipt,
+                'date_of_receipt' => $product['date_of_receipt'],
             ]);
 
             $products[] = $product->fresh();
@@ -95,4 +95,9 @@ class EmployeProductController extends Controller
     }
 
     
+    public function destroy($id){
+        return EmployeProduct::find($id)->delete();
+    }
+
+
 }

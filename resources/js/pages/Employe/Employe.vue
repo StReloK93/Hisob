@@ -111,6 +111,7 @@
 </template>
 
 <script setup lang="ts">
+import Icon from '@/components/AgGrid/Icon.vue'
 import AddMainProduct from './components/AddMainProduct.vue'
 import AddSpecialProduct from './components/AddSpecialProduct.vue'
 import Scud from './components/Scud.vue'
@@ -119,6 +120,7 @@ import axios from '@/modules/axios'
 import { reactive } from 'vue'
 import { useAuthStore } from '@/store/useAuthStore'
 import ImageUpload from './components/ImageUpload.vue'
+import swal from '@/modules/swal';
 const { id } = defineProps(['id'])
 
 const store = useAuthStore()
@@ -135,12 +137,6 @@ const pageData = reactive({
     mainProducts: null,
     inputImage: null
 })
-
-
-
-function changeImage(){
-    pageData.image = URL.createObjectURL(pageData.inputImage[0])
-}
 
 function changeTab(){
     pageData.productGridApi?.deselectAll()
@@ -259,6 +255,28 @@ const ColumnDefs = reactive([
         },
         headerName: 'Q.Muddati',
         width: 75,
+    },
+    {
+        hide: (store.userRoles.includes(4) || store.userRoles.includes(1)) == false,
+        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
+        headerName: '',
+        width: 60,
+        cellRenderer: Icon,
+        cellRendererParams: { icon: 'mdi-delete-empty', color: 'red' },
+        headerClass: ['px-2'],
+        onCellClicked: ({data}) => {
+            swal.fire({
+                title: "Aniq o'chirmoqchimisiz?",
+                text: "Malumotni qayta tiklab bo'lmaydi",
+                icon: 'warning',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`employe_product/${data.id}`).then(() => {
+                        pageData.productGridApi.applyTransaction({ remove: [data] })
+                    })
+                }
+            })
+        }
     },
 ])
 

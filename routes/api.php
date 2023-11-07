@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('employe', EmployeController::class)->only(['index', 'show']);
     Route::apiResource('position', PositionController::class)->only(['index', 'show']);
 
-    Route::apiResource('employe_product', EmployeProductController::class)->only(['index', 'show']);
+    Route::apiResource('employe_product', EmployeProductController::class)->only(['index', 'show', 'destroy']);
     Route::get('employe_product/products/{employe_id}', [EmployeProductController::class, 'getEmployeProducts']);
     Route::get('employe_product/mainproducts/{employe_id}', [EmployeProductController::class, 'getMainEmployeProducts']);
     Route::get('employe_product/custom/in_timer', [EmployeProductController::class, 'inTimer']);
