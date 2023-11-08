@@ -76,6 +76,13 @@ class PositionController extends Controller
         $position->isActive = $request->active;
         return $position->save();
     }
+
+
+    public function destroy($id){
+        PositionProduct::where('position_id', $id)->delete();
+
+        return Position::find($id)->delete();
+    }
 }
 
 

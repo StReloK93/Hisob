@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [AuthController::class, 'logoutUser']);
 
     Route::apiResource('employe', EmployeController::class)->only(['index', 'show']);
-    Route::apiResource('position', PositionController::class)->only(['index', 'show']);
+    Route::apiResource('position', PositionController::class)->only(['index', 'show', 'destroy']);
 
     Route::apiResource('employe_product', EmployeProductController::class)->only(['index', 'show', 'destroy']);
     Route::get('employe_product/products/{employe_id}', [EmployeProductController::class, 'getEmployeProducts']);
@@ -38,21 +38,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('employe_images', EmployeImagesController::class)->except(['store']);
     Route::post('/employe_images/{id}', [EmployeImagesController::class, 'store']);
 
-
-
     Route::apiResource('product', ProductController::class);
     Route::apiResource('product_type', ProductTypeController::class);
     Route::apiResource('role', RoleController::class);
-
-
 
     //   
     Route::apiResource('position_type', PositionTypeController::class);
     Route::apiResource('working_condition', WorkingConditionController::class);
 
-
-
-    
 
 
     Route::get('employe/getdata/{tableNumber}', [EmployeController::class, 'getEmployeData']);

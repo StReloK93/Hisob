@@ -21,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
+import swal from '@/modules/swal'
 import AddPosition from './components/AddPosition.vue'
 import EditPosition from './components/EditPosition.vue'
 import PositionProducts from '@/components/AgGrid/PositionProducts.vue'
-import Button from '@/components/AgGrid/Button.vue'
-import IconEdit from '@/components/AgGrid/IconEdit.vue'
+import Icon from '@/components/AgGrid/Icon.vue'
 import { reactive, ref } from "vue"
 import axios from '@/modules/axios'
 import { useAuthStore } from '@/store/useAuthStore'
@@ -61,27 +61,34 @@ const columnDefs = reactive([
     {
         hide: (store.userRoles.includes(4) || store.userRoles.includes(1)) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
-        field: "isActive",
-        headerName: 'Faolligi',
-        cellRenderer: Button,
-        width: 60,
-        headerClass: ['px-2'],
-        onCellClicked: (params) => {
-            axios.post(`position/set_activate/${params.data.id}`, { active: !params.value }).then(() => {
-                params.node.setDataValue('isActive', !params.value)
-            })
-        }
-    },
-    {
-        hide: (store.userRoles.includes(4) || store.userRoles.includes(1)) == false,
-        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
-        headerName: '',
         width: 60 ,
-        cellRenderer: IconEdit,
+        cellRenderer: Icon,
+        cellRendererParams: { icon: 'mdi-pencil-outline'},
         headerClass: ['px-2'],
         onCellClicked: ({data}) => {
             pageData.selected = data.id
             editComponent.value.toggle()
+        }
+    },
+    {
+        hide: (store.userRoles.includes(1)) == false,
+        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
+        width: 60,
+        cellRenderer: Icon,
+        cellRendererParams: { icon: 'mdi-delete-empty', color: 'red' },
+        headerClass: ['px-2'],
+        onCellClicked: ({data}) => {
+            swal.fire({
+                title: "Aniq o'chirmoqchimisiz?",
+                text: "Malumotni qayta tiklab bo'lmaydi",
+                icon: 'warning',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`position/${data.id}`).then(() => {
+                        pageData.gridApi.applyTransaction({ remove: [data] })
+                    })
+                }
+            })
         }
     },
 ]);
