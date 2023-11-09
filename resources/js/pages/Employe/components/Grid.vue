@@ -82,7 +82,7 @@ const ColumnDefs = reactive([
     {
         headerClass: ['px-3'],
         cellClass: ['px-3'],
-        field: "position_product.product.name",
+        field: "product.name",
         headerName: 'Nomi',
         flex: 1,
         minWidth: 300,
@@ -91,7 +91,7 @@ const ColumnDefs = reactive([
         showDisabledCheckboxes: store.userRoles.includes(2),
     },
     { field: "count", headerName: 'soni', width: 50, headerClass: ['px-2'], cellClass: ['px-2']},
-    { field: "position_product.expiration_date", headerName: 'Muddati (oy)', width: 90, headerClass: ['px-2'], cellClass: ['px-2'] },
+    { field: "product_data.expiration_date", headerName: 'Muddati (oy)', width: 90, headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "price", headerName: 'Narxi', width: 120, headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "nomenclature", headerName: 'Nomenklatura', width: 120, headerClass: ['px-2'], cellClass: ['px-2'] },
     {
@@ -111,16 +111,16 @@ const ColumnDefs = reactive([
         width: 145,
         cellRendererParams: { color: 'red' }
     },
-    {
-        headerClass: ['px-2'],
-        cellClass: ['d-flex', 'align-center', 'px-2', 'bg-gray-100', 'justify-center'],
-        field: "timer",
-        cellRenderer: ({value}) => {
-            return  `${value} Kun` 
-        },
-        headerName: 'Q.Muddati',
-        width: 75,
-    },
+    // {
+    //     headerClass: ['px-2'],
+    //     cellClass: ['d-flex', 'align-center', 'px-2', 'bg-gray-100', 'justify-center'],
+    //     field: "timer",
+    //     cellRenderer: ({value}) => {
+    //         return  `${value} Kun` 
+    //     },
+    //     headerName: 'Q.Muddati',
+    //     width: 75,
+    // },
     {
         hide: (store.userRoles.includes(4) || store.userRoles.includes(1)) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],

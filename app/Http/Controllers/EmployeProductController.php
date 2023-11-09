@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EmployeProduct;
+use App\Models\PositionProduct;
 use DB;
 class EmployeProductController extends Controller
 {
@@ -19,11 +20,23 @@ class EmployeProductController extends Controller
     }
 
     public function getEmployeProducts($employe_id){
-        return EmployeProduct::where('employe_id', $employe_id)->SpecialProducts()->get();
+        // return EmployeProduct::where('employe_id', $employe_id)->SpecialProducts()->get();
+
+        $employeProducts = EmployeProduct::where('employe_id', $employe_id)->get();
+        foreach ($employeProducts as $key => $empProduct) {
+            $employeProducts[$key]->product_data = PositionProduct::without('product')->where([
+                ['position_id', $empProduct->position_id],
+                ['product_id', $empProduct->product_id],
+            ])->first();
+        }
+
+
+        return $employeProducts;
     }
 
     public function getMainEmployeProducts($employe_id){
-        return EmployeProduct::where('employe_id', $employe_id)->MainProducts()->get();
+        // return EmployeProduct::where('employe_id', $employe_id)->MainProducts()->get();
+        return EmployeProduct::where('employe_id', $employe_id)->get();
     }
 
     public function store(Request $request){
@@ -31,7 +44,8 @@ class EmployeProductController extends Controller
         foreach ($request->products as $key => $product) {
             $product = EmployeProduct::create([
                 'employe_id' => $request->employe_id,
-                'position_product_id' => $product['id'],
+                'product_id' => $product['product_id'],
+                'position_id' => $product['position_id'],
                 'count' => $product['count'],
                 'nomenclature' => $product['nomenclature'],
                 'price' => $product['price'],

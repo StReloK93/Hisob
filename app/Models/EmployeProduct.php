@@ -10,15 +10,16 @@ class EmployeProduct extends Model
     use HasFactory;
 
     protected $with = [
-        'positionProduct',
+        'product',
         // 'employe'
     ];
 
-    protected $appends = ['expiration_date','timer'];
+    // protected $appends = ['expiration_date','timer'];
 
     protected $fillable = [
         'employe_id',
-        'position_product_id',
+        'product_id',
+        'position_id',
         'count',
         'nomenclature',
         'price',
@@ -28,9 +29,9 @@ class EmployeProduct extends Model
         'toggle_write_off',
     ];
 
-    public function positionProduct()
+    public function Product()
     {
-        return $this->hasOne(PositionProduct::class, 'id', 'position_product_id');
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 
     public function employe()
@@ -38,14 +39,14 @@ class EmployeProduct extends Model
         return $this->belongsTo(Employe::class);
     }
 
-    public function scopeSpecialProducts($query)
-    {
-        return $query->whereHas('positionProduct', function($query) {
-            $query->whereHas('product', function($query) {
-                $query->where('product_type_id' , 1);
-            });
-        });
-    }
+    // public function scopeSpecialProducts($query)
+    // {
+    //     return $query->whereHas('product', function($query) {
+    //         $query->whereHas('product', function($query) {
+    //             $query->where('product_type_id' , 1);
+    //         });
+    //     });
+    // }
 
     public function scopeAccessOrganizations($query)
     {
@@ -57,14 +58,14 @@ class EmployeProduct extends Model
 
 
 
-    public function scopeMainProducts($query)
-    {
-        return $query->whereHas('positionProduct', function($query) {
-            $query->whereHas('product', function($query) {
-                $query->where('product_type_id' , 2);
-            });
-        });
-    }
+    // public function scopeMainProducts($query)
+    // {
+    //     return $query->whereHas('product', function($query) {
+    //         $query->whereHas('product', function($query) {
+    //             $query->where('product_type_id' , 2);
+    //         });
+    //     });
+    // }
 
     protected $casts = [
         'date_of_receipt' => 'date:Y-m-d',
@@ -76,15 +77,15 @@ class EmployeProduct extends Model
     ];
     
 
-    public function getExpirationDateAttribute() {
-        if($this->positionProduct){
-            $date = Carbon::parse($this->date_of_receipt)->addMonth($this->positionProduct->expiration_date)->format('Y-m-d');
-            return $date;
-        }
-        else{
-            return null;
-        }
-    }
+    // public function getExpirationDateAttribute() {
+    //     if($this->positionProduct){
+    //         $date = Carbon::parse($this->date_of_receipt)->addMonth($this->positionProduct->expiration_date)->format('Y-m-d');
+    //         return $date;
+    //     }
+    //     else{
+    //         return null;
+    //     }
+    // }
 
 
     public function getTimerAttribute() {

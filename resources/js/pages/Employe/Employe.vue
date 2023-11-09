@@ -30,7 +30,7 @@
                     <main></main>
                     <v-tabs v-model="pageData.tab" class="mt-12" color="cyan">
                         <v-tab value="one">Maxsus kiyimlar</v-tab>
-                        <v-tab value="two">Asosiy buyumlar</v-tab>
+                        <!-- <v-tab value="two">Asosiy buyumlar</v-tab> -->
                     </v-tabs>
                     <v-divider color="cyan -top-1px"></v-divider>
                     <v-window v-model="pageData.tab" v-if="pageData.position" class="flex-grow-1">
@@ -51,10 +51,10 @@
                                 </v-spacer>
                             </main>
                         </v-window-item>
-
+<!-- 
                         <v-window-item value="two" class="flex-grow-1 pt-5">
                             <Grid :main="true" :employe="pageData.employe" :request="`employe_product/mainproducts/${id}`"/>
-                        </v-window-item>
+                        </v-window-item> -->
                     </v-window>
                 </main>
             </section>
