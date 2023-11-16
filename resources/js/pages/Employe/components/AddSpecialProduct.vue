@@ -80,9 +80,11 @@ async function getProductPrices(product) {
     else product.productPrices = []
 }
 
+console.log(position.products)
+
 const pageData = reactive({
     dialog: false,
-    products: position.products.map((item) => { return { ...item, name: item.product.name, count: 1, nomenclature: null, price: null, productPrices: [] } }),
+    products: position.products.map((item) => { return { ...item, name: item.product?.name, count: 1, nomenclature: null, price: null, productPrices: [] } }),
     rules: [(value) => value == null || value == "" ? 'toldiring' : true],
     formLoading: false,
 })

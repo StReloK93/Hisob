@@ -22,7 +22,7 @@
                     </p>
 
                     <div v-if="pageData.position" class="text-teal">
-                        {{ pageData.position.name }}
+                        {{ pageData.position?.name }}
                     </div>
                     <div v-else class="text-red">
                         Lavozim biriktirilmagan
@@ -42,7 +42,7 @@
                                     </p>
                                     <v-chip size="small" color="teal" class="mr-2 px-4 mb-2" v-for="item in pageData.position.products">
                                         <v-tooltip activator="parent" location="bottom">{{ item.working_condition.name }}</v-tooltip>
-                                        {{ item.product.name }} <span class="ml-2">x</span>{{ item.count }}
+                                        {{ item.product?.name }} <span class="ml-2">x</span>{{ item?.count }}
                                         <v-icon class="ml-2">mdi-texture-box</v-icon>
                                     </v-chip>
                                 </aside>
