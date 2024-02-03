@@ -26,9 +26,9 @@ class Employe extends Model
     ];
 
 
-    protected $appends = ['end_timer'];
+    // protected $appends = ['end_timer'];
 
-    protected $with = ['organization','position'];
+    protected $with = ['organization'];
 
     public function organization()
     {
@@ -53,13 +53,13 @@ class Employe extends Model
 
 
 
-    public function getEndTimerAttribute() {
-        return EmployeProduct::where('employe_id', $this->id)
-        ->get()
-        ->filter(function ($product, $key) {
-            return $product->timer < 300;
-        });
-    }
+    // public function getEndTimerAttribute() {
+    //     return EmployeProduct::where('employe_id', $this->id)
+    //     ->get()
+    //     ->filter(function ($product, $key) {
+    //         return $product->timer < 300;
+    //     });
+    // }
 
     protected $casts = [
         'hiring_date' => 'date:Y-m-d',

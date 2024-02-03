@@ -12,7 +12,7 @@
         @grid-ready="(params) => pageData.gridApi = params.api"
     />
     <main class="absolute grid-button">
-        <Scud 
+        <Scud
             v-if="pageData.selectedRows.length && store.userRoles.includes(2)"
             @confirm_products=confirm_mainproducts
             :employe="employe"

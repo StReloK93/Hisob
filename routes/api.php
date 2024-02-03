@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\PositionController;
@@ -20,13 +19,14 @@ use App\Http\Controllers\WorkingConditionController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
+
 Route::middleware('auth:sanctum')->group(function () {
     // available organizations
     Route::get('accessOrganizations', [OrganizationController::class, 'accessOrganizations']);
-
+    
     Route::get('/user', [AuthController::class, 'getUser']);
     Route::get('/logout', [AuthController::class, 'logoutUser']);
-
+    
     Route::apiResource('employe', EmployeController::class)->only(['index', 'show']);
     Route::apiResource('position', PositionController::class)->only(['index', 'show', 'destroy']);
 

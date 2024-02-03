@@ -1,0 +1,1 @@
+import{d as t,a as o,o as a,h as n,e as r,w as s,f as c}from"./app-2560280e.js";const f=t({__name:"Reports",setup(l){return(p,_)=>{const e=o("v-btn");return a(),n("section",null,[r(e,{tag:"a",href:"/employe/export",color:"success",target:"_blank"},{default:s(()=>[c(" EmployeController ")]),_:1})])}}});export{f as default};

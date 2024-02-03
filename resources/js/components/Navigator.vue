@@ -16,6 +16,7 @@
 
 		<v-list-item prepend-icon="mdi-weather-hail" title="Mehnat sharoitlari" :to="{ name: 'workingconditions' }" />
 		<v-list-item prepend-icon="mdi-account-hard-hat" title="Lavozimlar" :to="{ name: 'positions' }" />
+		<v-list-item prepend-icon="mdi-microsoft-excel" title="Hisobotlar" :to="{ name: 'report' }" />
 
 
 		<v-divider></v-divider>

@@ -55,6 +55,18 @@ export default [
                 }
             },
             {
+                path: 'report',
+                name: 'report',
+                component: () => import('@/pages/Report/Reports.vue'),
+                meta: {
+                    breadcrumbs: [
+                        { title: 'Lavozimlar', to: '/app/report' , disabled: true }
+                    ]
+                }
+            },
+            
+
+            {
                 path: 'organizations',
                 name: 'organizations',
                 component: () => import('@/pages/Organization/Organizations.vue'),

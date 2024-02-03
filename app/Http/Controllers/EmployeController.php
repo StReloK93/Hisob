@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employe;
 use App\Models\EmployePosition;
-use App\Models\EmployeProduct;
 use App\Models\Organization;
 use DB;
 use Carbon\Carbon;
+
+
 
 class EmployeController extends Controller
 {
 
     public function index(){
-        return Employe::orderBy('id', 'desc')->accessOrganizations()->get();
+        return Employe::select('id', 'table_number', 'name', 'hiring_date', 'organization_id')->orderBy('id', 'desc')->accessOrganizations()->get();
     }
 
 
@@ -36,7 +37,7 @@ class EmployeController extends Controller
 
     public function show($id){
 
-        $employe = Employe::find($id);
+        $employe = Employe::with('position')->find($id);
         $employe->cards = $this->getCardNumbers($employe->table_number);
         return $employe;
     }
