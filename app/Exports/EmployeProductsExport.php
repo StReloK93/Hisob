@@ -54,7 +54,6 @@ class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings
         $expiration = $this->PositionProducts->where('position_id', $data['position_id'])->where('product_id', $data['product_id'])->first();
         if (isset($expiration)) {
             $data['expiration_date'] = $expiration['expiration_date'];
-
         }
         else return [];
 
@@ -75,7 +74,7 @@ class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings
             $data['price'],
             $data['expiration_date'],
             $data['date_of_receipt'],
-            $endDate
+            $endDate->format('Y-m-d')
         ];
     }
 

@@ -1,7 +1,7 @@
 <template>
     <section>
         <v-btn tag="a" href="/employe/export" color="success" target="_blank">
-            EmployeController
+            Hisobotni yuklash
         </v-btn>
     </section>
 </template>

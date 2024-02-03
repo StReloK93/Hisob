@@ -1,0 +1,1 @@
+import{d as t,a as o,o as a,h as n,e as s,w as r,f as c}from"./app-4b2bef85.js";const u=t({__name:"Reports",setup(_){return(l,p)=>{const e=o("v-btn");return a(),n("section",null,[s(e,{tag:"a",href:"/employe/export",color:"success",target:"_blank"},{default:r(()=>[c(" Hisobotni yuklash ")]),_:1})])}}});export{u as default};
