@@ -5,7 +5,6 @@ namespace App\Exports;
 use Carbon\Carbon;
 use App\Models\EmployeProduct;
 use App\Models\PositionProduct;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -13,10 +12,10 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings, WithColumnWidths
 {
     private $PositionProducts;
-
-    public function __construct()
+    private $currentDate;
+    public function __construct($currentDate)
     {
-
+        $this->currentDate = $currentDate;
         $this->PositionProducts = collect(PositionProduct::whereRaw('TRY_CAST(expiration_date AS int) IS NOT NULL')
             ->get()->toArray());
     }
@@ -62,7 +61,7 @@ class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings
 
         $endDate = Carbon::parse($data['date_of_receipt'])->add($data['expiration_date'], 'month');
 
-        if(now() < $endDate) {
+        if($this->currentDate < $endDate) {
             return [];
         }
 

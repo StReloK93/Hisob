@@ -13,6 +13,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MainDocumentController;
 use App\Http\Controllers\PositionTypeController;
 use App\Http\Controllers\WorkingConditionController;
+use App\Http\Controllers\ReportTypeController;
+use App\Http\Controllers\ReportController;
 
 
 
@@ -23,7 +25,13 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
     // available organizations
     Route::get('accessOrganizations', [OrganizationController::class, 'accessOrganizations']);
-    
+
+    Route::apiResource('report', ReportController::class)->only(['index', 'store', 'destroy']);
+    Route::get('report_type/{report_type_id}', [ReportController::class, 'reportsByType']);
+
+
+    Route::apiResource('report_type', ReportTypeController::class)->only(['index']);
+
     Route::get('/user', [AuthController::class, 'getUser']);
     Route::get('/logout', [AuthController::class, 'logoutUser']);
     

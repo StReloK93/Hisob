@@ -22,7 +22,7 @@
                             </thead>
                             <tbody>                                
                                 <tr v-for="item in selected.selectedRows">
-                                    <td>{{item.position_product.product.name}}</td>
+                                    <td>{{item.product.name}}</td>
                                     <td>{{item.nomenclature}}</td>
                                     <td>{{item.count}}</td>
                                     <!-- <td>{{item.price}}</td> -->
@@ -43,6 +43,8 @@ import axios from '@/modules/axios'
 import Swal from 'sweetalert2'
 const emit = defineEmits(['confirm_products'])
 const { selected, employe } = defineProps(['selected', 'employe'])
+
+console.log(selected)
 
 
 const pageData = reactive({

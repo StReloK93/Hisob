@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use DB;
 use App\Models\Product;
+use Storage;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,16 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $user = DB::connection('1cbase')->select("SELECT * FROM dbo.PoiskSotrudnikaTabelniyNomer ('68595')");
 
-        // dd($user);
-
-        //         $user = DB::connection('oracle')->select("SELECT a.n_gr, a.n_subgr, a.name_subgr, a.creater, a.created, a.changer,
-        //         a.changed
-        //    FROM nmmc.t_materials_subgr a where a.n_gr=25");
-
-        //         dd($user);
-
+        
         
     }
 }

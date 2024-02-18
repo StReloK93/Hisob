@@ -16,7 +16,7 @@
         </v-btn>
         <v-btn size="small" class="mr-2" color="white" icon="" v-if="store.userRoles.includes(4)">
             <v-icon>mdi-security</v-icon>
-            <v-tooltip activator="parent" location="bottom">ММваХТ мухандиси</v-tooltip>
+            <v-tooltip activator="parent" location="bottom">ММваХТ muxandis</v-tooltip>
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn color="white" class="text-none" stacked>

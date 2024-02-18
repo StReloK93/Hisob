@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\ReportType;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,10 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // ReportType::insert([
+        //     ['name' => 'Oylik hisobot'],
+        //     ['name' => 'ММваХТ hisobot'],
+        // ]);
 
 
         $this->call([
-            MainSeeder::class,
+            // MainSeeder::class,
             // TestSeeder::class,
         ]);
 
