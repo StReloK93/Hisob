@@ -15,6 +15,7 @@ class Report extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'user_id',
         'name',
         'confirmed',
         'report_type_id',
@@ -23,6 +24,14 @@ class Report extends Model
     ];
 
 
+    protected $with = [
+        'user',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i'
     ];

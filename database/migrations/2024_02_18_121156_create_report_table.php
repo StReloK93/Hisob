@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('report', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('name');
             $table->boolean('confirmed');
             $table->integer('report_type_id');

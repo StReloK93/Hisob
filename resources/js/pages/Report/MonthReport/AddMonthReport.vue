@@ -25,16 +25,14 @@ const { report } = defineProps(['report'])
 
 const formData = reactive({
 	name: null,
-	report_type_id: report.id
+	report_type_id: report.id,
+	old: true
 })
 
 async function getReport() {
 	await axios.post('report', formData).then(({ data }) => {
-		console.log(report.id, data);
-		
-		emit('addReport', { report_type_id: report.id, report: data })
+		emit('addReport', { report_type_id: report.id, report: data, old: true })
 		pageData.dialog = false
-
 	})
 }
 const pageData = reactive({

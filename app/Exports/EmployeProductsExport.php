@@ -12,9 +12,11 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings, WithColumnWidths
 {
     private $PositionProducts;
+    private $old;
     private $currentDate;
-    public function __construct($currentDate)
+    public function __construct($currentDate, $old)
     {
+        $this->old = $old;
         $this->currentDate = $currentDate;
         $this->PositionProducts = collect(PositionProduct::whereRaw('TRY_CAST(expiration_date AS int) IS NOT NULL')
             ->get()->toArray());
@@ -61,7 +63,7 @@ class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings
 
         $endDate = Carbon::parse($data['date_of_receipt'])->add($data['expiration_date'], 'month');
 
-        if($this->currentDate < $endDate) {
+        if(($this->currentDate < $endDate) == $this->old) {
             return [];
         }
 

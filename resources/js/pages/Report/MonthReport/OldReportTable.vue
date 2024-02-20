@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import swal from '@/modules/swal'
 import { reactive } from 'vue'
 import Icon from '@/components/AgGrid/Icon.vue'
 import axios from 'axios'
@@ -18,21 +19,13 @@ const pageData = reactive({
 const columnDefs = reactive([
     { field: "id", headerName: '№', width: 65 },
     { field: "name", headerName: 'Nomi', width: 200 },
+    { field: "user.name", headerName: 'Yaratdi', },
     { field: "created_at", headerName: 'Vaqti', flex: 1, },
     {
-        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
-        field: "completed",
-        headerName: 'Tasdiqlash',
-        width: 90,
-        cellRenderer: Button,
-        onCellClicked: ({ data }) => {
-            
-        }
-    },
-    {
+        cellClass: ['d-flex', 'justify-center', 'align-center'],
         field: "file_source",
         headerName: '',
-        width: 80,
+        width: 60,
         cellRenderer: Icon,
         cellRendererParams: { icon: 'mdi-microsoft-excel' },
         onCellClicked: ({ data }) => {
@@ -40,14 +33,42 @@ const columnDefs = reactive([
         }
     },
     {
+        cellClass: ['d-flex', 'justify-center', 'align-center'],
+        field: "file_source",
+        headerName: 'Tasdiqlash',
+        width: 90,
+        cellRenderer: Icon,
+        cellRendererParams: { icon: 'mdi-checkbox-marked-outline' },
+        onCellClicked: ({ data }) => {
+            swal.fire({
+                title: "Ushbu amalni aniq bajarmoqchimisiz?",
+                icon: 'warning',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.get(`report_success/${data.id}`)
+                }
+            })
+            
+        }
+    },
+    {
+        cellClass: ['d-flex', 'justify-center', 'align-center'],
         field: "",
         headerName: '',
-        width: 80,
+        width: 60,
         cellRenderer: Icon,
         cellRendererParams: { icon: 'mdi-delete-empty', color: 'red' },
         onCellClicked: ({ data }) => {
-            axios.delete(`report/${data.id}`).then(() => {
-                pageData.gridApi.applyTransaction({ remove: [data] })
+            swal.fire({
+                title: "Aniq o'chirmoqchimisiz?",
+                text: "Malumotni qayta tiklab bo'lmaydi",
+                icon: 'warning',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`report/${data.id}`).then(() => {
+                        pageData.gridApi.applyTransaction({ remove: [data] })
+                    })
+                }
             })
         }
     },
@@ -69,5 +90,5 @@ axios.get(`report_type/${report_id}`).then(({ data }) => {
 //     rowNode.setData(position)
 // }
 
-defineExpose({pageData})
+defineExpose({ pageData })
 </script>

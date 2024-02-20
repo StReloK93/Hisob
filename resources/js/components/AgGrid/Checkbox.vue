@@ -1,7 +1,10 @@
 <template>
     <main class="relative d-flex align-center">
-        <span v-if="params.color">
+        <span v-if="params.color == 'red'">
             {{ params.data.expiration_date }}
+        </span>
+        <span v-else-if="params.color == 'blue'">
+            {{ params.data.date_write_off }}
         </span>
         <span v-else>
             {{ params.data.date_of_receipt }}

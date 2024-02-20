@@ -68,6 +68,7 @@ class EmployeProduct extends Model
     // }
 
     protected $casts = [
+        'date_write_off' => 'date:Y-m-d',
         'date_of_receipt' => 'date:Y-m-d',
         'employe_id' => 'integer',
         'position_product_id' => 'integer',

@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('report', ReportController::class)->only(['index', 'store', 'destroy']);
     Route::get('report_type/{report_type_id}', [ReportController::class, 'reportsByType']);
+    Route::get('report_success/{report_type_id}', [ReportController::class, 'successEmployeProducts']);
 
 
     Route::apiResource('report_type', ReportTypeController::class)->only(['index']);

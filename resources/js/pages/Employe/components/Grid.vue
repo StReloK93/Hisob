@@ -109,7 +109,7 @@ const ColumnDefs = reactive([
         headerName: 'Xisobdan chiqariladi',
         cellRenderer: Checkbox,
         width: 145,
-        cellRendererParams: { color: 'red' }
+        cellRendererParams: { color: 'blue' }
     },
     // {
     //     headerClass: ['px-2'],
@@ -129,7 +129,8 @@ const ColumnDefs = reactive([
         cellRenderer: Icon,
         cellRendererParams: { icon: 'mdi-delete-empty', color: 'red' },
         headerClass: ['px-2'],
-        onCellClicked: ({data}) => {
+        onCellClicked: ({ data }) => {
+            if(data.toggle_write_off) return
             swal.fire({
                 title: "Aniq o'chirmoqchimisiz?",
                 text: "Malumotni qayta tiklab bo'lmaydi",

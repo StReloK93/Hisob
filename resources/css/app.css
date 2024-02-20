@@ -97,3 +97,7 @@ input::-webkit-inner-spin-button {
 .fade-leave-active {
   position: absolute;
 }
+
+.alert-button-width{
+    width: 80px;
+}
