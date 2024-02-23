@@ -7,6 +7,7 @@
 						v-bind="props">
 						Hisobotlar
 					</v-btn>
+					<!-- <Movement /> -->
 					<v-btn prepend-icon="mdi-microsoft-excel" class="text-capitalize ml-4" color="blue-grey" variant="tonal">
 							Harakat
 					</v-btn>
@@ -48,6 +49,7 @@
 import { reactive, shallowRef, ref } from 'vue'
 import AddMonthReport from './MonthReport/AddMonthReport.vue'
 import AddMonth from './MonthReport/AddMonth.vue'
+// import Movement from './MonthReport/Movement.vue'
 import OldReportTable from './MonthReport/OldReportTable.vue'
 import CurrentReportTable from './MonthReport/CurrentReportTable.vue'
 

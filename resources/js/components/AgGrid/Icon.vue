@@ -7,7 +7,7 @@ import { computed } from 'vue';
 const { params } = defineProps(['params'])
 
 const color = computed(() => {
-    if(params.data.toggle_write_off) return 'grey'
+    if(params.isBlocked && (params.data.toggle_write_off || params.data.confirmed == true) ) return 'grey'
     return params.color == null ? 'teal' : params.color
 })
 

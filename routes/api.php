@@ -28,8 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('report', ReportController::class)->only(['index', 'store', 'destroy']);
     Route::get('report_type/{report_type_id}', [ReportController::class, 'reportsByType']);
-    Route::get('report_success/{report_type_id}', [ReportController::class, 'successEmployeProducts']);
-
 
     Route::apiResource('report_type', ReportTypeController::class)->only(['index']);
 
@@ -55,8 +53,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('position_type', PositionTypeController::class);
     Route::apiResource('working_condition', WorkingConditionController::class);
 
-
-
     Route::get('employe/getdata/{tableNumber}', [EmployeController::class, 'getEmployeData']);
 
     Route::get('products/main', [ProductController::class, 'getMainProducts']);
@@ -72,8 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::middleware(['auth:sanctum', 'ability:admin,buxgalter'])->group(function () {
-
-
+    Route::get('report_success/{report_type_id}', [ReportController::class, 'successEmployeProducts']);
 });
 
 Route::middleware(['auth:sanctum', 'ability:admin,tb'])->group(function () {

@@ -77,8 +77,9 @@ function confirm_mainproducts(arrayId) {
 function addProduct(data) {
     pageData.gridApi.applyTransaction({ add: data })
 }
-
+// Машинист помощник машиниста экскаватора ЭКГ,RH
 const ColumnDefs = reactive([
+    { headerName: '№', width: 50, cellRenderer: (data) => data.rowIndex + 1},
     {
         headerClass: ['px-3'],
         cellClass: ['px-3'],
@@ -127,7 +128,7 @@ const ColumnDefs = reactive([
         headerName: '',
         width: 60,
         cellRenderer: Icon,
-        cellRendererParams: { icon: 'mdi-delete-empty', color: 'red' },
+        cellRendererParams: { icon: 'mdi-delete-empty', color: 'red', isBlocked: true },
         headerClass: ['px-2'],
         onCellClicked: ({ data }) => {
             if(data.toggle_write_off) return

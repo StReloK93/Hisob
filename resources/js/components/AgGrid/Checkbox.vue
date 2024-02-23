@@ -4,7 +4,7 @@
             {{ params.data.expiration_date }}
         </span>
         <span v-else-if="params.color == 'blue'">
-            {{ params.data.date_write_off }}
+            {{ params.data.date_write_off }} {{ params.data.report?.name }}
         </span>
         <span v-else>
             {{ params.data.date_of_receipt }}

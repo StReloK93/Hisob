@@ -22,7 +22,7 @@ class EmployeProductController extends Controller
     public function getEmployeProducts($employe_id){
         // return EmployeProduct::where('employe_id', $employe_id)->SpecialProducts()->get();
 
-        $employeProducts = EmployeProduct::where('employe_id', $employe_id)->get();
+        $employeProducts = EmployeProduct::where('employe_id', $employe_id)->with('report')->get();
         foreach ($employeProducts as $key => $empProduct) {
             $employeProducts[$key]->product_data = PositionProduct::without('product')->where([
                 ['position_id', $empProduct->position_id],

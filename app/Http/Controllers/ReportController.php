@@ -44,25 +44,25 @@ class ReportController extends Controller
         return Report::where('report_type_id', $report_type_id)->get();
     }
 
-
-    public function confirmed($id){
-        $report = Report::find($id);
-        $date = $report->created_at;
-    }
-
     public function destroy($id){
         $report = Report::find($id);
         Storage::delete("public/$report->file_source");
         return $report->delete();
     }
 
-    public function successEmployeProducts(){
+    public function successEmployeProducts($report_id){
+        dd('pashol nax');
+        // $report = Report::find($report_id);
+        // $report->confirmed = true;
+        // $report->save();
+        // $organizations = Auth::user()->organizations->pluck('organizations_id');
+        // $employes = Employe::whereIn('organization_id', $organizations)->pluck('id');
+        // EmployeProduct::whereIn('employe_id', $employes)->update([
+        //     'date_write_off' => null,
+        //     'toggle_write_off' => false,
+        //     'report_id' => null,
+        // ]);
 
-        $organizations = Auth::user()->organizations->pluck('organizations_id');
-        $employes = Employe::whereIn('organization_id', $organizations)->pluck('id');
-        return EmployeProduct::whereIn('employe_id', $employes)->update([
-            'date_write_off' => null,
-            'toggle_write_off' => false,
-        ]);
+        // return $report->fresh();
     }
 }

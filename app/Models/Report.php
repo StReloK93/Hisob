@@ -33,7 +33,8 @@ class Report extends Model
         return $this->belongsTo(User::class);
     }
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d H:i'
+        'created_at' => 'datetime:Y-m-d H:i',
+        'confirmed' => 'boolean'
     ];
     
 }

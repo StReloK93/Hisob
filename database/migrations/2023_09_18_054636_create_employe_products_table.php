@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('employe_id');
             $table->integer('product_id');
             $table->integer('position_id');
+            $table->integer('report_id');
             $table->integer('count');
             $table->bigInteger('nomenclature');
             $table->double('price', 15,2);

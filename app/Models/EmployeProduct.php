@@ -20,6 +20,7 @@ class EmployeProduct extends Model
         'employe_id',
         'product_id',
         'position_id',
+        'report_id',
         'count',
         'nomenclature',
         'price',
@@ -32,6 +33,11 @@ class EmployeProduct extends Model
     public function Product()
     {
         return $this->hasOne(Product::class, 'id', 'product_id');
+    }
+
+    public function report()
+    {
+        return $this->belongsTo(Report::class);
     }
 
     public function employe()

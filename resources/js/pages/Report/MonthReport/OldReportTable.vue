@@ -9,7 +9,10 @@ import swal from '@/modules/swal'
 import { reactive } from 'vue'
 import Icon from '@/components/AgGrid/Icon.vue'
 import axios from 'axios'
+import { useAuthStore } from '@/store/useAuthStore'
 import Button from '@/components/AgGrid/Button.vue';
+
+const store = useAuthStore()
 const { report_id } = defineProps(['report_id'])
 const pageData = reactive({
     gridApi: null,
@@ -33,19 +36,23 @@ const columnDefs = reactive([
         }
     },
     {
+        hide: store.userRoles.includes(2),
         cellClass: ['d-flex', 'justify-center', 'align-center'],
         field: "file_source",
         headerName: 'Tasdiqlash',
         width: 90,
         cellRenderer: Icon,
-        cellRendererParams: { icon: 'mdi-checkbox-marked-outline' },
-        onCellClicked: ({ data }) => {
+        cellRendererParams: { icon: 'mdi-checkbox-marked-outline', isBlocked: true },
+        onCellClicked: ({ data, node }) => {
+            if(data.confirmed) return 
             swal.fire({
                 title: "Ushbu amalni aniq bajarmoqchimisiz?",
                 icon: 'warning',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.get(`report_success/${data.id}`)
+                    axios.get(`report_success/${data.id}`).then(({data}) => {
+                        node.setData(data)
+                    })
                 }
             })
             
@@ -57,8 +64,9 @@ const columnDefs = reactive([
         headerName: '',
         width: 60,
         cellRenderer: Icon,
-        cellRendererParams: { icon: 'mdi-delete-empty', color: 'red' },
-        onCellClicked: ({ data }) => {
+        cellRendererParams: { icon: 'mdi-delete-empty', color: 'red', isBlocked: true },
+        onCellClicked: ({data}) => {
+            if(data.confirmed) return 
             swal.fire({
                 title: "Aniq o'chirmoqchimisiz?",
                 text: "Malumotni qayta tiklab bo'lmaydi",
