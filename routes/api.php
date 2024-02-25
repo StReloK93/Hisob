@@ -23,6 +23,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('umumiy/employes', [ReportController::class, 'umumiy_malumot']);
     // available organizations
     Route::get('accessOrganizations', [OrganizationController::class, 'accessOrganizations']);
 

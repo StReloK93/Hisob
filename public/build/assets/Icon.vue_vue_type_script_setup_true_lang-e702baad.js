@@ -1,0 +1,1 @@
+import{d as r,C as t,a,o as s,c as l}from"./app-181ef7cc.js";const u=r({__name:"Icon",props:["params"],setup(e){const{params:o}=e,n=t(()=>o.isBlocked&&(o.data.toggle_write_off||o.data.confirmed==!0)?"grey":o.color==null?"teal":o.color);return(m,i)=>{const c=a("v-btn");return s(),l(c,{color:n.value,icon:e.params.icon,size:"x-small"},null,8,["color","icon"])}}});export{u as _};

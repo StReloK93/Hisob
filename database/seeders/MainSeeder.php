@@ -52,7 +52,6 @@ class MainSeeder extends Seeder
             'name' => 'Soliyev Aziz',
             'login' => 'admin',
             'password' => Hash::make('zzzz1111*'),
-            'name' => 'Soliyev Aziz',
         ]);
 
         UserRole::insert([

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Exports\EmployeProductsExport;
+use App\Exports\HarakatExport;
+use App\Exports\UmumiyMalumotlar;
+
+
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Report;
 use App\Models\EmployeProduct;
@@ -14,17 +18,27 @@ use Storage;
 class ReportController extends Controller
 {
 
-    public function create_file($filename, $currentDate, $old){
+    public function create_hisobot($filename, $currentDate, $old){
         return Excel::store(new EmployeProductsExport($currentDate, $old), "public/".$filename);
-        // return Excel::download(new EmployeProductsExport, "Muddati o'tgan tovarlar.xlsx");
+    }
+    public function create_harakat($filename, $startDate, $endDate, $productTypes){
+        return Excel::store(new HarakatExport($startDate, $endDate, $productTypes), "public/".$filename);
     }
 
+    public function umumiy_malumot(){
+        return Excel::download(new UmumiyMalumotlar, "Hodimlar.xlsx");
+    }
 
     public function store(Request $request){
         $now = now()->timestamp;
         $filename = "$request->name$now.xlsx";
-        $this->create_file($filename, now(), $request->old);
-
+        if($request->report_type_id == 1 || $request->report_type_id == 2){
+            $this->create_hisobot($filename, now(), $request->old);
+        }
+        elseif($request->report_type_id == 3){
+            $productIds = array_column($request->products, 'id');
+            $this->create_harakat($filename, $request->start, $request->end, $productIds);
+        }
         
         $report = Report::create([
             'user_id' => Auth::user()->id,
@@ -51,18 +65,17 @@ class ReportController extends Controller
     }
 
     public function successEmployeProducts($report_id){
-        dd('pashol nax');
-        // $report = Report::find($report_id);
-        // $report->confirmed = true;
-        // $report->save();
-        // $organizations = Auth::user()->organizations->pluck('organizations_id');
-        // $employes = Employe::whereIn('organization_id', $organizations)->pluck('id');
-        // EmployeProduct::whereIn('employe_id', $employes)->update([
-        //     'date_write_off' => null,
-        //     'toggle_write_off' => false,
-        //     'report_id' => null,
-        // ]);
+        $report = Report::find($report_id);
+        $report->confirmed = true;
+        $report->save();
+        $organizations = Auth::user()->organizations->pluck('organizations_id');
+        $employes = Employe::whereIn('organization_id', $organizations)->pluck('id');
+        EmployeProduct::whereIn('employe_id', $employes)->update([
+            'date_write_off' => null,
+            'toggle_write_off' => false,
+            'report_id' => null,
+        ]);
 
-        // return $report->fresh();
+        return $report->fresh();
     }
 }
