@@ -11,7 +11,7 @@
                         </main>
                         <main>
                             <ImageUpload :employe="pageData.employe" />
-                            <v-btn icon="mdi-printer" class="ml-4" />
+                            <v-btn @click="openPrintPanel" icon="mdi-printer" class="ml-4" />
                         </main>
                     </div>
                     <div class="text-grey my-2 d-inline-flex align-center">
@@ -70,6 +70,7 @@ import Grid from './components/Grid.vue'
 import axios from '@/modules/axios'
 import { reactive } from 'vue'
 import ImageUpload from './components/ImageUpload.vue'
+import { printStore } from '@/store/useAuthStore';
 const { id } = defineProps(['id'])
 const pageData = reactive({
     image: "",
@@ -79,6 +80,15 @@ const pageData = reactive({
     inputImage: null
 })
 
+const print = printStore()
+function openPrintPanel() {
+
+    
+    print.employe = pageData.employe
+    setTimeout(() => {
+        window.print()
+    })
+}
 
 axios.get(`employe/${id}`).then(({ data: employer }) => {
     pageData.employe = employer

@@ -56,3 +56,10 @@ export const useAuthStore = defineStore('Auth', () => {
 
     return { user, userRoles,  getUser, login, register, logout }
 })
+
+
+export const printStore = defineStore('printStore', () => {
+    const printForm = ref(false)
+    const employe = ref(null)
+    return { printForm, employe }
+})

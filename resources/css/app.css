@@ -101,3 +101,29 @@ input::-webkit-inner-spin-button {
 .alert-button-width{
     width: 80px;
 }
+
+
+.position-top-left{
+    position: absolute;
+    top: 0;
+    left: 0;
+   z-index: 10000;
+
+}
+
+.vertical-text {
+    writing-mode: vertical-lr;
+    /* transform: scaleY(-1); */
+    transform: rotate(180deg);
+}
+.print-hidden{
+    display: none;
+}
+@media print {
+    .print-none{
+        display: none;
+    }
+    .print-hidden{
+        display: block;
+    }
+}
