@@ -34,7 +34,7 @@ import swal from '@/modules/swal'
 import Checkbox from '@/components/AgGrid/Checkbox.vue'
 import AddMainProduct from './AddMainProduct.vue'
 import AddSpecialProduct from './AddSpecialProduct.vue'
-
+const emit = defineEmits(['requestLoad'])
 const { employe, request , main } = defineProps(['employe', 'request', 'main'])
 
 const store = useAuthStore()
@@ -51,6 +51,8 @@ function onSelection() {
 
 axios.get(request).then(({ data }) => {
     pageData.products = data
+    emit('requestLoad', data)
+    
 })
 
 

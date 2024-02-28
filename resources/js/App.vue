@@ -1,5 +1,5 @@
 <template>
-    <main v-if="print.employe" class="position-top-left print-hidden">
+    <main v-if="print.employe && print.employeProducts" class="position-top-left print-hidden">
         <FrontPage />
         <BackPage />
     </main>

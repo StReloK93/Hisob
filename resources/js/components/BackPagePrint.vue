@@ -33,14 +33,32 @@
             <td class="border border-color px-1">9</td>
             <td class="border border-color px-1">10</td>
          </tr>
-         <tr v-for="n in 39" class="leading-none text-center">
+         <tr v-for="product in products" class="leading-none">
+            <td class="border border-color pa-1">{{ product.product.name }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.nomenclature }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.date_of_receipt }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.count }}</td>
+            <td class="border border-color pa-1 text-center">{{  (+product.price).toFixed(2) }}</td>
             <td class="border border-color pa-1"></td>
+            <td class="border border-color pa-1" colspan="4"></td>
+         </tr>
+         <tr v-for="product in products" class="leading-none">
+            <td class="border border-color pa-1">{{ product.product.name }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.nomenclature }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.date_of_receipt }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.count }}</td>
+            <td class="border border-color pa-1 text-center">{{  (+product.price).toFixed(2) }}</td>
             <td class="border border-color pa-1"></td>
+            <td class="border border-color pa-1" colspan="4"></td>
+         </tr>
+         <tr v-for="product in products" class="leading-none">
+            <td class="border border-color pa-1">{{ product.product.name }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.nomenclature }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.date_of_receipt }}</td>
+            <td class="border border-color pa-1 text-center">{{ product.count }}</td>
+            <td class="border border-color pa-1 text-center">{{  (+product.price).toFixed(2) }}</td>
             <td class="border border-color pa-1"></td>
-            <td class="border border-color pa-1"></td>
-            <td class="border border-color pa-1"></td>
-            <td class="border border-color pa-1"></td>
-            <td class="border border-color pa-1" colspan="4">salom</td>
+            <td class="border border-color pa-1" colspan="4"></td>
          </tr>
       </table>
    </section>
@@ -50,7 +68,9 @@
 import { printStore } from '@/store/useAuthStore'
 
 const print = printStore()
-const employe = print.employe
+const products = print.employeProducts
+console.log(products)
+
 </script>
 <style scoped>
 .printer {

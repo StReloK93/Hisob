@@ -8,7 +8,7 @@
             Maxsus forma № MB-6a
          </div>
       </aside>
-      <aside class="text-center text-h5 font-weight-bold d-flex justify-center  leading-none">
+      <aside class="text-center text-h5 font-weight-bold d-flex justify-center leading-none">
          Shaxsiy varaqa № <div class="border-b border-color" style="width: 100px;"></div>
       </aside>
       <aside class="text-center">
@@ -17,11 +17,14 @@
       <aside class="leading-none">
          <div class="d-flex pt-3">
             <main class="border-b border-color w-75">
-               {{ employe.name }}
+               <b>
+                  {{ employe.name }}
+               </b>
             </main>
             <main style="width: 25px;"></main>
-            <main class="border-b border-color w-25">
-               Jinsi
+            <main class="border-b border-color w-25 d-flex justify-space-between">
+               <span>Jinsi</span>
+               <b>{{ employe.gender ? 'Erkak' : 'Ayol' }}</b> 
             </main>
          </div>
          <div class="d-flex pt-2">
@@ -37,40 +40,56 @@
                </span>
             </main>
             <main style="width: 25px;"></main>
-            <main class="border-b border-color w-25">
-               Buyi
+            <main class="border-b border-color w-25  d-flex justify-space-between">
+               <span>Buyi</span>
+               <b>{{ employe.heigth }}</b> 
             </main>
          </div>
          <div class="d-flex pt-2">
             <main class="w-75 d-flex">
-               <span class="w-25 border-b border-color">Tabel. №</span>
+               <span class="w-25 border-b border-color d-flex justify-space-between">
+                  <span>
+                     Tabel. №
+                  </span>
+                  <b>
+                     {{ employe.table_number }}
+                  </b>
+                  </span>
             </main>
             <main style="width: 25px;"></main>
-            <main class="border-b border-color w-25">
-               Kiyim o'lchami
+            <main class="border-b border-color w-25  d-flex justify-space-between">
+               <span>Kiyim o'lchami</span>
+               <b>{{ employe.size_cloth }}</b> 
             </main>
          </div>
          <div class="d-flex pt-2">
             <main class="border-b border-color w-75 d-flex">
                Sex va uchastka raqami
+               <b class="ml-4">
+                  {{ employe.organization.name }}
+               </b>
             </main>
             <main style="width: 25px;"></main>
-            <main class="border-b border-color w-25">
-               Oyoq o'lchami
+            <main class="border-b border-color w-25  d-flex justify-space-between">
+               <span>Oyoq o'lchami</span>
+               <b>{{ employe.size_shoes }}</b> 
             </main>
          </div>
          <div class="d-flex pt-2">
             <main class="border-b border-color w-75 d-flex">
-               Lavozim
+               Lavozim <b class="ml-4">{{ employe.position[0]?.position.name }}</b> 
             </main>
             <main style="width: 25px;"></main>
-            <main class="border-b border-color w-25">
-               Bosh o'lchami
+
+            <main class="border-b border-color w-25 d-flex justify-space-between">
+               <span>Bosh o'lchami</span>
+               <b>{{ employe.size_head }}</b> 
             </main>
          </div>
          <div class="d-flex pt-2">
             <main class="border-b border-color w-75 d-flex">
                Ishga kirgan sanasi
+               <b class="ml-4">{{ employe.hiring_date }}</b> 
             </main>
             <main style="width: 25px;"></main>
             <main class="w-25"></main>
@@ -87,18 +106,28 @@
          <h3>Norma bo'yicha biriktirilgan himoya vositalari</h3>
          <table class="w-100 text-caption" style="border-collapse: collapse;">
             <tr>
-               <td class="border border-color py-1 px-1 w-50">Maxsus kiyim nomi</td>
-               <td class="border border-color py-1 px-1 w-1-8">Paragraf nomi</td>
-               <td class="border border-color py-1 px-1 w-1-8">O'lchov birligi</td>
-               <td class="border border-color py-1 px-1 w-1-8">Soni</td>
-               <td class="border border-color py-1 px-1 w-1-8">Muddati</td>
+               <td class="border border-color py-0.5 px-1 w-50">Maxsus kiyim nomi</td>
+               <td class="border border-color py-0.5 px-1 w-1-8">Paragraf nomi</td>
+               <td class="border border-color py-0.5 px-1 w-1-8">O'lchov birligi</td>
+               <td class="border border-color py-0.5 px-1 w-1-8">Soni</td>
+               <td class="border border-color py-0.5 px-1 w-1-8">Muddati</td>
             </tr>
-            <tr v-for="n in 22">
-               <td class="border border-color py-1 px-1 w-50">Salom</td>
-               <td class="border border-color py-1 px-1 w-1-8"></td>
-               <td class="border border-color py-1 px-1 w-1-8"></td>
-               <td class="border border-color py-1 px-1 w-1-8"></td>
-               <td class="border border-color py-1 px-1 w-1-8"></td>
+            <tr v-for="item in employe.position[0].position.products">
+               <td class="border border-color py-0.5 px-1 w-50">{{ item.product.name }}</td>
+               <td class="border border-color py-0.5 px-1 w-1-8">
+                  {{ employe.position[0].position.position_type_id }}
+                  -
+                  {{ employe.position[0].position.number_in_document }}</td>
+               <td class="border border-color py-0.5 px-1 w-1-8">Dona</td>
+               <td class="border border-color py-0.5 px-1 w-1-8">{{ item.count }}</td>
+               <td class="border border-color py-0.5 px-1 w-1-8">{{ item.expiration_date }}</td>
+            </tr>
+            <tr v-for="item in 30 - employe.position[0].position.products.length">
+               <td class="border border-color py-0.5 px-1 w-50"> <span class="opacity-0">|</span></td>
+               <td class="border border-color py-0.5 px-1 w-1-8"></td>
+               <td class="border border-color py-0.5 px-1 w-1-8"></td>
+               <td class="border border-color py-0.5 px-1 w-1-8"></td>
+               <td class="border border-color py-0.5 px-1 w-1-8"></td>
             </tr>
          </table>
       </aside>
@@ -122,10 +151,12 @@ import { printStore } from '@/store/useAuthStore'
 
 const print = printStore()
 const employe = print.employe
+console.log(employe)
+
 </script>
 <style scoped>
-:root{
-   --v-border-opacity: 1;
+.opacity-0{
+   opacity: 0;
 }
 .printer {
    font-family: 'Times New Roman', Times, serif;

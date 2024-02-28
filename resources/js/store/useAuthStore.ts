@@ -61,5 +61,6 @@ export const useAuthStore = defineStore('Auth', () => {
 export const printStore = defineStore('printStore', () => {
     const printForm = ref(false)
     const employe = ref(null)
-    return { printForm, employe }
+    const employeProducts = ref()
+    return { printForm, employe, employeProducts }
 })
