@@ -36,7 +36,7 @@ const columnDefs = reactive([
         }
     },
     {
-        hide: store.userRoles.includes(2),
+        hide: store.userRoles.includes(3) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center'],
         field: "file_source",
         headerName: 'Tasdiqlash',
