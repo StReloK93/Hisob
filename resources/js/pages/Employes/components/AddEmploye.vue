@@ -1,6 +1,6 @@
 <template>
     <v-row justify="end" class="flex-0-0 ma-0 pb-2 px-4 overflow-y-auto">
-        <v-dialog v-model="pageData.dialog" persistent width="768" location="right">
+        <v-dialog v-model="pageData.dialog" persistent width="768" location="right" >
             <template v-slot:activator="{ props }">
                 <v-btn icon="mdi-plus" color="teal" v-bind="props"></v-btn>
             </template>
@@ -19,9 +19,6 @@ const emit = defineEmits(['addEmploye'])
 
 const pageData = reactive({
     dialog: false,
-    organizations: null,
-    positions: null,
-    inputLoading: false,
 })
 
 const formData = reactive({
@@ -44,11 +41,5 @@ async function addEmploye() {
         emit('addEmploye', data)
     })
 }
-
-axios.all([axios.get('accessOrganizations'), axios.get('position')])
-.then(axios.spread(({ data: organizations }, { data: positions }) => {
-    pageData.organizations = organizations
-    pageData.positions = positions
-}))
 
 </script>

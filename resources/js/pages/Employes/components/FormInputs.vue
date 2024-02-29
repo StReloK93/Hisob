@@ -4,9 +4,9 @@
             <v-text-field class="mb-2" @input="inputTableNumber" :loading="pageData.inputLoading" :rules="rules"
                 label="Tabel raqam" v-model="formData.table_number" type="number" />
             <v-text-field class="mb-2" :rules="rules" label="F.I.SH" v-model="formData.name" />
-            <v-autocomplete class="mb-2" :items="pageData.organizations" v-model="formData.organization_id" label="Ish joyi"
+            <v-autocomplete class="mb-2" v-if="pageData.organizations" :items="pageData.organizations" v-model="formData.organization_id" label="Ish joyi"
                 item-title="short_name" item-value="id" :rules="rules" />
-            <v-autocomplete class="mb-2" :items="pageData.positions" v-model="formData.position_id"
+            <v-autocomplete class="mb-2" v-if="pageData.positions" :items="pageData.positions" v-model="formData.position_id"
                 label="Meyoriy hujjatdagi lavozimi (kasbi)" item-title="name" :rules="rules" item-value="id" />
             <v-text-field class="mb-2" label="Lavozimi (kasbi)" v-model="formData.profession" :rules="rules" />
             <v-text-field class="mb-2" label="Ushbu lavozim (kasb)ga tayinlangan kuni" v-model="formData.hiring_date"
@@ -30,10 +30,16 @@
 </template>
 
 <script setup lang="ts">
-const { formData, pageData } = defineProps(['formData', 'pageData'])
+const { formData } = defineProps(['formData', 'pageData'])
 import { rules } from '@/modules/helpers'
 import axios from '@/modules/axios'
+import { reactive } from 'vue';
 
+const pageData = reactive({
+    organizations: null,
+    positions: null,
+    inputLoading: false
+})
 
 function inputTableNumber() {
     if (formData.table_number.length == 5) {
@@ -42,6 +48,12 @@ function inputTableNumber() {
     }
 }
 
+
+axios.all([axios.get('accessOrganizations'), axios.get('position')])
+    .then(axios.spread(({ data: organizations }, { data: positions }) => {
+        pageData.organizations = organizations
+        pageData.positions = positions
+    }))
 
 function getEmployeData() {
     axios.get(`employe/getdata/${formData.table_number}`).then(({ data }) => {

@@ -15,7 +15,11 @@ class EmployeController extends Controller
 {
 
     public function index(){
-        return Employe::select('id', 'table_number', 'name', 'hiring_date', 'organization_id')->orderBy('id', 'desc')->accessOrganizations()->get();
+        return Employe::select('id', 'table_number', 'name', 'hiring_date', 'organization_id', 'profession')
+        ->with('position')
+        ->orderBy('id', 'desc')
+        ->accessOrganizations()
+        ->get();
     }
 
 
@@ -30,10 +34,6 @@ class EmployeController extends Controller
 
         return $employe->fresh();
     }
-
-
-
-
 
     public function show($id){
 

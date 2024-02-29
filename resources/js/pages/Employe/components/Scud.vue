@@ -44,9 +44,6 @@ import Swal from 'sweetalert2'
 const emit = defineEmits(['confirm_products'])
 const { selected, employe } = defineProps(['selected', 'employe'])
 
-console.log(selected)
-
-
 const pageData = reactive({
     snackbar: false,
     dialog: false,

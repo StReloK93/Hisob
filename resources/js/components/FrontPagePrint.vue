@@ -112,17 +112,17 @@
                <td class="border border-color py-0.5 px-1 w-1-8">Soni</td>
                <td class="border border-color py-0.5 px-1 w-1-8">Muddati</td>
             </tr>
-            <tr v-for="item in employe.position[0].position.products">
+            <tr v-for="item in print.position.products">
                <td class="border border-color py-0.5 px-1 w-50">{{ item.product.name }}</td>
                <td class="border border-color py-0.5 px-1 w-1-8">
-                  {{ employe.position[0].position.position_type_id }}
+                  {{ print.position.position_type_id }}
                   -
-                  {{ employe.position[0].position.number_in_document }}</td>
+                  {{ print.position.number_in_document }}</td>
                <td class="border border-color py-0.5 px-1 w-1-8">Dona</td>
                <td class="border border-color py-0.5 px-1 w-1-8">{{ item.count }}</td>
                <td class="border border-color py-0.5 px-1 w-1-8">{{ item.expiration_date }}</td>
             </tr>
-            <tr v-for="item in 30 - employe.position[0].position.products.length">
+            <tr v-for="n in 30 - print.position.products.length">
                <td class="border border-color py-0.5 px-1 w-50"> <span class="opacity-0">|</span></td>
                <td class="border border-color py-0.5 px-1 w-1-8"></td>
                <td class="border border-color py-0.5 px-1 w-1-8"></td>
@@ -148,11 +148,8 @@
 
 <script setup lang="ts">
 import { printStore } from '@/store/useAuthStore'
-
 const print = printStore()
 const employe = print.employe
-console.log(employe)
-
 </script>
 <style scoped>
 .opacity-0{

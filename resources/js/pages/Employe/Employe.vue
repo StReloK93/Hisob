@@ -50,7 +50,11 @@
 									</v-expansion-panel>
 								</v-expansion-panels>
 								<v-spacer class="relative">
-									<Grid  :employe="pageData.employe" @request-load="(data) => pageData.employeProducts = data" :request="`employe_product/products/${id}`" />
+									<Grid
+										:employe="pageData.employe"
+										@request-load="(data) => pageData.employeProducts = data" 
+										:request="`employe_product/products/${id}`"
+									/>
 								</v-spacer>
 							</main>
 						</v-window-item>
@@ -67,9 +71,9 @@
 <script setup lang="ts">
 import Grid from './components/Grid.vue'
 import axios from '@/modules/axios'
-import { reactive } from 'vue'
+import { reactive, provide } from 'vue'
 import ImageUpload from './components/ImageUpload.vue'
-import { printStore } from '@/store/useAuthStore';
+import { printStore } from '@/store/useAuthStore'
 const { id } = defineProps(['id'])
 const pageData = reactive({
 	image: "",
@@ -80,21 +84,34 @@ const pageData = reactive({
 	employeProducts: []
 })
 
+provide('page', pageData)
+axios.get(`employe/${id}`).then(({ data: employer }) => {
+	pageData.employe = employer
+	const lastPosition = employer.position.at(-1)
+
+	if (lastPosition) {
+		axios.get(`position/${lastPosition.position_id}`).then(({data}) => {
+			pageData.position = data
+		})
+	}
+})
+
+
+
+// Chop etish
 const print = printStore()
 function openPrintPanel() {
 	print.employeProducts = pageData.employeProducts
 	print.employe = pageData.employe
+	print.position = pageData.position
+	
 	setTimeout(() => window.print())
 }
 
 window.onafterprint = function () {
 	print.employe = null
 	print.employeProducts = null
+	print.position = null
 }
 
-axios.get(`employe/${id}`).then(({ data: employer }) => {
-	pageData.employe = employer
-	const lastPosition = employer.position.at(-1)
-	if (lastPosition) pageData.position = lastPosition.position
-})
 </script>

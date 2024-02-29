@@ -66,10 +66,13 @@ import { increment, decrement } from '@/modules/helpers'
 import { reactive, watch, ref } from 'vue'
 import moment from 'moment'
 import axios from '@/modules/axios'
+import { inject } from 'vue';
 const emit = defineEmits(['addProduct'])
 const { employe } = defineProps(['employe'])
 
-const position = employe.position?.at(-1).position
+const page: any = inject('page')
+console.log();
+
 const form = ref()
 
 async function getProductPrices(product) {
@@ -82,7 +85,7 @@ async function getProductPrices(product) {
 
 const pageData = reactive({
     dialog: false,
-    products: position.products.map((item) => { return { ...item, name: item.product?.name, count: 1, nomenclature: null, price: null, productPrices: [] } }),
+    products: page.position.products.map((item) => { return { ...item, name: item.product?.name, count: 1, nomenclature: null, price: null, productPrices: [] } }),
     rules: [(value) => value == null || value == "" ? 'toldiring' : true],
     formLoading: false,
 })

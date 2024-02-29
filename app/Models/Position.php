@@ -10,7 +10,7 @@ class Position extends Model
     use HasFactory;
 
     protected $with = [
-        'products',
+        // 'products',
     ];
 
 

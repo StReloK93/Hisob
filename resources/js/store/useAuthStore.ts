@@ -62,5 +62,6 @@ export const printStore = defineStore('printStore', () => {
     const printForm = ref(false)
     const employe = ref(null)
     const employeProducts = ref()
-    return { printForm, employe, employeProducts }
+    const position = ref(null)
+    return { printForm, employe, employeProducts , position}
 })

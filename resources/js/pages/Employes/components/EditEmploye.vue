@@ -15,8 +15,6 @@ const { current } = defineProps(['current'])
 
 const pageData = reactive({
     dialog: false,
-    organizations: null,
-    positions: null,
 })
 
 const formData = reactive({
@@ -58,12 +56,6 @@ async function editEmploye() {
         emit('editEmploye', data)
     })
 }
-
-axios.all([axios.get('accessOrganizations'),axios.get('position')])
-.then(axios.spread(({ data: organizations }, { data: positions }) => {
-    pageData.organizations = organizations
-    pageData.positions = positions
-}))
 
 watch(() => pageData.dialog, (dialog) => {
     if (dialog) getSelectedEmploye()

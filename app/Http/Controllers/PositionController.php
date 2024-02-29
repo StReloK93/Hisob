@@ -14,12 +14,8 @@ class PositionController extends Controller
 
 
     public function show($id){
-        return Position::find($id);
+        return Position::with('products')->find($id);
     }
-
-
-
-
 
     public function store(Request $request){
 

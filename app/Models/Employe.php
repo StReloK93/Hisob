@@ -32,12 +32,12 @@ class Employe extends Model
 
     public function organization()
     {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(Organization::class)->select('id', 'short_name');
     }
 
     public function position()
     {
-        return $this->hasMany(EmployePosition::class);
+        return $this->hasMany(EmployePosition::class)->select('id', 'employe_id', 'position_id');
     }
 
     public function scopeAccessOrganizations($query)
@@ -50,16 +50,6 @@ class Employe extends Model
 
         return $query->whereIn('organization_id', $organizations);
     }
-
-
-
-    // public function getEndTimerAttribute() {
-    //     return EmployeProduct::where('employe_id', $this->id)
-    //     ->get()
-    //     ->filter(function ($product, $key) {
-    //         return $product->timer < 300;
-    //     });
-    // }
 
     protected $casts = [
         'hiring_date' => 'date:Y-m-d',
