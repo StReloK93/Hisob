@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import swal from '@/modules/swal'
 import Icon from '@/components/AgGrid/Icon.vue'
 import axios from '@/modules/axios'
 import AddEmploye from './components/AddEmploye.vue'
@@ -92,6 +93,27 @@ const columnDefs = reactive([
         onCellClicked: ({ data }) => {
             pageData.selected = data.id
             editComponent.value.toggle()
+        }
+    },
+    {
+        hide: (store.userRoles.includes(1)) == false,
+        cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
+        width: 60,
+        cellRenderer: Icon,
+        cellRendererParams: { icon: 'mdi-delete-empty', color: 'red' },
+        headerClass: ['px-2'],
+        onCellClicked: ({data}) => {
+            swal.fire({
+                title: "Aniq o'chirmoqchimisiz?",
+                text: "Malumotni qayta tiklab bo'lmaydi",
+                icon: 'warning',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`employe/${data.id}`).then(() => {
+                        pageData.gridApi.applyTransaction({ remove: [data] })
+                    })
+                }
+            })
         }
     },
         // { field: "gender", headerName: 'Jinsi', cellRenderer: (data) => gender(data.value), sortable: true, width: 60, headerClass: ['px-2'], cellClass: ['px-2'] },

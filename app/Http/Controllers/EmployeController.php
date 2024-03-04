@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employe;
 use App\Models\EmployePosition;
+use App\Models\EmployeProduct;
+use App\Models\EmployeImages;
 use App\Models\Organization;
 use DB;
 use Carbon\Carbon;
@@ -31,8 +33,8 @@ class EmployeController extends Controller
             'employe_id' => $employe->id,
             'position_id' => $request->position_id,
         ]);
-
-        return $employe->fresh();
+        $employe->position;
+        return $employe;
     }
 
     public function show($id){
@@ -76,6 +78,13 @@ class EmployeController extends Controller
         return $employe->fresh();
     }
 
+
+    public function destroy($id){
+        EmployePosition::where('employe_id',$id)->delete();
+        EmployeProduct::where('employe_id',$id)->delete();
+        EmployeImages::where('employe_id',$id)->delete();
+        return Employe::find($id)->delete();
+    }
 
     public function getCardNumbers($table_number){
         $cards = DB::connection('sqlsrv')->select("SELECT NomerKarti FROM [SCUD].[dbo].[KartiSotrudnikov] where TabelniyNomer=$table_number and DeletedTime is null");

@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'getUser']);
     Route::get('/logout', [AuthController::class, 'logoutUser']);
     
-    Route::apiResource('employe', EmployeController::class)->only(['index', 'show']);
+    Route::apiResource('employe', EmployeController::class)->only(['index', 'show', 'destroy']);
     Route::apiResource('position', PositionController::class)->only(['index', 'show', 'destroy']);
 
     Route::apiResource('employe_product', EmployeProductController::class)->only(['index', 'show', 'destroy']);
