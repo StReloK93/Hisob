@@ -1,40 +1,38 @@
 <template>
-    <v-row justify="end" class="flex-0-0 ma-0 pb-2 px-4 overflow-y-auto">
-        <v-dialog v-model="pageData.dialog" persistent width="768" location="right">
-            <template v-slot:activator="{ props }">
-                <v-btn  v-bind="props" color="pink" icon="mdi-credit-card-outline"></v-btn>
-            </template>
-            <v-card>
-                <v-card-title> Qabul qilish </v-card-title>
-                <v-card-text class="pa-0">
-                    <div class="text-center">
-                        <img src="/images/scud.avif" class="w-50" style="position: relative; right: 20px;">
-                    </div>
-                    <div class="px-6">
-                        <v-table class="w-100">
-                            <thead>
-                                <tr>
-                                    <td>Nomi</td>
-                                    <td>Nomenklatura</td>
-                                    <td>Soni</td>
-                                    <!-- <td>Narxi</td> -->
-                                </tr>
-                            </thead>
-                            <tbody>                                
-                                <tr v-for="item in selected.selectedRows">
-                                    <td>{{item.product.name}}</td>
-                                    <td>{{item.nomenclature}}</td>
-                                    <td>{{item.count}}</td>
-                                    <!-- <td>{{item.price}}</td> -->
-                                </tr>
-                            </tbody>
-                        </v-table>
-                    </div>
-                </v-card-text>
-                <FormFooter @close="pageData.dialog = false"/>
-            </v-card>
-        </v-dialog>
-    </v-row>
+<v-dialog v-model="pageData.dialog" persistent width="768" location="right">
+    <template v-slot:activator="{ props }">
+        <v-btn  v-bind="props" class="mb-1 mt-0" color="pink" icon="mdi-credit-card-outline"></v-btn>
+    </template>
+    <v-card>
+        <v-card-title> Qabul qilish </v-card-title>
+        <v-card-text class="pa-0">
+            <div class="text-center">
+                <img src="/images/scud.avif" class="w-50" style="position: relative; right: 20px;">
+            </div>
+            <div class="px-6">
+                <v-table class="w-100">
+                    <thead>
+                        <tr>
+                            <td>Nomi</td>
+                            <td>Nomenklatura</td>
+                            <td>Soni</td>
+                            <!-- <td>Narxi</td> -->
+                        </tr>
+                    </thead>
+                    <tbody>                                
+                        <tr v-for="item in selected.selectedRows">
+                            <td>{{item.product.name}}</td>
+                            <td>{{item.nomenclature}}</td>
+                            <td>{{item.count}}</td>
+                            <!-- <td>{{item.price}}</td> -->
+                        </tr>
+                    </tbody>
+                </v-table>
+            </div>
+        </v-card-text>
+        <FormFooter @close="pageData.dialog = false"/>
+    </v-card>
+</v-dialog>
 </template>
 
 <script setup lang="ts">

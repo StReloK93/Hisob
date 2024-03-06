@@ -49,6 +49,7 @@ class EmployeProductController extends Controller
                 'nomenclature' => $product['nomenclature'],
                 'price' => $product['price'],
                 'date_of_receipt' => $product['date_of_receipt'],
+                'expiration_date' => $product['expiration_date'],
             ]);
 
             $products[] = $product->fresh();

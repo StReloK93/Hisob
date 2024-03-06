@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\User;
-use Hash;
+
+use App\Models\EmployeProduct;
+use App\Models\PositionProduct;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,7 +25,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        // $collect = collect(PositionProduct::all()->toArray());
+        // $products = EmployeProduct::where('expiration_date', null)->get();
         
+        // foreach ($products as $key => $value) {
+        //     $product = $collect
+        //     ->where('position_id', $value->position_id)
+        //     ->where('product_id', $value->product_id)
+        //     ->first();
+        //     if(isset($product)){
+        //         $products[$key]->expiration_date = $product['expiration_date'];
+
+        //     }
+
+        //     $value->save();
+        // }
+
+        // dd($products[99]);
+
     }
 }
 

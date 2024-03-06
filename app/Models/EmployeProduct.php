@@ -28,6 +28,7 @@ class EmployeProduct extends Model
         'toggle_confirmation',
         'date_write_off',
         'toggle_write_off',
+        'expiration_date'
     ];
 
     public function Product()

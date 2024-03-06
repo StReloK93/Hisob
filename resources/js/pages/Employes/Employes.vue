@@ -54,6 +54,10 @@ function editEmploye(employe) {
 
 const router = useRouter()
 const columnDefs = reactive([
+    {
+        width: 65,
+        field: "id",
+    },
     { field: "table_number", headerName: 'Tabel №', sortable: true, width: 65, headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "name", headerName: 'F.I.SH', sortable: true, flex: 1, minWidth: 275 },
     { field: "organization.short_name", headerName: 'Ish joyi', sortable: true },

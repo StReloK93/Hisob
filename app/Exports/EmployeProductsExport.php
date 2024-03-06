@@ -18,8 +18,6 @@ class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings
     {
         $this->old = $old;
         $this->currentDate = $currentDate;
-        $this->PositionProducts = collect(PositionProduct::whereRaw('TRY_CAST(expiration_date AS int) IS NOT NULL')
-            ->get()->toArray());
     }
     public function headings(): array
     {
@@ -39,7 +37,10 @@ class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings
 
     public function collection()
     {
-        $collect = EmployeProduct::select('employe_id', 'product_id', 'position_id', 'nomenclature', 'price', 'date_of_receipt')->with(['employe'])->get();
+        $collect = EmployeProduct::select('employe_id', 'product_id', 'position_id', 'nomenclature', 'price', 'date_of_receipt', 'expiration_date')
+        ->whereNotIn('expiration_date', ['до износа', 'дежурные'])
+        ->with(['employe'])
+        ->get();
 
         $collect->transform(function ($coll) {
             $coll->date_of_receipt = $coll->date_of_receipt->format('Y-m-d');
@@ -52,11 +53,6 @@ class EmployeProductsExport implements FromCollection, WithMapping, WithHeadings
     public function map($row): array
     {
         $data = $row->getAttributes();
-        $expiration = $this->PositionProducts->where('position_id', $data['position_id'])->where('product_id', $data['product_id'])->first();
-        if (isset($expiration)) {
-            $data['expiration_date'] = $expiration['expiration_date'];
-        }
-        else return [];
 
         if(isset($row->product)) $data['product'] = $row->product->name;
         else $data['product'] = null;

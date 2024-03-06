@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="flex">
         <Scud v-if="pageData.selectedRows.length && store.userRoles.includes(2)" @confirm_products=confirm_mainproducts
             :employe="employe" :selected="pageData" />
         <span v-else></span>
@@ -7,7 +7,7 @@
         <AddSpecialProduct :employe="employe" @addProduct="addProduct" />
     </main>
     <AgGridVue :defaultColDef="{ sortable: true }" :getRowId="({ data }) => data.id" :headerHeight="34" animateRows="true"
-        :rowSelection="'multiple'" class="ag-theme-material h-100" :columnDefs="ColumnDefs" :rowData="pageData.products"
+        :rowSelection="'multiple'" class="ag-theme-material h-100 flex-grow-1" :columnDefs="ColumnDefs" :rowData="pageData.products"
         @selection-changed="onSelection" @grid-ready="(params) => pageData.gridApi = params.api" />
 </template>
 
@@ -81,7 +81,7 @@ const ColumnDefs = reactive([
         showDisabledCheckboxes: store.userRoles.includes(2),
     },
     { field: "count", headerName: 'soni', width: 50, headerClass: ['px-2'], cellClass: ['px-2'] },
-    { field: "product_data.expiration_date", headerName: 'Muddati (oy)', width: 90, headerClass: ['px-2'], cellClass: ['px-2'] },
+    { field: "expiration_date", headerName: 'Muddati (oy)', width: 90, headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "price", headerName: 'Narxi', width: 120, headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "nomenclature", headerName: 'Nomenklatura', width: 120, headerClass: ['px-2'], cellClass: ['px-2'] },
     {

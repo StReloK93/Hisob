@@ -49,7 +49,7 @@
 										</v-expansion-panel-text>
 									</v-expansion-panel>
 								</v-expansion-panels>
-								<v-spacer class="relative">
+								<v-spacer class="relative d-flex flex-column">
 									<Grid
 										:employe="pageData.employe"
 										@request-load="(data) => pageData.employeProducts = data" 
