@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useAuthStore } from '@/store/useAuthStore'
+import { auth } from '@/store/auth'
 import Scud from './Scud.vue'
 import Icon from '@/components/AgGrid/Icon.vue'
 import axios from '@/modules/axios'
@@ -24,7 +24,7 @@ import AddSpecialProduct from './AddSpecialProduct.vue'
 const emit = defineEmits(['requestLoad'])
 const { employe, request, main } = defineProps(['employe', 'request', 'main'])
 
-const store = useAuthStore()
+const store = auth()
 const pageData = reactive({
     gridApi: null,
     selectedRows: [],

@@ -73,7 +73,7 @@ import Grid from './components/Grid.vue'
 import axios from '@/modules/axios'
 import { reactive, provide } from 'vue'
 import ImageUpload from './components/ImageUpload.vue'
-import { printStore } from '@/store/useAuthStore'
+import { printStore } from '@/store/auth'
 const { id } = defineProps(['id'])
 const pageData = reactive({
 	image: "",

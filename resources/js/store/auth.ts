@@ -4,7 +4,7 @@ import { ref , computed } from "vue"
 import router from "@/router"
 import axios from '@/modules/axios'
 
-export const useAuthStore = defineStore('Auth', () => {
+export const auth = defineStore('Auth', () => {
     const user = ref(null)
 
     async function login(data) {

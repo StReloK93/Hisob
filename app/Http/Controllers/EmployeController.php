@@ -24,8 +24,6 @@ class EmployeController extends Controller
         ->get();
     }
 
-
-
     public function store(Request $request){
         $employe = Employe::create($request->all());
 

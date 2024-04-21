@@ -30,9 +30,9 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import Navigator from "./Navigator.vue"
-import { useAuthStore } from "@/store/useAuthStore"
+import { auth } from '@/store/auth'
 const nav = ref(null)
-const store = useAuthStore()
+const store = auth()
 
 function toggleNavigator() {
     nav.value.toggle()

@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router"
 import routes from "./routes"
-import { useAuthStore } from '@/store/useAuthStore'
+import { auth } from '@/store/auth'
 
 // @ts-ignore
 const router = createRouter({ history: createWebHistory(), routes})
 
 router.beforeEach((to, from, next) => {
-	const store = useAuthStore()
+	const store = auth()
 	if (store.user) {
 		if (to.meta.guard === 'guest') next({ name: 'main' })
 		else next()

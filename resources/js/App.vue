@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import FrontPage from './components/FrontPagePrint.vue'
 import BackPage from './components/BackPagePrint.vue'
-import { printStore } from './store/useAuthStore'
+import { printStore } from './store/auth'
 
 const print = printStore()
 

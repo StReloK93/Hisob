@@ -38,11 +38,11 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useAuthStore } from '@/store/useAuthStore'
+import { auth } from '@/store/auth'
 import swal from '@/modules/swal'
 const driwer = ref(true)
 
-const store = useAuthStore()
+const store = auth()
 
 function toggle() { driwer.value = !driwer.value }
 defineExpose({ toggle })

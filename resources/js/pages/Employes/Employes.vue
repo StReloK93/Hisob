@@ -33,8 +33,8 @@ import AddEmploye from './components/AddEmploye.vue'
 import EditEmploye from './components/EditEmploye.vue'
 import { reactive, ref } from "vue"
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/store/useAuthStore'
-const store = useAuthStore()
+import { auth } from '@/store/auth'
+const store = auth()
 
 const editComponent = ref()
 

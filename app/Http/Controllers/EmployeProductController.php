@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\EmployeProduct;
 use App\Models\PositionProduct;
 use DB;
+use Carbon\Carbon;
 class EmployeProductController extends Controller
 {
     public function index(){
@@ -39,6 +40,25 @@ class EmployeProductController extends Controller
     }
 
     public function store(Request $request){
+
+        $product_ids = array_map(fn($item) => $item['product_id'], $request->products);
+
+        $employe_products = EmployeProduct::where([
+            ['employe_id', $request->employe_id],
+            ['expiration_date','до износа']
+        ])
+        ->whereIn('product_id', $product_ids)
+        ->get();
+
+        
+
+        foreach ($employe_products as $key => $product) {
+            $diffMonth = Carbon::now()->diffInMonths($product->date_of_receipt);
+            $product->expiration_date = $diffMonth;
+            $product->save();
+        }
+
+
         $products = [];
         foreach ($request->products as $key => $product) {
             $product = EmployeProduct::create([

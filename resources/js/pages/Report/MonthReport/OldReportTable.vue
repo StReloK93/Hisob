@@ -9,10 +9,10 @@ import swal from '@/modules/swal'
 import { reactive } from 'vue'
 import Icon from '@/components/AgGrid/Icon.vue'
 import axios from 'axios'
-import { useAuthStore } from '@/store/useAuthStore'
+import { auth } from '@/store/auth'
 import Button from '@/components/AgGrid/Button.vue';
 
-const store = useAuthStore()
+const store = auth()
 const { report_id } = defineProps(['report_id'])
 const pageData = reactive({
     gridApi: null,

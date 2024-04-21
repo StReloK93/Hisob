@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { useAuthStore } from './store/useAuthStore'
+import { auth } from './store/auth'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
@@ -25,7 +25,7 @@ app.component('CustomForm', CustomForm)
 app.component('AgGridVue', AgGridVue)
 app.use(vuetify)
 app.use(pinia)
-const store = useAuthStore()
+const store = auth()
 
 async function init() {
 	await store.getUser()

@@ -147,7 +147,7 @@
 </template>
 
 <script setup lang="ts">
-import { printStore } from '@/store/useAuthStore'
+import { printStore } from '@/store/auth'
 const print = printStore()
 const employe = print.employe
 </script>

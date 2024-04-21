@@ -28,8 +28,8 @@ import PositionProducts from '@/components/AgGrid/PositionProducts.vue'
 import Icon from '@/components/AgGrid/Icon.vue'
 import { reactive, ref } from "vue"
 import axios from '@/modules/axios'
-import { useAuthStore } from '@/store/useAuthStore'
-const store = useAuthStore()
+import { auth } from '@/store/auth'
+const store = auth()
 
 
 const editComponent = ref()

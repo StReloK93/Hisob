@@ -46,10 +46,10 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/store/useAuthStore'
+import { auth } from '@/store/auth'
 import { reactive } from 'vue'
 
-const store = useAuthStore()
+const store = auth()
 const pageData = reactive({
     errorLogin: null,
     errorRegister: null,
