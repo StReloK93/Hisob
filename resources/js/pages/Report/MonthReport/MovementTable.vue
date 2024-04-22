@@ -58,6 +58,7 @@ const columnDefs = reactive([
         }
     },
     {
+        hide: store.userRoles.includes(3) == false || store.userRoles.includes(1) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center'],
         field: "",
         headerName: '',

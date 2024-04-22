@@ -2,7 +2,7 @@
     <section class="d-flex flex-column">
         <div class="d-flex justify-space-between items-center">
             <Breadcrumbs></Breadcrumbs>
-            <AddProduct @addProduct="addProduct"></AddProduct>
+            <AddProduct v-if="store.userRoles.includes(3) || store.userRoles.includes(1) || store.userRoles.includes(4)" @addProduct="addProduct"></AddProduct>
             <EditProduct @editProduct="editProduct" ref="editComponent" :current="pageData"></EditProduct>
         </div>
         <v-spacer class="px-4">
@@ -52,6 +52,7 @@ const columnDefs = reactive([
     { field: "name", headerName: 'Nomi', flex: 1 },
     { field: "product_type.name", headerName: 'Turi' },
     {
+        hide: store.userRoles.includes(3) == false || store.userRoles.includes(1) == false || store.userRoles.includes(4) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',
         width: 60 ,
@@ -63,7 +64,7 @@ const columnDefs = reactive([
         }
     },
     {
-        hide: (store.userRoles.includes(1)) == false,
+        hide: store.userRoles.includes(3) == false || store.userRoles.includes(1) == false || store.userRoles.includes(4) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',
         width: 60,

@@ -2,8 +2,8 @@
     <section class="d-flex flex-column">
         <div class="d-flex justify-space-between items-center">
             <Breadcrumbs></Breadcrumbs>
-            <AddWorkingCondition @addWorkingCondition="addWorkingCondition"></AddWorkingCondition>
-            <EditWorkingCondition @editWorkingCondition="editWorkingCondition" ref="editComponent" :current="pageData"></EditWorkingCondition>
+            <AddWorkingCondition v-if="store.userRoles.includes(1) || store.userRoles.includes(4)" @addWorkingCondition="addWorkingCondition"></AddWorkingCondition>
+            <EditWorkingCondition v-if="store.userRoles.includes(1) || store.userRoles.includes(4)" @editWorkingCondition="editWorkingCondition" ref="editComponent" :current="pageData"></EditWorkingCondition>
         </div>
         <v-spacer class="px-4">
             <AgGridVue
@@ -25,6 +25,9 @@ import EditWorkingCondition from './components/EditWorkingCondition.vue'
 import IconEdit from '@/components/AgGrid/IconEdit.vue'
 import { reactive, ref } from "vue"
 import axios from '@/modules/axios'
+import { auth } from '@/store/auth'
+const store = auth()
+
 
 const editComponent = ref()
 
@@ -47,6 +50,7 @@ const columnDefs = reactive([
     { field: "id", headerName: 'Kod', width: 80 },
     { field: "name", headerName: 'Nomi', flex: 1 },
     {
+        hide: store.userRoles.includes(1) == false || store.userRoles.includes(4) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',
         width: 60 ,

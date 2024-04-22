@@ -26,9 +26,11 @@
 		<v-spacer class="mt-4">
 			<v-card class="h-100 d-flex flex-column">
 				<v-tabs v-model="pageData.tab">
-					<v-tab v-for="(report, index) in pageData.report_types" :value="index" class="text-capitalize">
-						{{ report.name }}
-					</v-tab>
+					<template v-for="(report, index) in pageData.report_types" :value="index" >
+						<v-tab v-if="report.id != 4" class="text-capitalize"> 
+								{{ report.name }}
+						</v-tab> 
+					</template>
 				</v-tabs>
 				<v-card-text class="flex-grow-1">
 					<v-window v-model="pageData.tab" class="h-100">

@@ -10,8 +10,6 @@ import { reactive } from 'vue'
 import Icon from '@/components/AgGrid/Icon.vue'
 import axios from 'axios'
 import { auth } from '@/store/auth'
-import Button from '@/components/AgGrid/Button.vue';
-
 const store = auth()
 const { report_id } = defineProps(['report_id'])
 const pageData = reactive({
@@ -59,6 +57,7 @@ const columnDefs = reactive([
         }
     },
     {
+        hide: store.userRoles.includes(3) == false || store.userRoles.includes(1) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center'],
         field: "",
         headerName: '',

@@ -1,7 +1,12 @@
 <template>
-    <v-app class="bg-grey-lighten-5">
+    <v-app class="bg-grey-lighten-5 bg-image">
+        <main style="position: absolute;inset: 0;background: rgba(0, 0, 0, 0.199);">
+            <h3 class="text-h2 text-center py-10 text-uppercase" style="letter-spacing: 10px !important;font-weight: bold!important;color: #fff7b1;">
+                Shaxsiy himoya vositalari <br> hisobini yuritish
+            </h3>
+        </main>
         <v-main class="d-flex align-center">
-            <v-sheet width="400" class="mx-auto elevation-10  py-4 rounded">
+            <v-sheet width="400" class="mx-auto elevation-10  py-4 rounded" style="opacity: 0.9;">
                 <v-tabs
                     v-model="pageData.tab"
                     color="teal"
@@ -85,3 +90,12 @@ function register(){
 }
 
 </script>
+
+<style>
+.bg-image{
+    background-image: url('/images/shkb.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+</style>

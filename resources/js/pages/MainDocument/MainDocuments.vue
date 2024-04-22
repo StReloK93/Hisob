@@ -2,8 +2,8 @@
     <section class="d-flex flex-column">
         <div class="d-flex justify-space-between items-center">
             <Breadcrumbs></Breadcrumbs>
-            <AddDocument @addDocument="addDocument" />
-            <EditDocument @editDocument="editDocument" ref="editComponent" :current="pageData" />
+            <AddDocument v-if="store.userRoles.includes(1) || store.userRoles.includes(4)" @addDocument="addDocument" />
+            <EditDocument v-if="store.userRoles.includes(1) || store.userRoles.includes(4)" @editDocument="editDocument" ref="editComponent" :current="pageData" />
         </div>
         <v-spacer class="px-4">
             <AgGridVue
@@ -28,6 +28,9 @@ import AddDocument from './components/AddDocument.vue'
 import EditDocument from './components/EditDocument.vue'
 import { reactive, ref } from "vue"
 import axios from '@/modules/axios'
+import { auth } from '@/store/auth'
+const store = auth()
+
 
 const editComponent = ref()
 
@@ -54,6 +57,7 @@ const columnDefs = reactive([
     { field: "confirm_date", headerName: "Tasdiqdan o'tgan sana" },
     { field: "description", headerName: "Izoh" , flex: 1},
     {
+        hide: store.userRoles.includes(1) == false || store.userRoles.includes(4) == false,
         cellClass: ['d-flex', 'justify-center', 'align-center', 'px-2' ,'bg-gray-100'],
         headerName: '',
         width: 60 ,

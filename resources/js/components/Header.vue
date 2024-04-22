@@ -19,6 +19,13 @@
             <v-tooltip activator="parent" location="bottom">ММваХТ muxandis</v-tooltip>
         </v-btn>
         <v-spacer></v-spacer>
+
+        <v-btn :active="current == 'uz'" color="white" stacked @click="setLocale('uz')">
+			uz
+		</v-btn>
+		<v-btn :active="current == 'ru'" color="white" stacked @click="setLocale('ru')">
+			ru
+		</v-btn>
         <v-btn color="white" class="text-none" stacked>
             <v-badge :content="10" color="error">
                 <v-icon>mdi-bell</v-icon>
@@ -31,6 +38,8 @@
 import { ref } from "vue"
 import Navigator from "./Navigator.vue"
 import { auth } from '@/store/auth'
+import { useLocale } from 'vuetify'
+const { t, current  } = useLocale()
 const nav = ref(null)
 const store = auth()
 
@@ -39,6 +48,11 @@ function toggleNavigator() {
 }
 // 2089
 
+
+function setLocale(locale) {
+    localStorage.setItem('locale', locale)
+    current.value = locale
+}
 // 943780031
 </script>
 

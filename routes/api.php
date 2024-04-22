@@ -23,6 +23,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('document', MainDocumentController::class)->only(['index', 'store', 'show', 'destroy']);
     Route::get('umumiy/employes', [ReportController::class, 'umumiy_malumot']);
     // available organizations
     Route::get('accessOrganizations', [OrganizationController::class, 'accessOrganizations']);
@@ -75,7 +76,6 @@ Route::middleware(['auth:sanctum', 'ability:admin,buxgalter'])->group(function (
 Route::middleware(['auth:sanctum', 'ability:admin,tb'])->group(function () {
     Route::apiResource('employe', EmployeController::class)->only(['update', 'store']);
     Route::apiResource('position', PositionController::class)->only(['update', 'store']);
-    Route::apiResource('document', MainDocumentController::class)->only(['index', 'store', 'show', 'destroy']);
 
     Route::post('document/{id}', [MainDocumentController::class, 'update']);
 });

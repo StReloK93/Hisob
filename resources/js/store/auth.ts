@@ -11,7 +11,7 @@ export const auth = defineStore('Auth', () => {
         const result = await axios.post('login', data)
         if (result.status == 299) return result.data
         else {
-            localStorage.setItem('token', `${result.data.type} ${result.data.token}`) // local
+            sessionStorage.setItem('token', `${result.data.type} ${result.data.token}`) // local
             await getUser()
             router.push({ name: 'main'})
         }
@@ -25,7 +25,7 @@ export const auth = defineStore('Auth', () => {
 
     async function getUser() {
 
-        axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+        axios.defaults.headers.common['Authorization'] = sessionStorage.getItem('token')
         await axios.get('user').then(({ data }) => {
             user.value = data
         }).catch(() => { console.clear() })
@@ -48,7 +48,7 @@ export const auth = defineStore('Auth', () => {
 
         if (data.status == 200) {
             axios.defaults.headers.common['Authorization'] = null
-            localStorage.removeItem('token')
+            sessionStorage.removeItem('token')
             user.value = null
             router.push({ name: 'login' })
         }

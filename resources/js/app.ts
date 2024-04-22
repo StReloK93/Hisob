@@ -1,39 +1,39 @@
-import { createApp } from 'vue'
-import { auth } from './store/auth'
-import { createPinia } from 'pinia'
-import App from './App.vue'
-import router from './router'
-import vuetify from './modules/vuetify'
-import onScan from 'onscan.js'
+import { createApp } from "vue";
+import { auth } from "./store/auth";
+import { createPinia } from "pinia";
 
-import "ag-grid-community/styles/ag-grid.css"
-import "ag-grid-community/styles/ag-theme-material.css"
-import '@sweetalert2/theme-material-ui/material-ui.css'
-import '../css/app.css'
-import Breadcrumbs from '@/components/Breadcrumbs.vue'
-import FormFooter from '@/components/FormFooter.vue'
-import CustomForm from '@/components/CustomForm.vue'
-import { AgGridVue } from 'ag-grid-vue3'
-onScan.attachTo(document)
+import App from "./App.vue";
+import router from "./router";
+import {vuetify, i18n} from "./modules/vuetify";
+import onScan from "onscan.js";
 
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-material.css";
+import "@sweetalert2/theme-material-ui/material-ui.css";
+import "../css/app.css";
+import Breadcrumbs from "@/components/Breadcrumbs.vue";
+import FormFooter from "@/components/FormFooter.vue";
+import CustomForm from "@/components/CustomForm.vue";
+import { AgGridVue } from "ag-grid-vue3";
+onScan.attachTo(document);
 
-const pinia = createPinia()
-const app = createApp(App)
-app.component('Breadcrumbs', Breadcrumbs)
-app.component('FormFooter', FormFooter)
-app.component('CustomForm', CustomForm)
-app.component('AgGridVue', AgGridVue)
-app.use(vuetify)
-app.use(pinia)
-const store = auth()
+const pinia = createPinia();
+const app = createApp(App);
+app.component("Breadcrumbs", Breadcrumbs);
+app.component("FormFooter", FormFooter);
+app.component("CustomForm", CustomForm);
+app.component("AgGridVue", AgGridVue);
+app.use(vuetify);
+app.use(i18n)
+app.use(pinia);
+const store = auth();
 
 async function init() {
-	await store.getUser()
-	app.use(router)
-	app.mount("#app")
+    await store.getUser();
+    app.use(router);
+    app.mount("#app");
 }
-init()
-
+init();
 
 //  TB
 // 1 - Ko'rish

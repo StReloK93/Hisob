@@ -36,8 +36,10 @@ class EmployeController extends Controller
     }
 
     public function show($id){
-
         $employe = Employe::with('position')->find($id);
+
+        $userData = DB::connection('sqlsrv')->select("SELECT TabelniyNomer , FIO , doljnost , KodPodrazdelenii, Razryad, DataNachaloRaboti , Foto  FROM [KADR].[dbo].[PoiskSotrudnikaTabelniyNomer] ($employe->table_number) ");
+        $employe->foto = base64_encode($userData[0]->Foto);
         $employe->cards = $this->getCardNumbers($employe->table_number);
         return $employe;
     }
@@ -85,6 +87,7 @@ class EmployeController extends Controller
     }
 
     public function getCardNumbers($table_number){
+
         $cards = DB::connection('sqlsrv')->select("SELECT NomerKarti FROM [SCUD].[dbo].[KartiSotrudnikov] where TabelniyNomer=$table_number and DeletedTime is null");
         $arr = [];
 

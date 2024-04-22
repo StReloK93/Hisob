@@ -7,6 +7,7 @@
         <v-card-title> Qabul qilish </v-card-title>
         <v-card-text class="pa-0">
             <div class="text-center">
+                <img :src="`data:image/jpeg;base64, ${employe.foto}`">
                 <img src="/images/scud.avif" class="w-50" style="position: relative; right: 20px;">
             </div>
             <div class="px-6">

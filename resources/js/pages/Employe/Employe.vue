@@ -2,12 +2,19 @@
 	<section v-if="pageData.employe" class="d-flex flex-column">
 		<Breadcrumbs :user="{ name: pageData.employe.name }"></Breadcrumbs>
 		<v-spacer class="px-4">
+
 			<section class="bg-white pa-6 h-100 d-flex">
 				<main class="flex-fill d-flex flex-column">
 					<div class="d-flex align-center justify-space-between">
 						<main class="text-blue-grey-darken-3 text-h5 d-flex align-center">
 							{{ pageData.employe.name }}
 							<span class="ml-4 text-body-1">№ {{ pageData.employe.table_number }}</span>
+							<v-btn class="ml-5" variant="tonal">
+								Lavozimni o'zgartirish
+							</v-btn>
+							<v-btn class="ml-5" variant="tonal">
+								Ishdan bo'shash
+							</v-btn>
 						</main>
 						<main>
 							<ImageUpload :employe="pageData.employe" />
@@ -21,6 +28,7 @@
 						Lavozim
 					</p>
 
+					
 					<div v-if="pageData.position" class="text-teal">
 						{{ pageData.position?.name }}
 					</div>
