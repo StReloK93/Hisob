@@ -93,9 +93,9 @@ function register(){
 
 <style>
 .bg-image{
-    background-image: url('/images/shkb.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-image: url('/images/shkb.jpg')!important;
+    background-repeat: no-repeat!important;
+    background-size: cover!important;
+    background-position: center!important;
 }
 </style>
