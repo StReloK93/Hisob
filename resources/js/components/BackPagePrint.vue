@@ -38,9 +38,9 @@
             <td class="border border-color pa-1 text-center">{{ product.nomenclature }}</td>
             <td class="border border-color pa-1 text-center">{{ product.date_of_receipt }}</td>
             <td class="border border-color pa-1 text-center">{{ product.count }}</td>
-            <td class="border border-color pa-1 text-center">{{  (+product.price).toFixed(2) }}</td>
+            <td class="border border-color pa-1 text-center">{{ (+product.price).toFixed(2) }}</td>
             <td class="border border-color pa-1"></td>
-            <td class="border border-color pa-1" colspan="4"></td>
+            <td class="border border-color pa-1" colspan="4">{{ product.difference }}</td>
          </tr>
       </table>
    </section>
@@ -48,10 +48,20 @@
 
 <script setup lang="ts">
 import { printStore } from '@/store/auth'
-
+import moment from 'moment';
+import { computed } from 'vue';
 const print = printStore()
-const products = print.employeProducts
-console.log(products)
+
+const leaveDate = print.employe.ishdan_boshagan_kuni
+
+const products = computed(() => {
+   return print.employeProducts.map((product) => {
+
+      const currentMonth = moment(product.date_of_receipt).add((+product.expiration_date), 'month')
+      const difference = Math.abs(moment(leaveDate).diff(currentMonth, 'month'))
+      return { ...product, difference }
+   })
+})
 
 </script>
 <style scoped>
@@ -62,15 +72,15 @@ console.log(products)
    margin: 0 auto;
 }
 
-.border-color{
-   border-color: black!important;
+.border-color {
+   border-color: black !important;
 }
 
-.w-1-8{
+.w-1-8 {
    width: 12.5%;
 }
 
-.leading-none{
+.leading-none {
    line-height: 0.9;
 }
 

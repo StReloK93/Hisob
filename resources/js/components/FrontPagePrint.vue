@@ -66,7 +66,7 @@
             <main class="border-b border-color w-75 d-flex">
                Sex va uchastka raqami
                <b class="ml-4">
-                  {{ employe.organization.name }}
+                  {{ employe.position.at(-1).organization?.name }}
                </b>
             </main>
             <main style="width: 25px;"></main>

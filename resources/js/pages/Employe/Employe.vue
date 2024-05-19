@@ -9,12 +9,8 @@
 						<main class="text-blue-grey-darken-3 text-h5 d-flex align-center">
 							{{ pageData.employe.name }}
 							<span class="ml-4 text-body-1">№ {{ pageData.employe.table_number }}</span>
-							<v-btn class="ml-5" variant="tonal">
-								Lavozimni o'zgartirish
-							</v-btn>
-							<v-btn class="ml-5" variant="tonal">
-								Ishdan bo'shash
-							</v-btn>
+							<ChangePosition :employe_id="pageData.employe.id" @change-position="changePosition" />
+							<IshdanBoshash :employe_id="pageData.employe.id" @leave="onLeaver" />
 						</main>
 						<main>
 							<ImageUpload :employe="pageData.employe" />
@@ -22,19 +18,21 @@
 						</main>
 					</div>
 					<div class="text-grey my-2 d-inline-flex align-center">
-						<v-icon class="mr-2">mdi-texture-box</v-icon> {{ pageData.employe.organization.short_name }}
+						<v-icon class="mr-2">mdi-texture-box</v-icon> {{ pageData.employe.position.at(-1).organization?.short_name }}
 					</div>
+					
 					<p class="text-grey-lighten-1 text-caption">
 						Lavozim
 					</p>
-
-					
-					<div v-if="pageData.position" class="text-teal">
-						{{ pageData.position?.name }}
+					<div v-if="pageData.employe.position.at(-1)" class="text-teal">
+						{{ pageData.employe.position.at(-1)?.position?.name }}
 					</div>
 					<div v-else class="text-red">
 						Lavozim biriktirilmagan
 					</div>
+
+
+					
 					<main></main>
 					<v-tabs v-model="pageData.tab" class="mt-12" color="cyan">
 						<v-tab value="one">Maxsus kiyimlar</v-tab>
@@ -79,10 +77,15 @@
 <script setup lang="ts">
 import Grid from './components/Grid.vue'
 import axios from '@/modules/axios'
-import { reactive, provide } from 'vue'
+import { reactive } from 'vue'
+
+import ChangePosition from './components/ChangePosition.vue'
+import IshdanBoshash from './components/IshdanBoshash.vue'
 import ImageUpload from './components/ImageUpload.vue'
 import { printStore } from '@/store/auth'
 const { id } = defineProps(['id'])
+
+
 const pageData = reactive({
 	image: "",
 	employe: null,
@@ -92,11 +95,20 @@ const pageData = reactive({
 	employeProducts: []
 })
 
-provide('page', pageData)
+
+function onLeaver(employe) {
+	pageData.employe = employe
+}
+
+function changePosition(position) {
+	pageData.employe.position.push(position)
+}
+
 axios.get(`employe/${id}`).then(({ data: employer }) => {
 	pageData.employe = employer
+	
 	const lastPosition = employer.position.at(-1)
-
+	
 	if (lastPosition) {
 		axios.get(`position/${lastPosition.position_id}`).then(({data}) => {
 			pageData.position = data
@@ -112,7 +124,6 @@ function openPrintPanel() {
 	print.employeProducts = pageData.employeProducts
 	print.employe = pageData.employe
 	print.position = pageData.position
-	
 	setTimeout(() => window.print())
 }
 

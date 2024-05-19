@@ -23,6 +23,10 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('employe/change-position/{id}', [EmployeController::class, 'changePosition']);
+    Route::get('employe-get-position-products/{employe_id}', [EmployeController::class, 'getPositionProductByEmployeId']);
+    Route::post('employe-ishdan-boshash/{employe_id}', [EmployeController::class, 'ishdanBoshash']);
+
     Route::apiResource('document', MainDocumentController::class)->only(['index', 'store', 'show', 'destroy']);
     Route::get('umumiy/employes', [ReportController::class, 'umumiy_malumot']);
     // available organizations

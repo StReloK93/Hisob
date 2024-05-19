@@ -8,6 +8,7 @@ use App\Models\EmployePosition;
 use App\Models\EmployeProduct;
 use App\Models\EmployeImages;
 use App\Models\Organization;
+use App\Models\Position;
 use DB;
 use Carbon\Carbon;
 
@@ -17,20 +18,25 @@ class EmployeController extends Controller
 {
 
     public function index(){
-        return Employe::select('id', 'table_number', 'name', 'hiring_date', 'organization_id', 'profession')
+        return Employe::select('id', 'table_number', 'name')
         ->with('position')
         ->orderBy('id', 'desc')
-        ->accessOrganizations()
+        // ->accessOrganizations()
         ->get();
     }
 
     public function store(Request $request){
         $employe = Employe::create($request->all());
-
+        
         EmployePosition::create([
             'employe_id' => $employe->id,
             'position_id' => $request->position_id,
+            'organization_id' => $request->organization_id,
+            'hiring_date' => $request->hiring_date,
+            'profession' => $request->profession,
         ]);
+
+
         $employe->position;
         return $employe;
     }
@@ -51,23 +57,27 @@ class EmployeController extends Controller
 
         if($employePosition){
             $employePosition->position_id = $request->position_id;
+            $employePosition->organization_id = $request->organization_id;
+            $employePosition->hiring_date = $request->hiring_date;
+            $employePosition->profession = $request->profession;
             $employePosition->save();
         }
         else{
             EmployePosition::create([
                 'employe_id' => $id,
                 'position_id' => $request->position_id,
+                'organization_id' => $request->organization_id,
+                'hiring_date' => $request->hiring_date,
+                'profession' => $request->profession,
             ]);
         }
 
         $employe = Employe::find($id);
-        
         $employe->table_number = $request->table_number;
         $employe->name = $request->name;
-        $employe->profession = $request->profession;
-        $employe->hiring_date = $request->hiring_date;
         $employe->gender = $request->gender;
-        $employe->organization_id = $request->organization_id;
+
+
 
         $employe->heigth = $request->heigth;
         $employe->size_cloth = $request->size_cloth;
@@ -78,6 +88,22 @@ class EmployeController extends Controller
         return $employe->fresh();
     }
 
+
+
+    public function changePosition($id, Request $request){
+
+        $employe = Employe::find($id);
+
+        $position = EmployePosition::create([
+            'employe_id' => $employe->id,
+            'position_id' => $request->position_id,
+            'organization_id' => $request->organization_id,
+            'hiring_date' => $request->hiring_date,
+            'profession' => $request->profession,
+        ]);
+
+        return $position->fresh();
+    }
 
     public function destroy($id){
         EmployePosition::where('employe_id',$id)->delete();
@@ -112,11 +138,32 @@ class EmployeController extends Controller
                 'hiring_date' => Carbon::parse($userData[0]->DataNachaloRaboti)->format('Y-m-d'),
             ];
 
-            
+
         }
         else{
             return null;
         }
+    }
+
+
+    public function getPositionProductByEmployeId($employe_id){
+        $employe = Employe::find($employe_id);
+        $lastPostion = $employe->position()->latest('id')->first();
+
+        $position = Position::find($lastPostion->position_id);
+        
+        return $position->products()->get();
+    }
+
+
+    public function ishdanBoshash($employe_id, Request $request){
+        $employe = Employe::find($employe_id);
+
+        $employe->ishdan_boshagan_kuni = $request->ishdan_boshagan_kuni;
+        $employe->buyruq_raqami = $request->buyruq_raqami;
+        $employe->save();
+        $employe->position;
+        return $employe;
     }
 
 }

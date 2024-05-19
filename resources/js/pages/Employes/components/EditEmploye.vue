@@ -34,19 +34,19 @@ const formData = reactive({
 
 function getSelectedEmploye() {
     axios.get(`employe/${current.selected}`).then(({ data: employe }) => {
-        const latest = employe.position.at(-1)
-        if (latest) formData.position_id = latest.position.id
-
+        const latestPosition = employe.position.at(-1)
+        if (latestPosition) formData.position_id = latestPosition.position.id
+        
         formData.table_number = employe.table_number
         formData.name = employe.name
-        formData.hiring_date = employe.hiring_date
+        formData.hiring_date = latestPosition.hiring_date
+        formData.profession = latestPosition.profession
+        formData.organization_id = +latestPosition.organization_id
         formData.gender = employe.gender
         formData.heigth = employe.heigth
-        formData.profession = employe.profession
         formData.size_cloth = employe.size_cloth
         formData.size_head = employe.size_head
         formData.size_shoes = employe.size_shoes
-        formData.organization_id = employe.organization_id
     })
 }
 

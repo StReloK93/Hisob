@@ -34,6 +34,8 @@ import EditEmploye from './components/EditEmploye.vue'
 import { reactive, ref } from "vue"
 import { useRouter } from 'vue-router'
 import { auth } from '@/store/auth'
+import moment from 'moment'
+
 const store = auth()
 
 const editComponent = ref()
@@ -60,11 +62,11 @@ const columnDefs = reactive([
     },
     { field: "table_number", headerName: 'Tabel №', sortable: true, width: 65, headerClass: ['px-2'], cellClass: ['px-2'] },
     { field: "name", headerName: 'F.I.SH', sortable: true, flex: 1, minWidth: 275 },
-    { field: "organization.short_name", headerName: 'Ish joyi', sortable: true },
+    { headerName: 'Ish joyi', sortable: true, cellRenderer: ({data}) => data.position.at(-1).organization?.short_name },
     {
-        field: "profession",
         headerName: 'Lavozimi',
         sortable: true,
+        cellRenderer: ({data}) => data.position.at(-1).profession
     },
     {
         headerName: 'Yoriqnoma №',
@@ -74,7 +76,11 @@ const columnDefs = reactive([
             return `${pos.position_type_id} - ${pos.number_in_document}`
         }
     },
-    { field: "hiring_date", headerName: 'Ishga qabul kuni', sortable: true, width: 160 },
+    {
+        headerName: 'Ishga qabul kuni',
+        sortable: true, width: 160,
+        cellRenderer: ({data}) => moment(data.position.at(-1).hiring_date).format('YYYY-MM-DD')
+    },
 
     {
         hide: (store.userRoles.includes(4) || store.userRoles.includes(1)) == false,

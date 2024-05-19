@@ -14,30 +14,24 @@ class Employe extends Model
     protected $fillable = [
         'table_number',
         'name',
-        'hiring_date',
         'gender',
-        'profession',
-        'organization_id',
         'division_id',
         'heigth',
         'size_cloth',
         'size_head',
         'size_shoes',
+
+        'buyruq_raqami',
+        'ishdan_boshagan_kuni',
     ];
 
 
     // protected $appends = ['end_timer'];
 
-    protected $with = ['organization'];
-
-    public function organization()
-    {
-        return $this->belongsTo(Organization::class)->select('id', 'short_name');
-    }
 
     public function position()
     {
-        return $this->hasMany(EmployePosition::class)->select('id', 'employe_id', 'position_id');
+        return $this->hasMany(EmployePosition::class)->select('id', 'employe_id', 'position_id', 'organization_id', 'hiring_date', 'profession');
     }
 
     public function scopeAccessOrganizations($query)

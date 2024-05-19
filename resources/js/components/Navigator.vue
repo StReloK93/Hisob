@@ -9,22 +9,24 @@
 
 			<v-divider></v-divider>
 			<v-list-subheader title="Umumiy" />
-			<v-list-item prepend-icon="mdi-texture-box" title="Normaviy hujjatlar" :to="{ name: 'maindocuments' }" />
-
-			<v-list-item prepend-icon="mdi-tshirt-crew" title="Shaxsiy himoya vositalari" :to="{ name: 'products' }">
-				<v-tooltip activator="parent" location="bottom">Shaxsiy himoya vositalari</v-tooltip>
+			<v-list-item prepend-icon="mdi-texture-box" :title="t('normative')" :to="{ name: 'maindocuments' }">
+				<v-tooltip activator="parent" location="bottom">{{ t('normative') }}</v-tooltip>
 			</v-list-item>
 
-			<v-list-item prepend-icon="mdi-weather-hail" title="Mehnat sharoitlari" :to="{ name: 'workingconditions' }" />
-			<v-list-item prepend-icon="mdi-account-hard-hat" title="Lavozimlar" :to="{ name: 'positions' }" />
-			<v-list-item prepend-icon="mdi-microsoft-excel" title="Hisobotlar" :to="{ name: 'report' }" />
+			<v-list-item prepend-icon="mdi-tshirt-crew" :title="t('personal_products')" :to="{ name: 'products' }">
+				<v-tooltip activator="parent" location="bottom">{{ t('personal_products') }}</v-tooltip>
+			</v-list-item>
+			
+			<v-list-item prepend-icon="mdi-weather-hail" :title="t('working_condition')" :to="{ name: 'workingconditions' }" />
+			<v-list-item prepend-icon="mdi-account-hard-hat" :title="t('positions')" :to="{ name: 'positions' }" />
+			<v-list-item prepend-icon="mdi-microsoft-excel" :title="t('reports')" :to="{ name: 'report' }" />
 
 
 			<v-divider></v-divider>
 			<div v-if="store.userRoles?.includes(1)">
 				<v-list-subheader title="Admin" />
-				<v-list-item prepend-icon="mdi-account-network" title="Foydalanuvchilar" :to="{ name: 'users' }" />
-				<v-list-item prepend-icon="mdi-texture-box" title="Bo'linmalar" :to="{ name: 'organizations' }" />
+				<v-list-item prepend-icon="mdi-account-network" :title="t('users')" :to="{ name: 'users' }" />
+				<v-list-item prepend-icon="mdi-texture-box" :title="t('organizations')" :to="{ name: 'organizations' }" />
 			</div>
 
 		</v-list>
@@ -69,7 +71,7 @@ function logout() {
 }
 
 
-const { t  } = useLocale()
+const { t } = useLocale()
 
 </script>
 

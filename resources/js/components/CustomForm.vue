@@ -38,7 +38,6 @@ async function Submit() {
     if (valid == false || pageData.formLoading) return
     pageData.formLoading = true
 
-
     submitMethod().then(() => {
         pageData.formLoading = false
     })
