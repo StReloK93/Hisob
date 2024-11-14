@@ -4,7 +4,7 @@ export default {
    personal_products: 'Shaxsiy himoya vositalari',
    working_condition: 'Mehnat sharoitlari',
    positions: 'Lavozimlar',
-   reports: 'Hisbotlar',
+   reports: 'Hisobotlar',
    users: 'Foydalanuvchilar',
    organizations: 'Bo`linmalar',
    table_number: 'Tabel raqami',

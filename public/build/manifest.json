@@ -1,12 +1,12 @@
 {
-  "_Icon.vue_vue_type_script_setup_true_lang-a3d332d0.js": {
-    "file": "assets/Icon.vue_vue_type_script_setup_true_lang-a3d332d0.js",
+  "_Icon.vue_vue_type_script_setup_true_lang-fd6c55d7.js": {
+    "file": "assets/Icon.vue_vue_type_script_setup_true_lang-fd6c55d7.js",
     "imports": [
       "resources/js/app.ts"
     ]
   },
-  "_IconEdit-778fb29f.js": {
-    "file": "assets/IconEdit-778fb29f.js",
+  "_IconEdit-9f99b426.js": {
+    "file": "assets/IconEdit-9f99b426.js",
     "imports": [
       "resources/js/app.ts"
     ]
@@ -14,8 +14,8 @@
   "_helpers-ca74a7fa.js": {
     "file": "assets/helpers-ca74a7fa.js"
   },
-  "_swal-cbba1c1d.js": {
-    "file": "assets/swal-cbba1c1d.js",
+  "_swal-4bf76317.js": {
+    "file": "assets/swal-4bf76317.js",
     "imports": [
       "resources/js/app.ts"
     ]
@@ -65,7 +65,7 @@
       "resources/js/pages/SpecialProduct/SpecialProducts.vue",
       "resources/js/pages/Login.vue"
     ],
-    "file": "assets/app-257e65fd.js",
+    "file": "assets/app-e4c7aa1a.js",
     "isEntry": true,
     "src": "resources/js/app.ts"
   },
@@ -77,21 +77,21 @@
     "css": [
       "assets/Employe-736de62a.css"
     ],
-    "file": "assets/Employe-f10b4cbb.js",
+    "file": "assets/Employe-f87ff0d1.js",
     "imports": [
       "resources/js/app.ts",
-      "_swal-cbba1c1d.js",
-      "_Icon.vue_vue_type_script_setup_true_lang-a3d332d0.js",
+      "_swal-4bf76317.js",
+      "_Icon.vue_vue_type_script_setup_true_lang-fd6c55d7.js",
       "_helpers-ca74a7fa.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Employe/Employe.vue"
   },
   "resources/js/pages/Employes/Employes.vue": {
-    "file": "assets/Employes-61e1e8a5.js",
+    "file": "assets/Employes-98c2a706.js",
     "imports": [
-      "_swal-cbba1c1d.js",
-      "_Icon.vue_vue_type_script_setup_true_lang-a3d332d0.js",
+      "_swal-4bf76317.js",
+      "_Icon.vue_vue_type_script_setup_true_lang-fd6c55d7.js",
       "resources/js/app.ts",
       "_helpers-ca74a7fa.js"
     ],
@@ -99,10 +99,10 @@
     "src": "resources/js/pages/Employes/Employes.vue"
   },
   "resources/js/pages/Home.vue": {
-    "file": "assets/Home-4cceecc1.js",
+    "file": "assets/Home-3ebd5df8.js",
     "imports": [
       "resources/js/app.ts",
-      "_swal-cbba1c1d.js"
+      "_swal-4bf76317.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Home.vue"
@@ -115,7 +115,7 @@
     "css": [
       "assets/Login-7932005c.css"
     ],
-    "file": "assets/Login-c23cbd63.js",
+    "file": "assets/Login-e2e47ade.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -123,7 +123,7 @@
     "src": "resources/js/pages/Login.vue"
   },
   "resources/js/pages/Main/Index.vue": {
-    "file": "assets/Index-57c1e306.js",
+    "file": "assets/Index-cba18145.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -131,9 +131,9 @@
     "src": "resources/js/pages/Main/Index.vue"
   },
   "resources/js/pages/MainDocument/MainDocuments.vue": {
-    "file": "assets/MainDocuments-23d5ba73.js",
+    "file": "assets/MainDocuments-180b2eac.js",
     "imports": [
-      "_IconEdit-778fb29f.js",
+      "_IconEdit-9f99b426.js",
       "resources/js/app.ts",
       "_helpers-ca74a7fa.js"
     ],
@@ -148,9 +148,9 @@
     "css": [
       "assets/Organizations-c47f54aa.css"
     ],
-    "file": "assets/Organizations-92e3e982.js",
+    "file": "assets/Organizations-5d686130.js",
     "imports": [
-      "_IconEdit-778fb29f.js",
+      "_IconEdit-9f99b426.js",
       "resources/js/app.ts",
       "_helpers-ca74a7fa.js"
     ],
@@ -158,41 +158,41 @@
     "src": "resources/js/pages/Organization/Organizations.vue"
   },
   "resources/js/pages/Position/Positions.vue": {
-    "file": "assets/Positions-57defb3b.js",
+    "file": "assets/Positions-5a5f8da5.js",
     "imports": [
-      "_swal-cbba1c1d.js",
+      "_swal-4bf76317.js",
       "_helpers-ca74a7fa.js",
       "resources/js/app.ts",
-      "_Icon.vue_vue_type_script_setup_true_lang-a3d332d0.js"
+      "_Icon.vue_vue_type_script_setup_true_lang-fd6c55d7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Position/Positions.vue"
   },
   "resources/js/pages/Product/Products.vue": {
-    "file": "assets/Products-7e0c14c8.js",
+    "file": "assets/Products-3ea2e248.js",
     "imports": [
-      "_swal-cbba1c1d.js",
+      "_swal-4bf76317.js",
       "resources/js/app.ts",
       "_helpers-ca74a7fa.js",
-      "_Icon.vue_vue_type_script_setup_true_lang-a3d332d0.js",
-      "_IconEdit-778fb29f.js"
+      "_Icon.vue_vue_type_script_setup_true_lang-fd6c55d7.js",
+      "_IconEdit-9f99b426.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Product/Products.vue"
   },
   "resources/js/pages/Report/Reports.vue": {
-    "file": "assets/Reports-7eb6376b.js",
+    "file": "assets/Reports-3bbeeae1.js",
     "imports": [
       "resources/js/app.ts",
       "_helpers-ca74a7fa.js",
-      "_swal-cbba1c1d.js",
-      "_Icon.vue_vue_type_script_setup_true_lang-a3d332d0.js"
+      "_swal-4bf76317.js",
+      "_Icon.vue_vue_type_script_setup_true_lang-fd6c55d7.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/Report/Reports.vue"
   },
   "resources/js/pages/SpecialProduct/SpecialProducts.vue": {
-    "file": "assets/SpecialProducts-3228653f.js",
+    "file": "assets/SpecialProducts-1d0049ae.js",
     "imports": [
       "resources/js/app.ts"
     ],
@@ -200,9 +200,9 @@
     "src": "resources/js/pages/SpecialProduct/SpecialProducts.vue"
   },
   "resources/js/pages/User/Users.vue": {
-    "file": "assets/Users-cecb22e7.js",
+    "file": "assets/Users-253edef4.js",
     "imports": [
-      "_IconEdit-778fb29f.js",
+      "_IconEdit-9f99b426.js",
       "resources/js/app.ts",
       "_helpers-ca74a7fa.js"
     ],
@@ -210,11 +210,11 @@
     "src": "resources/js/pages/User/Users.vue"
   },
   "resources/js/pages/WorkingCondition/WorkingConditions.vue": {
-    "file": "assets/WorkingConditions-a096e671.js",
+    "file": "assets/WorkingConditions-fe64675c.js",
     "imports": [
       "resources/js/app.ts",
       "_helpers-ca74a7fa.js",
-      "_IconEdit-778fb29f.js"
+      "_IconEdit-9f99b426.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/pages/WorkingCondition/WorkingConditions.vue"
