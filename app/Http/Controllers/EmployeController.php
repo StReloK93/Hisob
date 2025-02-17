@@ -21,7 +21,7 @@ class EmployeController extends Controller
         return Employe::select('id', 'table_number', 'name')
         ->with('position')
         ->orderBy('id', 'desc')
-        // ->accessOrganizations()
+        ->accessOrganizations()
         ->get();
     }
 

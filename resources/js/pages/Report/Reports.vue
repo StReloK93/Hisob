@@ -9,7 +9,7 @@
 					</v-btn>
 					<Movement v-if="pageData.report_types.length" @addMovement="addMovement"
 						:report="pageData.report_types[2]" />
-					<v-btn @click="downloadExcel" prepend-icon="mdi-book-account" class="text-capitalize ml-4" variant="tonal">
+					<v-btn @click="downloadExcel('umumiy/employes', 'umumiy.xlsx')" prepend-icon="mdi-book-account" class="text-capitalize ml-4" variant="tonal">
 						Umumiy malumotlar
 					</v-btn>
 				</div>
@@ -51,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+import { downloadExcel } from '@/modules/helpers'
 import { reactive, shallowRef, ref } from 'vue'
 import AddMonthReport from './MonthReport/AddMonthReport.vue'
 import AddMonth from './MonthReport/AddMonth.vue'
@@ -59,8 +60,6 @@ import MovementTable from './MonthReport/MovementTable.vue'
 import OldReportTable from './MonthReport/OldReportTable.vue'
 import CurrentReportTable from './MonthReport/CurrentReportTable.vue'
 import axios from 'axios'
-
-
 
 const oldTable = ref()
 const currentTable = ref()
@@ -92,18 +91,5 @@ axios.get('report_type').then(({ data }) => {
 })
 const pageData = reactive({ tab: 0, report_types: [] })
 
-function downloadExcel() {
-	axios.get('umumiy/employes', { responseType: 'blob' }).then((response) => {
-		const url = window.URL.createObjectURL(new Blob([response.data]));
 
-		const link = document.createElement('a');
-		link.href = url;
-		link.setAttribute('download', 'umumiy.xlsx');  // Указываем имя файла
-		document.body.appendChild(link);
-		link.click();
-		window.URL.revokeObjectURL(url);
-
-		document.body.removeChild(link);
-	})
-}
 </script>

@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\Models\Employe;
-use Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -32,12 +31,15 @@ class UmumiyMalumotlar implements FromCollection, WithMapping, WithHeadings, Sho
 
     public function collection()
     {
-        $organizations = Auth::user()->organizations->pluck('organizations_id');
-        $employes = Employe::with('position')->whereIn('organization_id', $organizations)->get();
+        $employes = Employe::with('position')->accessOrganizations()->get();
         foreach ($employes as $key => $employe) {
-            $employes[$key]->organization_name  = $employe->organization->short_name;
-            $employes[$key]->position_name = $employe->position[0]->position->name;
+            $lastPosition = last($employe->position->all());
+            $employes[$key]->profession = $lastPosition->profession;
+            $employes[$key]->position_name = $lastPosition->position->name;
+            $employes[$key]->organization_name = $lastPosition->organization->short_name;
+            $employes[$key]->hiring_date = $lastPosition->hiring_date;
         }
+
         return $employes;
     }
 

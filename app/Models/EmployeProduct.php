@@ -11,10 +11,7 @@ class EmployeProduct extends Model
 
     protected $with = [
         'product',
-        // 'employe'
     ];
-
-    // protected $appends = ['expiration_date','timer'];
 
     protected $fillable = [
         'employe_id',
@@ -46,34 +43,6 @@ class EmployeProduct extends Model
         return $this->belongsTo(Employe::class);
     }
 
-    // public function scopeSpecialProducts($query)
-    // {
-    //     return $query->whereHas('product', function($query) {
-    //         $query->whereHas('product', function($query) {
-    //             $query->where('product_type_id' , 1);
-    //         });
-    //     });
-    // }
-
-    public function scopeAccessOrganizations($query)
-    {
-        return $query->whereHas('employe', function ($query) {
-            $query->accessOrganizations();
-        });
-    }
-
-
-
-
-    // public function scopeMainProducts($query)
-    // {
-    //     return $query->whereHas('product', function($query) {
-    //         $query->whereHas('product', function($query) {
-    //             $query->where('product_type_id' , 2);
-    //         });
-    //     });
-    // }
-
     protected $casts = [
         'date_write_off' => 'date:Y-m-d',
         'date_of_receipt' => 'date:Y-m-d',
@@ -83,18 +52,6 @@ class EmployeProduct extends Model
         'toggle_confirmation' => 'boolean',
         'toggle_write_off' => 'boolean',
     ];
-    
-
-    // public function getExpirationDateAttribute() {
-    //     if($this->positionProduct){
-    //         $date = Carbon::parse($this->date_of_receipt)->addMonth($this->positionProduct->expiration_date)->format('Y-m-d');
-    //         return $date;
-    //     }
-    //     else{
-    //         return null;
-    //     }
-    // }
-
 
     public function getTimerAttribute() {
         $today = now();

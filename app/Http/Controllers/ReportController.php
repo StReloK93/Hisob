@@ -7,7 +7,7 @@ use App\Exports\EmployeProductsExport;
 use App\Exports\HarakatExport;
 use App\Exports\UmumiyMalumotlar;
 
-
+use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Report;
 use App\Models\EmployeProduct;
@@ -17,40 +17,42 @@ use Storage;
 
 class ReportController extends Controller
 {
-
-    public function create_hisobot($filename, $currentDate, $old){
-        return Excel::store(new EmployeProductsExport($currentDate, $old), "public/".$filename);
-    }
-    public function create_harakat($filename, $startDate, $endDate, $productTypes){
-        return Excel::store(new HarakatExport($startDate, $endDate, $productTypes), "public/".$filename);
-    }
-
     public function umumiy_malumot(){
         return Excel::download(new UmumiyMalumotlar, "Hodimlar.xlsx");
     }
 
+    public function muddati_utganlar($id){
+        $report = Report::find($id);
+        $created = Carbon::parse($report->created_at)->timestamp;
+        $filename = "$report->name$created.xlsx";
+
+        return Excel::download(new EmployeProductsExport($report->created_at, true, $report), $filename);
+    }
+
+    public function hali_amalda($id){
+        $report = Report::find($id);
+        $created = Carbon::parse($report->created_at)->timestamp;
+        $filename = "$report->name$created.xlsx";
+
+        return Excel::download(new EmployeProductsExport($report->created_at, false), $filename);
+    }
+
     public function store(Request $request){
-        $now = now()->timestamp;
-        $filename = "$request->name$now.xlsx";
-        if($request->report_type_id == 1 || $request->report_type_id == 2){
-            $this->create_hisobot($filename, now(), $request->old);
-        }
-        elseif($request->report_type_id == 3){
+        $currentTime = now();
+        if($request->report_type_id == 3){
+            $filename = "$request->name$currentTime->timestamp.xlsx";
             $productIds = array_column($request->products, 'id');
-            $this->create_harakat($filename, $request->start, $request->end, $productIds);
+            Excel::store(new HarakatExport($request->start, $request->end, $productIds), "public/".$filename);
         }
-        
-        $report = Report::create([
+
+        return Report::create([
             'user_id' => Auth::user()->id,
             'name' => $request->name,
             'confirmed' => false,
             'file_source' => $filename,
             'report_type_id' => $request->report_type_id,
-            'created_at' => now(),
-        ]);
-
-        return $report->fresh();
-
+            'created_at' => $currentTime,
+        ])->fresh();
     }
 
 
@@ -66,16 +68,23 @@ class ReportController extends Controller
 
     public function successEmployeProducts($report_id){
         $report = Report::find($report_id);
-        $report->confirmed = true;
-        $report->save();
-        $organizations = Auth::user()->organizations->pluck('organizations_id');
-        $employes = Employe::whereIn('organization_id', $organizations)->pluck('id');
-        EmployeProduct::whereIn('employe_id', $employes)->update([
-            'date_write_off' => null,
-            'toggle_write_off' => false,
-            'report_id' => null,
+        $targetDate = $report->created_at;
+        $employes = Employe::accessOrganizations()->pluck('id');
+
+
+        EmployeProduct::whereNotIn('expiration_date', ['до износа', 'дежурные'])
+        ->whereIn('employe_id', $employes)
+        ->whereRaw('DATEADD(month, CAST(expiration_date AS INT), date_of_receipt) < ?', [$targetDate])
+        ->update([
+            'date_write_off' => $targetDate,
+            'toggle_write_off' => true,
+            'report_id' => $report->id,
         ]);
 
+        $report->confirmed = true;
+        $report->save();
         return $report->fresh();
     }
 }
+
+

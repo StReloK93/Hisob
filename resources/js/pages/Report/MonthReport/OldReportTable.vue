@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import { downloadExcel } from '@/modules/helpers'
 import swal from '@/modules/swal'
 import { reactive } from 'vue'
 import Icon from '@/components/AgGrid/Icon.vue'
@@ -30,7 +31,7 @@ const columnDefs = reactive([
         cellRenderer: Icon,
         cellRendererParams: { icon: 'mdi-microsoft-excel' },
         onCellClicked: ({ data }) => {
-            window.open(`/storage/${data.file_source}`, "_blank");
+            downloadExcel(`umumiy/muddati-utganlar/${data.id}`, `${data.name}.xlsx`)
         }
     },
     {
@@ -86,16 +87,6 @@ axios.get(`report_type/${report_id}`).then(({ data }) => {
     pageData.reports = data
 })
 
-
-
-// function addPosition(position) {
-//     pageData.gridApi.applyTransaction({ add: [position], addIndex: 0 })
-// }
-
-// function editPosition(position) {
-//     const rowNode = pageData.gridApi.getRowNode(position.id)
-//     rowNode.setData(position)
-// }
 
 defineExpose({ pageData })
 </script>

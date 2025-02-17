@@ -28,7 +28,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('employe-ishdan-boshash/{employe_id}', [EmployeController::class, 'ishdanBoshash']);
 
     Route::apiResource('document', MainDocumentController::class)->only(['index', 'store', 'show', 'destroy']);
+
+
+
     Route::get('umumiy/employes', [ReportController::class, 'umumiy_malumot']);
+    Route::get('umumiy/muddati-utganlar/{id}', [ReportController::class, 'muddati_utganlar']);
+    Route::get('umumiy/hali-amalda/{id}', [ReportController::class, 'hali_amalda']);
+
+
+
     // available organizations
     Route::get('accessOrganizations', [OrganizationController::class, 'accessOrganizations']);
 
