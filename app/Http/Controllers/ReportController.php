@@ -39,8 +39,8 @@ class ReportController extends Controller
 
     public function store(Request $request){
         $currentTime = now();
+        $filename = "$request->name$currentTime->timestamp.xlsx";
         if($request->report_type_id == 3){
-            $filename = "$request->name$currentTime->timestamp.xlsx";
             $productIds = array_column($request->products, 'id');
             Excel::store(new HarakatExport($request->start, $request->end, $productIds), "public/".$filename);
         }
